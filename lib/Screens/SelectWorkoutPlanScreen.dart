@@ -31,8 +31,8 @@ class CustomPlansScreen extends StatelessWidget {
               RaisedButton(
                 elevation: 10,
                 onPressed: () async {
-                  await workoutDataProvider
-                      .makeCurrentPlan(customPlansList[i].planName);
+                  workoutDataProvider // add await in case when I add shared pref
+                      .tempMakeCurrentPlan(customPlansList[i].planName);
                   Navigator.pop(context);
                 },
                 child: Text('Make Current Plan'),

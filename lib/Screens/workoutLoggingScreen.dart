@@ -23,22 +23,22 @@ class _WorkoutLoggingScreenState extends State<WorkoutLoggingScreen> {
   // @override
   // void initState() {
   //   final workoutDataProvider = Provider.of<WorkoutDataProvider>(context);
-  //   workoutDataProvider.currentPlan.then((value) {
 
+  //   workoutDataProvider.currentPlan.then((value) {
   //     currentPlanName = value;
   //   });
   //   // TODO: implement initState
   //   super.initState();
   // }
 
-  Future<void> getCurrentPlan() async {
-    print("get Current Plan initialized");
-    final workoutDataProvider =
-        Provider.of<WorkoutDataProvider>(context, listen: false);
-    currentPlanName = await workoutDataProvider.currentPlan;
-    print("Current plan Name set==" + currentPlanName);
-    setState(() {});
-  }
+  // Future<void> getCurrentPlan() async {
+  //   print("get Current Plan initialized");
+  //   final workoutDataProvider =
+  //       Provider.of<WorkoutDataProvider>(context, listen: false);
+  //   currentPlanName = await workoutDataProvider.currentPlan;
+  //   print("Current plan Name set==" + currentPlanName);
+  //   setState(() {});
+  // }
 
   // @override
   // void initState() {
@@ -49,9 +49,10 @@ class _WorkoutLoggingScreenState extends State<WorkoutLoggingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    getCurrentPlan();
+    // getCurrentPlan();
     final workoutDataProvider = Provider.of<WorkoutDataProvider>(context);
-    // String currentPlanName="";
+    String currentPlanName = "";
+    currentPlanName = workoutDataProvider.currentPlan;
     print("currentPlanName is " + currentPlanName);
     print(currentPlanName == "");
     String uid = workoutDataProvider.getUid;

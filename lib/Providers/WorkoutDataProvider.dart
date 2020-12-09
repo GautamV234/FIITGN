@@ -296,15 +296,49 @@ class WorkoutDataProvider with ChangeNotifier {
       final response = await http.get(url);
       final List<WorkoutDataModel> loadedData = [];
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      print(extractedData.runtimeType);
+      print(extractedData);
       extractedData.forEach((statId, statVal) {
+        print("Bolo Tararara");
         final List<WorkoutLogModel> listOfSetsReps = [];
-        final Map mapSetsReps = statVal['listOfSetsReps'];
-        mapSetsReps.forEach((key, value) {
-          listOfSetsReps.add(new WorkoutLogModel(
-              exerciseName: value['exerciseName'],
-              numOfReps: value['numOfReps'],
-              setNumber: value['setNumber']));
-        });
+        final listMapSetsReps = statVal['listOfSetsReps'];
+        print(listMapSetsReps);
+        print(listMapSetsReps.runtimeType);
+        // print("Tanananana");
+        listMapSetsReps.forEach(
+          (element) {
+            Map mapSetReps = element;
+            // print("mapSetReps type is " + mapSetReps.runtimeType.toString());
+            // print("heehaa");
+            // mapSetReps.forEach(
+            //   (key, value) {
+            //     print("Key type is" + key.runtimeType.toString());
+            //     print("value type is" + value.runtimeType.toString());
+            //     listOfSetsReps.add(
+            //       new WorkoutLogModel(
+            //         exerciseName: value['exerciseName'],
+            //         numOfReps: value['numOfReps'],
+            //         setNumber: value['setNumber'],
+            //       ),
+            //     );
+            //   },
+            // );
+            listOfSetsReps.add(
+              new WorkoutLogModel(
+                exerciseName: element['exerciseName'],
+                numOfReps: element['numOfReps'],
+                setNumber: element['setNumber'],
+              ),
+            );
+          },
+        );
+
+        // mapSetsReps.forEach((key, value) {
+        //   listOfSetsReps.add(new WorkoutLogModel(
+        //       exerciseName: value['exerciseName'],
+        //       numOfReps: value['numOfReps'],
+        //       setNumber: value['setNumber']));
+        // });
         loadedData.add(
           new WorkoutDataModel(
             databaseId: statId,
@@ -367,14 +401,17 @@ class WorkoutDataProvider with ChangeNotifier {
     // _yourWorkouts.add(data);
   }
 
-  Future<String> get currentPlan async {
-    final _currentPlanFromDevice = await SharedPreferences.getInstance();
-    final planNameSP = _currentPlanFromDevice.getString('planName');
-    if (planNameSP == null) {
-      return "";
-    }
-    return planNameSP;
+  String get currentPlan {
+    /// should return Future<String> later on and should be marked async
+
+    // final _currentPlanFromDevice = await SharedPreferences.getInstance();
+    // final planNameSP = _currentPlanFromDevice.getString('planName');
+    // if (planNameSP == null) {
+    // return "";
+    // }
+    // return planNameSP;
     // return _currentPlan;
+    return _currentPlan;
   }
 
   Future<void> makeCurrentPlan(String planName) async {
