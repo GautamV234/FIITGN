@@ -7,6 +7,14 @@ import 'ExerciseModel.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+/////////////
+////////////
+//////////
+///////////
+////
+///
+///
+
 class WorkoutDataProvider with ChangeNotifier {
   String _uid;
   String _token;
@@ -277,6 +285,8 @@ class WorkoutDataProvider with ChangeNotifier {
   String get getUid {
     return _uid;
   }
+
+  void go2() {}
 
   List<PlanModel> get customPlans {
     return [..._customPlans];
