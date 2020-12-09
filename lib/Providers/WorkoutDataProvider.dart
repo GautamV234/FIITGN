@@ -266,6 +266,7 @@ class WorkoutDataProvider with ChangeNotifier {
     _token = token;
   }
 
+  void go() {}
   void setUid(String uid) {
     _uid = uid;
     // print('uid has been set');
@@ -296,11 +297,15 @@ class WorkoutDataProvider with ChangeNotifier {
       final response = await http.get(url);
       final List<WorkoutDataModel> loadedData = [];
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
-      print(extractedData.runtimeType);
-      print(extractedData);
       extractedData.forEach((statId, statVal) {
-        print("Bolo Tararara");
         final List<WorkoutLogModel> listOfSetsReps = [];
+        final Map mapSetsReps = statVal['listOfSetsReps'];
+        mapSetsReps.forEach((key, value) {
+          listOfSetsReps.add(new WorkoutLogModel(
+              exerciseName: value['exerciseName'],
+              numOfReps: value['numOfReps'],
+              setNumber: value['setNumber']));
+        });
         final listMapSetsReps = statVal['listOfSetsReps'];
         print(listMapSetsReps);
         print(listMapSetsReps.runtimeType);
@@ -333,12 +338,9 @@ class WorkoutDataProvider with ChangeNotifier {
           },
         );
 
-        // mapSetsReps.forEach((key, value) {
-        //   listOfSetsReps.add(new WorkoutLogModel(
-        //       exerciseName: value['exerciseName'],
-        //       numOfReps: value['numOfReps'],
-        //       setNumber: value['setNumber']));
-        // });
+        /// just for git testing
+        /// ///
+        ///
         loadedData.add(
           new WorkoutDataModel(
             databaseId: statId,
@@ -355,6 +357,7 @@ class WorkoutDataProvider with ChangeNotifier {
       print("Loaded List for Workout Stats is ready");
     } catch (e) {
       print(e);
+      //
     }
   }
 
@@ -403,7 +406,6 @@ class WorkoutDataProvider with ChangeNotifier {
 
   String get currentPlan {
     /// should return Future<String> later on and should be marked async
-
     // final _currentPlanFromDevice = await SharedPreferences.getInstance();
     // final planNameSP = _currentPlanFromDevice.getString('planName');
     // if (planNameSP == null) {
