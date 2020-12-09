@@ -266,7 +266,6 @@ class WorkoutDataProvider with ChangeNotifier {
     _token = token;
   }
 
-  void go() {}
   void setUid(String uid) {
     _uid = uid;
     // print('uid has been set');
