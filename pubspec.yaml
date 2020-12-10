@@ -84,6 +84,13 @@ flutter:
     - assets/Situps.gif
     - assets/MountainClimbers.gif
     - assets/Deadlift.gif
+    - assets/fitnessPlan.jpg
+    - assets/fitnessPlan2.jpg
+    - assets/pushUp.jpg
+    - assets/MountainClimbers.jpeg
+    - assets/Deadlift.jpeg
+    - assets/jumpingJack.jpg
+
     # - assets/Tile.jpg
     # - images/a_dot_ham.jpeg
 

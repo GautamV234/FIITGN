@@ -49,7 +49,7 @@ class CardioScreen extends StatelessWidget {
             left: 16,
             top: 320,
             child: Text(
-              'What would you like\n to do today?',
+              'What would you like\nto do today?',
               style: TextStyle(
                 fontSize: 40,
                 fontWeight: FontWeight.bold,
