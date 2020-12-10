@@ -4,11 +4,13 @@ class HomeScreenItem extends StatelessWidget {
   final title;
   final url;
   final routeName;
+  final description;
 
   HomeScreenItem({
     this.title,
     this.routeName,
     this.url,
+    this.description,
   });
   @override
   Widget build(BuildContext context) {
@@ -17,53 +19,63 @@ class HomeScreenItem extends StatelessWidget {
         if (routeName != 'None')
           {
             Navigator.pushNamed(context, routeName),
-          }
+          } //IMAGE ADD KARO WITH Image.asset url and text is the title. description bhi add karo alag se.
       },
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(40),
-            topRight: Radius.circular(40),
-          ),
-        ),
-        elevation: 5,
-        margin: EdgeInsets.all(40),
-        child: Column(
+      child: Container(
+        margin: EdgeInsets.all(10.0),
+        width: 210.0,
+        child: Row(
+          // alignment: Alignment.topCenter,
           children: <Widget>[
-            Stack(
-              children: <Widget>[
-                ClipRRect(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black26,
+                    offset: Offset(0.0, 2.0),
+                    blurRadius: 6.0,
                   ),
-                  child: Image.asset(
-                    url,
-                    height: 300,
-                    width: 300,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Positioned(
-                  bottom: 5,
-                  right: 10,
-                  left: 10,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    width: 250,
-                    color: Colors.black54,
-                    child: Text(
-                      title,
-                      style: TextStyle(
-                        fontSize: 26,
-                        color: Colors.white,
-                      ),
-                      softWrap: true,
-                      overflow: TextOverflow.fade,
+                ],
+              ),
+              child: Stack(
+                children: <Widget>[
+                  //    Hero(
+                  //    tag: url,
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: Image.asset(
+                      url,
+                      height: 180.0,
+                      width: 180.0,
+                      fit: BoxFit.cover,
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
+            ),
+            Container(
+              height: 120,
+              width: 200,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        title,
+                        style: TextStyle(
+                          fontSize: 22.0,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Text(
+                        description,
+                        style: TextStyle(color: Colors.grey),
+                      )
+                    ]),
+              ),
             ),
           ],
         ),

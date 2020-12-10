@@ -25,19 +25,104 @@ class WorkoutHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.black,
-      appBar: AppBar(
-        title: Text('Workout'),
-        elevation: 12,
-      ),
-      body: ListView.builder(
-        itemCount: workoutScreenList.length,
-        itemBuilder: (ctx, i) => HomeScreenItem(
-          routeName: workoutScreenList[i]['routeName'],
-          title: workoutScreenList[i]['title'],
-          url: workoutScreenList[i]['url'],
+        // backgroundColor: Colors.black,
+        //  appBar: AppBar(
+        //     title: Text('Workout'),
+        //      elevation: 12,
+        //    ),
+        body: Column(children: <Widget>[
+      Stack(children: [
+        Container(
+          height: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30.0),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black26,
+                  offset: Offset(0, 2),
+                  blurRadius: 6,
+                )
+              ]),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(30.0),
+            child: Image.asset(
+              'assets/Workout.gif',
+              fit: BoxFit.cover,
+            ),
+          ),
         ),
-      ),
-    );
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 40),
+          child: Row(
+            children: <Widget>[
+              IconButton(
+                icon: Icon(Icons.arrow_back),
+                iconSize: 30.0,
+                color: Colors.black,
+                onPressed: () => Navigator.pop(context),
+              )
+            ],
+          ),
+        ),
+        Positioned(
+          left: 16,
+          top: 320,
+          child: Text(
+            'Choose a plan.\nStart your workout!',
+            style: TextStyle(
+              fontSize: 40,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+        )
+      ]),
+      Container(
+        height: 465,
+        child: ListView(
+          children: [
+            InkWell(
+              onTap: () {
+                //// add code to verify from Shared Pref to check if plan already selected
+                ///
+                Navigator.pushNamed(context, WorkoutLoggingScreen.routeName);
+              },
+              child: ListTile(
+                title: Text('Start Working out'),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, CustomPlansScreen.routeName);
+              },
+              child: ListTile(
+                title: Text('Select Workout Plan'),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                //  feature to be added later
+              },
+              child: ListTile(
+                title: Text('Create Plan'),
+              ),
+            ),
+          ],
+        ),
+        // child: ListView(children: [
+        //   ListView.builder(
+        //     shrinkWrap: true,
+        //     physics: ScrollPhysics(),
+        //     itemCount: workoutScreenList.length,
+        //     itemBuilder: (ctx, i) => HomeScreenItem(
+        //       routeName: workoutScreenList[i]['routeName'],
+        //       title: workoutScreenList[i]['title'],
+        //       url: workoutScreenList[i]['url'],
+        //       description: "",
+        //     ),
+        //   ),
+        // ]),
+      )
+    ]));
   }
 }

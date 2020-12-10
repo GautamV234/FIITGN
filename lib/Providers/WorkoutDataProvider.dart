@@ -15,11 +15,11 @@ class WorkoutDataProvider with ChangeNotifier {
   static final List<ExerciseModel> _exercises = [
     ExerciseModel(
       exerciseName: "Jump Squats",
-      assetImageUrl: "assets/jumpSquats.gif",
+      assetImageUrl: "assets/jumpSquats.jpeg",
     ),
     ExerciseModel(
       exerciseName: "Pushups",
-      assetImageUrl: "assets/pushUp.gif",
+      assetImageUrl: "assets/pushUp.jpg",
     ),
     ExerciseModel(
       exerciseName: "Situps",
@@ -27,7 +27,7 @@ class WorkoutDataProvider with ChangeNotifier {
     ),
     ExerciseModel(
       exerciseName: "Jumping Jacks",
-      assetImageUrl: "assets/jumpingJack.gif",
+      assetImageUrl: "assets/jumpingJack.jpg",
     ),
     ExerciseModel(
       exerciseName: "Chinups",
@@ -38,14 +38,14 @@ class WorkoutDataProvider with ChangeNotifier {
     ),
     ExerciseModel(
       exerciseName: "Deadlift",
-      assetImageUrl: "assets/Deadlift.gif",
+      assetImageUrl: "assets/Deadlift.jpeg",
     ),
     ExerciseModel(
       exerciseName: "Machine Lat pull down",
     ),
     ExerciseModel(
       exerciseName: "Mountain Climber",
-      assetImageUrl: "assets/MountainClimbers.gif",
+      assetImageUrl: "assets/MountainClimbers.jpeg",
     ),
   ];
 
