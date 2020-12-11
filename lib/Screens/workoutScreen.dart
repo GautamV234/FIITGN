@@ -53,7 +53,7 @@ class WorkoutHomeScreen extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(30.0),
                   child: Image.asset(
-                    'assets/Workout.gif',
+                    'assets/Workout.jpeg',
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -78,7 +78,7 @@ class WorkoutHomeScreen extends StatelessWidget {
                   style: TextStyle(
                     fontSize: MediaQuery.of(context).size.width / 10.3,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
                 ),
               ),

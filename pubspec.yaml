@@ -90,6 +90,10 @@ flutter:
     - assets/MountainClimbers.jpeg
     - assets/Deadlift.jpeg
     - assets/jumpingJack.jpg
+    - assets/Workout.jpeg
+    - assets/statsTile2.jpeg
+    - assets/WorkoutStats3.jpeg
+    - assets/newActivity.jpeg
 
     # - assets/Tile.jpg
     # - images/a_dot_ham.jpeg

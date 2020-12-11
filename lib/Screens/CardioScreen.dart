@@ -27,7 +27,7 @@ class CardioScreen extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(30.0),
               child: Image.asset(
-                'assets/runTile.jpg',
+                'assets/newActivity.jpeg',
                 fit: BoxFit.cover,
               ),
             ),
@@ -51,23 +51,46 @@ class CardioScreen extends StatelessWidget {
               style: TextStyle(
                 fontSize: MediaQuery.of(context).size.width / 10.3,
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: Colors.black,
               ),
             ),
           )
-        ]),
+        ]), // make everything below this stack horizontally scrollable
+
         Padding(
-          padding: const EdgeInsets.all(50.0),
           child: ListTile(
+            leading: Text('Running'),
             trailing: Icon(Icons.run_circle),
-            title: Text(
-              'Running',
-            ),
             onTap: () {
               Navigator.of(context).pushReplacementNamed(MapScreen.routeName);
             },
           ),
+          padding: const EdgeInsets.all(40.0),
+          // child: Container(
+          //   //  color: Colors.grey,
+          //   decoration: BoxDecoration(
+          //       borderRadius: BorderRadius.circular(20), color: Colors.grey),
+          //   height: 200,
+          //   width: MediaQuery.of(context).size.width,
+          //   child: Row(
+          //     children: [
+          //       ClipRRect(
+          //         borderRadius: BorderRadius.circular(20),
+          //         child: Image.asset(
+          //           'newActivity.jpeg',
+          //           height: 200,
+          //         ),
+          //       ),
+          //       Text('Running')
+          //     ],
+          //   ),
+          //   // trailing: Icon(Icons.run_circle),
+          //   // title: Text(
+          //   //   'Running',
+          //   // ),
+          // ),
         ),
+
         // Padding(
         //   padding: const EdgeInsets.all(50.0),
         //   child: ListTile(

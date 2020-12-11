@@ -80,28 +80,28 @@ class HomeScreen extends StatelessWidget {
   final List homeScreenList = [
     {
       'title': 'Start an Activity',
-      'url': 'assets/runTile.jpg',
+      'url': 'assets/newActivity.jpeg',
       'routeName': CardioScreen.routeName,
       'description':
           'Various activites like running and cycling can be accessed from here. Get out there and get those legs working!'
     },
     {
       'title': 'Your Activities',
-      'url': 'assets/statsTile1.png',
+      'url': 'assets/statsTile2.jpeg',
       'routeName': YourRuns.routeName,
       'description':
           'Your running statistics can be seen here. Keep a watch and aim to reach higher and higher everyday.'
     },
     {
       'title': 'Workout',
-      'url': 'assets/Workout.gif',
+      'url': 'assets/Workout.jpeg',
       'routeName': WorkoutHomeScreen.routeName,
       'description':
           'Had a quick warmup or a gruelling cardio session? Whichever it is, record it here and keep a tab on all those calories you are burning!'
     },
     {
       'title': 'Workout Stats',
-      'url': 'assets/WorkoutStats2.gif',
+      'url': 'assets/WorkoutStats3.jpeg',
       'routeName': WorkoutStatScreen.routeName,
       'description': 'Getting a bit redundant gotta think new here',
     },
