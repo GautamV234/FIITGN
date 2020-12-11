@@ -1,7 +1,5 @@
 import 'Screens/SelectWorkoutPlanScreen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import './loginScreen.dart';
 import 'Screens/CardioScreen.dart';
 import 'Screens/WalkingScreen.dart';
 import 'Screens/MapsScreen.dart';
@@ -14,13 +12,13 @@ import 'Screens/UserDetailsScreen.dart';
 import 'Providers/storeReturnProvider.dart';
 import './Providers/RunDataProvider.dart';
 import 'package:provider/provider.dart';
-import 'Screens/UserDetailsScreen.dart';
 import './Providers/WorkoutDataProvider.dart';
 import './Screens/GAuth.dart';
 import './Screens/workoutScreen.dart';
 import './Screens/workoutLoggingScreen.dart';
 import './Screens/WorkoutStatsScreen.dart';
 import './Screens/WorkoutDetailsScreen.dart';
+import './Screens/NoWorkoutPlanSelectedScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -54,8 +52,7 @@ class MyApp extends StatelessWidget {
         //     ? SignInFIITGN()
         //     : DetailsScreen(),
 
-        home: //SignInGoogle().isSignedIn == true ?
-            HomeScreen(), // : SignInGoogle(),
+        home: SignInGoogle().isSignedIn == true ? HomeScreen() : SignInGoogle(),
 
         routes: {
           CardioScreen.routeName: (ctx) => CardioScreen(),
@@ -73,6 +70,9 @@ class MyApp extends StatelessWidget {
           WorkoutLoggingScreen.routeName: (_) => WorkoutLoggingScreen(),
           WorkoutStatScreen.routeName: (_) => WorkoutStatScreen(),
           WorkoutDetailScreen.routeName: (_) => WorkoutDetailScreen(),
+          NoWorkoutPlanSelectedScreen.routeName: (_) =>
+              NoWorkoutPlanSelectedScreen()
+          //
         },
       ),
     );

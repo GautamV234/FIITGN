@@ -10,7 +10,7 @@ import 'dart:convert';
 class WorkoutDataProvider with ChangeNotifier {
   String _uid;
   String _token;
-  String _currentPlan = "";
+  String currentPlanPrivate = "";
 
   static final List<ExerciseModel> _exercises = [
     ExerciseModel(
@@ -295,16 +295,19 @@ class WorkoutDataProvider with ChangeNotifier {
     try {
       final response = await http.get(url);
       final List<WorkoutDataModel> loadedData = [];
-      final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      final extractedData = json.decode(response.body);
+      print(extractedData);
       extractedData.forEach((statId, statVal) {
         final List<WorkoutLogModel> listOfSetsReps = [];
-        final Map mapSetsReps = statVal['listOfSetsReps'];
-        mapSetsReps.forEach((key, value) {
-          listOfSetsReps.add(new WorkoutLogModel(
-              exerciseName: value['exerciseName'],
-              numOfReps: value['numOfReps'],
-              setNumber: value['setNumber']));
-        });
+
+        // final Map mapSetsReps = statVal['listOfSetsReps'];
+        // mapSetsReps.forEach((key, value) {
+        //   print("BoomBooom");
+        //   listOfSetsReps.add(new WorkoutLogModel(
+        //       exerciseName: value['exerciseName'],
+        //       numOfReps: value['numOfReps'],
+        //       setNumber: value['setNumber']));
+        // });
         final listMapSetsReps = statVal['listOfSetsReps'];
         print(listMapSetsReps);
         print(listMapSetsReps.runtimeType);
@@ -336,10 +339,6 @@ class WorkoutDataProvider with ChangeNotifier {
             );
           },
         );
-
-        /// just for git testing
-        /// ///
-        ///
         loadedData.add(
           new WorkoutDataModel(
             databaseId: statId,
@@ -403,28 +402,41 @@ class WorkoutDataProvider with ChangeNotifier {
     // _yourWorkouts.add(data);
   }
 
-  String get currentPlan {
-    /// should return Future<String> later on and should be marked async
-    // final _currentPlanFromDevice = await SharedPreferences.getInstance();
-    // final planNameSP = _currentPlanFromDevice.getString('planName');
-    // if (planNameSP == null) {
-    // return "";
-    // }
-    // return planNameSP;
-    // return _currentPlan;
-    return _currentPlan;
+  // String get currentPlan {
+  //   /// should return Future<String> later on and should be marked async
+  //   // final _currentPlanFromDevice = await SharedPreferences.getInstance();
+  //   // final planNameSP = _currentPlanFromDevice.getString('planName');
+  //   // if (planNameSP == null) {
+  //   // return "";
+  //   // }
+  //   // return planNameSP;
+  //   // return _currentPlan;
+  //   return currentPlanPrivate;
+  // }
+
+  Future<String> get getCurrentPlan async {
+    final SharedPreferences preferences2 =
+        await SharedPreferences.getInstance();
+    String planNameRecieved = preferences2.getString('planName') ?? "";
+    return planNameRecieved;
   }
 
-  Future<void> makeCurrentPlan(String planName) async {
+  makeCurrentPlan(String planName) async {
     final _currentPlanFromDevice = await SharedPreferences.getInstance();
-    await _currentPlanFromDevice.setString('planName', planName);
-    _currentPlan = planName;
+    _currentPlanFromDevice.setString('planName', planName);
+    currentPlanPrivate = planName;
     print("New plan set" + planName);
     notifyListeners();
   }
 
   void tempMakeCurrentPlan(String planName) {
-    _currentPlan = planName;
+    currentPlanPrivate = planName;
     notifyListeners();
   }
 }
+
+// setCurrentPlanName2(String planName) async {
+//   final SharedPreferences preferences2 = await SharedPreferences.getInstance();
+//   preferences2.setString('planName', planName);
+//   currentPlanPrivate = planName;
+// }

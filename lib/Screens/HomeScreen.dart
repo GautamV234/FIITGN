@@ -12,18 +12,40 @@ class HomeScreen extends StatelessWidget {
     FontAwesomeIcons.signOutAlt,
     FontAwesomeIcons.user,
   ];
-  Widget buildIcon(int index) {
-    return Container(
-      height: 60.0,
-      width: 60.0,
-      decoration: BoxDecoration(
-        color: Color(0xFFE7EBEE),
-        borderRadius: BorderRadius.circular(30.0),
-      ),
-      child: Icon(
-        rowOfItem[index],
-        size: 25.0,
-        color: Colors.blue[300],
+  Widget buildIcon(int index, BuildContext context) {
+    return InkWell(
+      onTap: () {
+        showDialog(
+            context: context,
+            builder: (ctx) => AlertDialog(
+                  title: Text('Do you Want to Logout?'),
+                  actions: <Widget>[
+                    FlatButton(
+                      onPressed: () {
+                        logoutUser();
+                      },
+                      child: Text('Yes'),
+                    ),
+                    FlatButton(
+                        onPressed: () {
+                          Navigator.of(ctx).pop(true);
+                        },
+                        child: Text('No'))
+                  ],
+                ));
+      },
+      child: Container(
+        height: 60.0,
+        width: 60.0,
+        decoration: BoxDecoration(
+          color: Color(0xFFE7EBEE),
+          borderRadius: BorderRadius.circular(30.0),
+        ),
+        child: Icon(
+          rowOfItem[index],
+          size: 25.0,
+          color: Colors.blue[300],
+        ),
       ),
     );
   }
@@ -78,42 +100,42 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: Colors.black,
-      //     appBar: AppBar(
-      //     leading: InkWell(
-      // child: Icon(Icons.backspace_outlined),
-      //     child: Icon(Icons.exit_to_app),
-      //   onTap: () {
-      //   showDialog(
-      //     context: context,
-      //   builder: (ctx) => AlertDialog(
-      //       title: Text('Do you Want to Logout?'),
-      //     actions: <Widget>[
-      //     FlatButton(
-      //       onPressed: () {
-      //       logoutUser();
-      //   },
-      //  child: Text('Yes')),
-      //                     FlatButton(
+      // appBar: AppBar(
+      //   leading: InkWell(
+      //     child: Icon(Icons.backspace_outlined),
+      //     // child: Icon(Icons.exit_to_app),
+      //     onTap: () {
+      //       showDialog(
+      //           context: context,
+      //           builder: (ctx) => AlertDialog(
+      //                 title: Text('Do you Want to Logout?'),
+      //                 actions: <Widget>[
+      //                   FlatButton(
+      //                     onPressed: () {
+      //                       logoutUser();
+      //                     },
+      //                     child: Text('Yes'),
+      //                   ),
+      //                   FlatButton(
       //                       onPressed: () {
-      //                       Navigator.of(ctx).pop(true);
-      //                   },
-      //                 child: Text('No'))
-      //         ],
-      //     ));
-//          },
-      //      ),
-
-      // leading: GestureDetector(
-      //   child: Icon(
-      //     Icons.logout,
+      //                         Navigator.of(ctx).pop(true);
+      //                       },
+      //                       child: Text('No'))
+      //                 ],
+      //               ));
+      //     },
       //   ),
-      //   // onTap: () => signOutUser().whenComplete(
-      //   //   () => SystemNavigator.pop(),
-      //   // ),
+      // leading: GestureDetector(
+      // child: Icon(
+      // Icons.logout,
       // ),
-      //       title: Text('FIITGN'),
-      //       elevation: 12,
-      //     ),
+      // onTap: () => signOutUser().whenComplete(
+      //   () => SystemNavigator.pop(),
+      // ),
+      // ),
+      // title: Text('FIITGN'),
+      // elevation: 12,
+      // ),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.symmetric(
@@ -143,8 +165,8 @@ class HomeScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                buildIcon(1),
-                buildIcon(0),
+                buildIcon(1, context),
+                buildIcon(0, context),
               ],
             ),
             SizedBox(
