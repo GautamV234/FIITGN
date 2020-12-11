@@ -125,6 +125,8 @@ class HomeScreen extends StatelessWidget {
   @override
   static const routeName = '\HomeScreen';
   Widget build(BuildContext context) {
+    var deviceSize = MediaQuery.of(context);
+    print(deviceSize);
     return Scaffold(
       // backgroundColor: Colors.black,
       // appBar: AppBar(
@@ -168,7 +170,7 @@ class HomeScreen extends StatelessWidget {
         child: SafeArea(
           child: ListView(
             padding: const EdgeInsets.symmetric(
-              vertical: 30.0,
+              vertical: 20,
             ),
             children: <Widget>[
               Padding(
@@ -176,7 +178,7 @@ class HomeScreen extends StatelessWidget {
                 child: Text(
                   'FIITGN',
                   style: TextStyle(
-                    fontSize: 50,
+                    fontSize: deviceSize.size.width / 8,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -186,11 +188,11 @@ class HomeScreen extends StatelessWidget {
                 child: Text(
                   'THE COMPLETE FITNESS APP',
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: deviceSize.size.width / 20,
                   ),
                 ),
               ),
-              SizedBox(height: 20.0),
+              SizedBox(height: deviceSize.size.width / 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
@@ -199,7 +201,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: 20,
+                height: deviceSize.size.width / 20,
               ),
               ListView.builder(
                 shrinkWrap: true,

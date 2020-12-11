@@ -23,7 +23,7 @@ class HomeScreenItem extends StatelessWidget {
       },
       child: Container(
         margin: EdgeInsets.all(10.0),
-        width: 210.0,
+        width: MediaQuery.of(context).size.width,
         child: Row(
           // alignment: Alignment.topCenter,
           children: <Widget>[
@@ -47,8 +47,8 @@ class HomeScreenItem extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20.0),
                     child: Image.asset(
                       url,
-                      height: 180.0,
-                      width: 180.0,
+                      height: MediaQuery.of(context).size.height / 4.87,
+                      width: MediaQuery.of(context).size.width / 2.28,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -56,8 +56,7 @@ class HomeScreenItem extends StatelessWidget {
               ),
             ),
             Container(
-              height: 120,
-              width: 200,
+              width: MediaQuery.of(context).size.width / 2.057,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
@@ -66,7 +65,7 @@ class HomeScreenItem extends StatelessWidget {
                       Text(
                         title,
                         style: TextStyle(
-                          fontSize: 22.0,
+                          fontSize: MediaQuery.of(context).size.width / 18.7,
                           fontWeight: FontWeight.w600,
                         ),
                       ),

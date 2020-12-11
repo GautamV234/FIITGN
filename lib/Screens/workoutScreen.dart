@@ -59,26 +59,24 @@ class WorkoutHomeScreen extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 40),
-                child: Row(
-                  children: <Widget>[
-                    IconButton(
-                      icon: Icon(Icons.arrow_back),
-                      iconSize: 30.0,
-                      color: Colors.black,
-                      onPressed: () => Navigator.pop(context),
-                    )
-                  ],
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 40,
+                ),
+                child: IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  iconSize: MediaQuery.of(context).size.width / 13.5,
+                  color: Colors.black,
+                  onPressed: () => Navigator.pop(context),
                 ),
               ),
               Positioned(
-                left: 16,
-                top: 320,
+                left: MediaQuery.of(context).size.width / 25.5,
+                bottom: MediaQuery.of(context).size.height / 29.22,
                 child: Text(
                   'Choose a plan.\nStart your workout!',
                   style: TextStyle(
-                    fontSize: 40,
+                    fontSize: MediaQuery.of(context).size.width / 10.3,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
@@ -87,7 +85,7 @@ class WorkoutHomeScreen extends StatelessWidget {
             ],
           ),
           Container(
-            height: 465,
+            height: MediaQuery.of(context).size.height / 1.89,
             child: ListView(
               children: [
                 InkWell(

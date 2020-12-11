@@ -33,33 +33,6 @@ class _WorkoutLoggingScreenState extends State<WorkoutLoggingScreen> {
     super.dispose();
   }
 
-  // @override
-  // void initState() {
-  //   final workoutDataProvider = Provider.of<WorkoutDataProvider>(context);
-
-  //   workoutDataProvider.currentPlan.then((value) {
-  //     currentPlanName = value;
-  //   });
-  //   // TODO: implement initState
-  //   super.initState();
-  // }
-
-  // Future<void> getCurrentPlan() async {
-  //   print("get Current Plan initialized");
-  //   final workoutDataProvider =
-  //       Provider.of<WorkoutDataProvider>(context, listen: false);
-  //   currentPlanName = await workoutDataProvider.currentPlan;
-  //   print("Current plan Name set==" + currentPlanName);
-  //   setState(() {});
-  // }
-
-  // @override
-  // void initState() {
-  //   getCurrentPlan();
-  //   // TODO: implement initState
-  //   super.initState();
-  // }
-
   Future<bool> _onBackPressed() async {
     return showDialog(
       context: context,
@@ -212,6 +185,8 @@ class _WorkoutLoggingScreenState extends State<WorkoutLoggingScreen> {
                         SingleChildScrollView(
                           child: Column(
                             children: [
+                              Text(currentPlanName),
+                              Text("Choose Workouts"),
                               ListView.builder(
                                 shrinkWrap: true,
                                 physics: ScrollPhysics(),
@@ -528,6 +503,18 @@ class _WorkoutLoggingScreenState extends State<WorkoutLoggingScreen> {
                                                 style: TextStyle(fontSize: 18),
                                               ),
                                             ],
+                                          ),
+                                          Center(
+                                            child: FloatingActionButton(
+                                              onPressed: () {
+                                                saveData(
+                                                    uid,
+                                                    dateIso,
+                                                    setsAndReps,
+                                                    currentPlanName);
+                                              },
+                                              child: Icon(Icons.save),
+                                            ),
                                           ),
                                         ],
                                       ),
