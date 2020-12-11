@@ -6,12 +6,38 @@ import 'YourRunsStatsScreen.dart';
 import '../Widgets/HomeScreenItem.dart';
 import 'workoutScreen.dart';
 import 'WorkoutStatsScreen.dart';
+import 'package:flutter/services.dart';
 
 class HomeScreen extends StatelessWidget {
   final List<IconData> rowOfItem = [
     FontAwesomeIcons.signOutAlt,
     FontAwesomeIcons.user,
   ];
+  Future<bool> _onBackPressed(BuildContext ctx) {
+    return showDialog(
+        context: ctx,
+        builder: (_) {
+          return AlertDialog(
+            title: Text('Exit App?'),
+            actions: [
+              FlatButton(
+                onPressed: () {
+                  Navigator.of(ctx).pop(true);
+                  SystemNavigator.pop();
+                },
+                child: Text('Yes'),
+              ),
+              // FlatButton(
+              //   onPressed: () {
+              //     Navigator.of(ctx).pop(true);
+              //   },
+              //   child: Text('No'),
+              // ),
+            ],
+          );
+        });
+  }
+
   Widget buildIcon(int index, BuildContext context) {
     return InkWell(
       onTap: () {
@@ -27,10 +53,11 @@ class HomeScreen extends StatelessWidget {
                       child: Text('Yes'),
                     ),
                     FlatButton(
-                        onPressed: () {
-                          Navigator.of(ctx).pop(true);
-                        },
-                        child: Text('No'))
+                      onPressed: () {
+                        Navigator.of(ctx).pop(true);
+                      },
+                      child: Text('No'),
+                    )
                   ],
                 ));
       },
@@ -136,54 +163,57 @@ class HomeScreen extends StatelessWidget {
       // title: Text('FIITGN'),
       // elevation: 12,
       // ),
-      body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.symmetric(
-            vertical: 30.0,
+      body: WillPopScope(
+        onWillPop: () => _onBackPressed(context),
+        child: SafeArea(
+          child: ListView(
+            padding: const EdgeInsets.symmetric(
+              vertical: 30.0,
+            ),
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 20.0, right: 120.0),
+                child: Text(
+                  'FIITGN',
+                  style: TextStyle(
+                    fontSize: 50,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20.0, right: 120.0),
+                child: Text(
+                  'THE COMPLETE FITNESS APP',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+              SizedBox(height: 20.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  buildIcon(1, context),
+                  buildIcon(0, context),
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: ScrollPhysics(),
+                itemCount: homeScreenList.length,
+                itemBuilder: (ctx, i) => HomeScreenItem(
+                  routeName: homeScreenList[i]['routeName'],
+                  title: homeScreenList[i]['title'],
+                  url: homeScreenList[i]['url'],
+                  description: homeScreenList[i]['description'],
+                ),
+              ),
+            ],
           ),
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(left: 20.0, right: 120.0),
-              child: Text(
-                'FIITGN',
-                style: TextStyle(
-                  fontSize: 50,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20.0, right: 120.0),
-              child: Text(
-                'THE COMPLETE FITNESS APP',
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            SizedBox(height: 20.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                buildIcon(1, context),
-                buildIcon(0, context),
-              ],
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            ListView.builder(
-              shrinkWrap: true,
-              physics: ScrollPhysics(),
-              itemCount: homeScreenList.length,
-              itemBuilder: (ctx, i) => HomeScreenItem(
-                routeName: homeScreenList[i]['routeName'],
-                title: homeScreenList[i]['title'],
-                url: homeScreenList[i]['url'],
-                description: homeScreenList[i]['description'],
-              ),
-            ),
-          ],
         ),
       ),
     );
