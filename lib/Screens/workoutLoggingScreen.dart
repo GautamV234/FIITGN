@@ -458,7 +458,9 @@ class _WorkoutLoggingScreenState extends State<WorkoutLoggingScreen> {
                                   Text(
                                     "Workout Details",
                                     style: TextStyle(
-                                        fontSize: 50,
+                                        fontSize:
+                                            MediaQuery.of(context).size.width /
+                                                10,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   FloatingActionButton(
