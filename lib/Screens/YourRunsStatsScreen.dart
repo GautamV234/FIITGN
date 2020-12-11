@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../Providers/RunModel.dart';
 import 'package:provider/provider.dart';
 import '../Providers/RunDataProvider.dart';
@@ -80,7 +81,10 @@ class _YourRunsState extends State<YourRuns> {
                             title: runStats[i].dateOfRun == null
                                 ? Text("Problem")
                                 : Text(
-                                    runStats[i].dateOfRun,
+                                    DateFormat.yMMMEd()
+                                        .format(DateTime.parse(
+                                            runStats[i].dateOfRun))
+                                        .toString(),
                                     style: TextStyle(color: Colors.white),
                                   ),
                           ),

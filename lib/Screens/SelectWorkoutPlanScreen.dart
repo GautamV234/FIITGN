@@ -63,7 +63,7 @@ class CustomPlansScreen extends StatelessWidget {
                       child: RaisedButton(
                         onPressed: () async {
                           workoutDataProvider // add await in case when I add shared pref
-                              .tempMakeCurrentPlan(customPlansList[i].planName);
+                              .makeCurrentPlan(customPlansList[i].planName);
                           Navigator.pop(context);
                         },
                         child: Text('Make Current Plan'),
@@ -88,7 +88,6 @@ class CustomPlansScreen extends StatelessWidget {
           ],
         ),
       ),
-      //  agar plan name aaraha hai toh baaki things can also be outputted think about that later
     );
   }
 }

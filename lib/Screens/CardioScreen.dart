@@ -66,7 +66,7 @@ class CardioScreen extends StatelessWidget {
               'Running',
             ),
             onTap: () {
-              Navigator.of(context).pushNamed(MapScreen.routeName);
+              Navigator.of(context).pushReplacementNamed(MapScreen.routeName);
             },
           ),
         ),

@@ -49,7 +49,7 @@ class _ShowResultsScreenState extends State<ShowResultsScreen> {
     final percent = distance / 10;
     DateTime initialTime = routeArgs['initialTime'];
     final String startTime = DateFormat.Hm().format(initialTime);
-    final String dateOfRun = DateFormat.yMMMEd().format(initialTime);
+    final String dateOfRun = initialTime.toIso8601String();
     DateTime finalTime = routeArgs['finalTime'];
     final timeOfRun = finalTime.difference(initialTime);
     String time = timeOfRun.toString();

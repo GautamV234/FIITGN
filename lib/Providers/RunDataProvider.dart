@@ -123,6 +123,7 @@ class RunDataProvider with ChangeNotifier {
       body: json.encode(
         {
           'uid': _uid,
+          'dateOfRun': dateOfRun,
           'avgSpeed': avgSpeed,
           'distanceCovered': distanceCovered,
           'startTime': startTime,
