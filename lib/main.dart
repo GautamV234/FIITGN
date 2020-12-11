@@ -49,11 +49,10 @@ class MyApp extends StatelessWidget {
           //fontFamily: 'Poppins'),
         ),
         // home: StoreReturnProvider().class_userInput_isSet
-        //     ? SignInFIITGN()
+        // ? SignInFIITGN()
         //     : DetailsScreen(),
 
-        home: //SignInGoogle().isSignedIn == true ?
-            HomeScreen(), //: SignInGoogle(),
+        home: SignInGoogle().isSignedIn == true ? HomeScreen() : SignInGoogle(),
 
         routes: {
           CardioScreen.routeName: (ctx) => CardioScreen(),

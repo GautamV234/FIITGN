@@ -84,59 +84,61 @@ class WorkoutHomeScreen extends StatelessWidget {
               ),
             ],
           ),
-          Container(
-            height: MediaQuery.of(context).size.height / 1.89,
-            child: ListView(
-              children: [
-                InkWell(
-                  onTap: () async {
-                    //// add code to verify from Shared Pref to check if plan already selected
-                    workoutPlanName = await workoutDataProvider.getCurrentPlan;
-                    if (workoutPlanName == "") {
-                      Navigator.pushNamed(
-                          context, NoWorkoutPlanSelectedScreen.routeName);
-                    } else {
-                      print("Plan was already Set");
-                      Navigator.pushNamed(
-                          context, WorkoutLoggingScreen.routeName,
-                          arguments: workoutPlanName);
-                    }
-                  },
-                  child: ListTile(
-                    title: Text('Start Working out'),
+          Expanded(
+            child: Container(
+              child: ListView(
+                children: [
+                  InkWell(
+                    onTap: () async {
+                      //// add code to verify from Shared Pref to check if plan already selected
+                      workoutPlanName =
+                          await workoutDataProvider.getCurrentPlan;
+                      if (workoutPlanName == "") {
+                        Navigator.pushNamed(
+                            context, NoWorkoutPlanSelectedScreen.routeName);
+                      } else {
+                        print("Plan was already Set");
+                        Navigator.pushNamed(
+                            context, WorkoutLoggingScreen.routeName,
+                            arguments: workoutPlanName);
+                      }
+                    },
+                    child: ListTile(
+                      title: Text('Start Working out'),
+                    ),
                   ),
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, CustomPlansScreen.routeName);
-                  },
-                  child: ListTile(
-                    title: Text('Select Workout Plan'),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, CustomPlansScreen.routeName);
+                    },
+                    child: ListTile(
+                      title: Text('Select Workout Plan'),
+                    ),
                   ),
-                ),
-                InkWell(
-                  onTap: () {
-                    //  feature to be added later
-                  },
-                  child: ListTile(
-                    title: Text('Create Plan'),
+                  InkWell(
+                    onTap: () {
+                      //  feature to be added later
+                    },
+                    child: ListTile(
+                      title: Text('Create Plan'),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
+              // child: ListView(children: [
+              //   ListView.builder(
+              //     shrinkWrap: true,
+              //     physics: ScrollPhysics(),
+              //     itemCount: workoutScreenList.length,
+              //     itemBuilder: (ctx, i) => HomeScreenItem(
+              //       routeName: workoutScreenList[i]['routeName'],
+              //       title: workoutScreenList[i]['title'],
+              //       url: workoutScreenList[i]['url'],
+              //       description: "",
+              //     ),
+              //   ),
+              // ]),
             ),
-            // child: ListView(children: [
-            //   ListView.builder(
-            //     shrinkWrap: true,
-            //     physics: ScrollPhysics(),
-            //     itemCount: workoutScreenList.length,
-            //     itemBuilder: (ctx, i) => HomeScreenItem(
-            //       routeName: workoutScreenList[i]['routeName'],
-            //       title: workoutScreenList[i]['title'],
-            //       url: workoutScreenList[i]['url'],
-            //       description: "",
-            //     ),
-            //   ),
-            // ]),
           )
         ],
       ),
