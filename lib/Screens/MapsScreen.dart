@@ -241,109 +241,275 @@ class _MapScreenState extends State<MapScreen> {
       height: height,
       width: width,
       child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          actions: [],
-          title: Text('Track Your Run'),
-        ),
+        // appBar: AppBar(
+        //   automaticallyImplyLeading: false,
+        //   actions: [],
+        //   title: Text('Track Your Run'),
+        // ),
         body: WillPopScope(
           onWillPop: _onBackPressed,
-          child: Stack(
+          child: Column(
             children: [
-              GoogleMap(
-                initialCameraPosition: initialPosition,
-                mapType: MapType.normal,
-                markers: Set.of((marker != null) ? [marker] : []),
-                circles: Set.of((circle != null) ? [circle] : []),
-                polylines: _polylines,
-                onMapCreated: (GoogleMapController controller) {
-                  _controller = controller;
-                },
-              ),
-              Positioned(
-                  child: ListTile(
-                tileColor: Color.fromRGBO(0, 0, 100, 1),
-                leading: Icon(Icons.panorama_fish_eye_sharp),
-                title: Text(
-                  "Distance - $dist metres",
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                ),
-                subtitle: Text(
-                  "Speed - $speedString m/s",
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                ),
-              )),
-              Positioned(
-                bottom: 19,
-                left: 10,
-                child: FloatingActionButton(
-                  heroTag: "2",
-                  backgroundColor: Colors.red,
-                  child: Icon(Icons.cancel),
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (ctx) {
-                        var actions2 = [
-                          FlatButton(
-                            onPressed: () {
-                              if (isChanged) {
-                                // storing final location
-                                storeFinalLat = finalLatitude;
-                                storeFinalLong = finalLongitude;
-                                endingTime = DateTime.now();
-                                passingToShowResults['initialLat'] =
-                                    storeInitialLat;
-                                passingToShowResults['initialLong'] =
-                                    storeInitialLong;
-                                passingToShowResults['finalLat'] =
-                                    storeFinalLat;
-                                passingToShowResults['finalLong'] =
-                                    storeFinalLong;
-                                passingToShowResults['initialTime'] =
-                                    startingTime;
-                                passingToShowResults['finalTime'] = endingTime;
-                                passingToShowResults['distance'] = distance;
-                                passingToShowResults['listOfLatLng'] =
-                                    listOfLatLngForPoly;
-
-                                print("All parameters stored successfully");
-                                // updatePolyLines(
-                                //   initialLatitude,
-                                //   initialLongitude,
-                                //   finalLatitude,
-                                //   finalLongitude,
-                                // );
-
-                                _locationSubscription.cancel();
-                                Navigator.of(context).pushReplacementNamed(
-                                    ShowResultsScreen.routeName,
-                                    arguments: passingToShowResults);
-                              }
-                            },
-                            child: Text('Yes'),
-                          ),
-                          FlatButton(
-                            onPressed: () {
-                              Navigator.of(ctx).pop(true);
-                            },
-                            child: Text('No'),
-                          ),
-                        ];
-                        return AlertDialog(
-                          title: Text('Are you sure you want to end Run?'),
-                          actions: actions2,
-                        );
-                      },
-                    );
+              Container(
+                height: MediaQuery.of(context).size.height / 2,
+                width: MediaQuery.of(context).size.width,
+                child: GoogleMap(
+                  initialCameraPosition: initialPosition,
+                  mapType: MapType.normal,
+                  markers: Set.of((marker != null) ? [marker] : []),
+                  circles: Set.of((circle != null) ? [circle] : []),
+                  polylines: _polylines,
+                  onMapCreated: (GoogleMapController controller) {
+                    _controller = controller;
                   },
                 ),
               ),
-              Positioned(
-                  child: FloatingActionButton(
-                child: Icon(Icons.location_searching),
-                onPressed: getCurrentLocation,
-              ))
+              Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: InkWell(
+                    onTap: getCurrentLocation,
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height / 25,
+                      child: Text(
+                        'Start',
+                        style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.height / 30,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.blue[100]),
+                    ),
+                  )),
+              // FloatingActionButton(
+              //   child: Icon(Icons.location_searching),
+              //   onPressed: getCurrentLocation,
+              // ),
+              Row(
+                children: [
+                  Container(
+                    child: Container(
+                      child: Column(
+                        children: [
+                          Icon(
+                            Icons.directions_run,
+                            color: Colors.black,
+                          ),
+                          Text(
+                            '$dist',
+                            style: TextStyle(
+                                fontSize: MediaQuery.of(context).size.width / 6,
+                                fontWeight: FontWeight.w700),
+                          ),
+                          Text('METRES')
+                        ],
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                      ),
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(color: Colors.grey[200], blurRadius: 5)
+                        ],
+                        borderRadius: BorderRadius.circular(30),
+                        color: Colors.grey[200],
+                      ),
+                      margin: EdgeInsets.all(5),
+                    ),
+                    width: MediaQuery.of(context).size.width / 2,
+                    height: MediaQuery.of(context).size.height / 6,
+                    //  color: Colors.white,
+                  ),
+                  Container(
+                    child: Container(
+                      child: Column(
+                        children: [
+                          Icon(
+                            Icons.speed,
+                            color: Colors.black,
+                          ),
+                          Text(
+                            '$speedString',
+                            style: TextStyle(
+                                fontSize: MediaQuery.of(context).size.width / 6,
+                                fontWeight: FontWeight.w700),
+                          ),
+                          Text('KMPH')
+                        ],
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                      ),
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(color: Colors.grey[200], blurRadius: 5)
+                        ],
+                        borderRadius: BorderRadius.circular(30),
+                        color: Colors.grey[200],
+                      ),
+                      margin: EdgeInsets.all(5),
+                    ),
+                    height: MediaQuery.of(context).size.height / 6,
+                    width: MediaQuery.of(context).size.width / 2,
+                    //color: Colors.white,
+                  ),
+                ],
+              ),
+              Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: InkWell(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (ctx) {
+                          var actions2 = [
+                            FlatButton(
+                              onPressed: () {
+                                if (isChanged) {
+                                  // storing final location
+                                  storeFinalLat = finalLatitude;
+                                  storeFinalLong = finalLongitude;
+                                  endingTime = DateTime.now();
+                                  passingToShowResults['initialLat'] =
+                                      storeInitialLat;
+                                  passingToShowResults['initialLong'] =
+                                      storeInitialLong;
+                                  passingToShowResults['finalLat'] =
+                                      storeFinalLat;
+                                  passingToShowResults['finalLong'] =
+                                      storeFinalLong;
+                                  passingToShowResults['initialTime'] =
+                                      startingTime;
+                                  passingToShowResults['finalTime'] =
+                                      endingTime;
+                                  passingToShowResults['distance'] = distance;
+                                  passingToShowResults['listOfLatLng'] =
+                                      listOfLatLngForPoly;
+
+                                  print("All parameters stored successfully");
+                                  // updatePolyLines(
+                                  //   initialLatitude,
+                                  //   initialLongitude,
+                                  //   finalLatitude,
+                                  //   finalLongitude,
+                                  // );
+
+                                  _locationSubscription.cancel();
+                                  Navigator.of(context).pushReplacementNamed(
+                                      ShowResultsScreen.routeName,
+                                      arguments: passingToShowResults);
+                                }
+                              },
+                              child: Text('Yes'),
+                            ),
+                            FlatButton(
+                              onPressed: () {
+                                Navigator.of(ctx).pop(true);
+                              },
+                              child: Text('No'),
+                            ),
+                          ];
+                          return AlertDialog(
+                            title: Text('Are you sure you want to end Run?'),
+                            actions: actions2,
+                          );
+                        },
+                      );
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height / 25,
+                      child: Text(
+                        'Finish',
+                        style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.height / 30,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.red[200]),
+                    ),
+                  )),
+              // Positioned(
+              //     child: ListTile(
+              //   tileColor: Color.fromRGBO(0, 0, 100, 1),
+              //   leading: Icon(Icons.panorama_fish_eye_sharp),
+              //   title: Text(
+              //     "Distance - $dist metres",
+              //     style: TextStyle(color: Colors.white, fontSize: 25),
+              //   ),
+              //   subtitle: Text(
+              //     "Speed - $speedString m/s",
+              //     style: TextStyle(color: Colors.white, fontSize: 25),
+              //   ),
+              // )),
+              // Positioned(
+              //   bottom: 19,
+              //   left: 10,
+              //   child: FloatingActionButton(
+              //     heroTag: "2",
+              //     backgroundColor: Colors.red,
+              //     child: Icon(Icons.cancel),
+              //     onPressed: () {
+              //       showDialog(
+              //         context: context,
+              //         builder: (ctx) {
+              //           var actions2 = [
+              //             FlatButton(
+              //               onPressed: () {
+              //                 if (isChanged) {
+              //                   // storing final location
+              //                   storeFinalLat = finalLatitude;
+              //                   storeFinalLong = finalLongitude;
+              //                   endingTime = DateTime.now();
+              //                   passingToShowResults['initialLat'] =
+              //                       storeInitialLat;
+              //                   passingToShowResults['initialLong'] =
+              //                       storeInitialLong;
+              //                   passingToShowResults['finalLat'] =
+              //                       storeFinalLat;
+              //                   passingToShowResults['finalLong'] =
+              //                       storeFinalLong;
+              //                   passingToShowResults['initialTime'] =
+              //                       startingTime;
+              //                   passingToShowResults['finalTime'] = endingTime;
+              //                   passingToShowResults['distance'] = distance;
+              //                   passingToShowResults['listOfLatLng'] =
+              //                       listOfLatLngForPoly;
+
+              //                   print("All parameters stored successfully");
+              //                   // updatePolyLines(
+              //                   //   initialLatitude,
+              //                   //   initialLongitude,
+              //                   //   finalLatitude,
+              //                   //   finalLongitude,
+              //                   // );
+
+              //                   _locationSubscription.cancel();
+              //                   Navigator.of(context).pushReplacementNamed(
+              //                       ShowResultsScreen.routeName,
+              //                       arguments: passingToShowResults);
+              //                 }
+              //               },
+              //               child: Text('Yes'),
+              //             ),
+              //             FlatButton(
+              //               onPressed: () {
+              //                 Navigator.of(ctx).pop(true);
+              //               },
+              //               child: Text('No'),
+              //             ),
+              //           ];
+              //           return AlertDialog(
+              //             title: Text('Are you sure you want to end Run?'),
+              //             actions: actions2,
+              //           );
+              //         },
+              //       );
+              //     },
+              //   ),
+              // ),
             ],
           ),
         ),

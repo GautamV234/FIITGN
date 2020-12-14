@@ -52,7 +52,7 @@ class _WorkoutStatScreenState extends State<WorkoutStatScreen> {
                   final dateToDisplay =
                       DateTime.parse(listOfYourWorkouts[i].date);
                   final dateOfWorkout =
-                      DateFormat.yMMMEd().format(dateToDisplay);
+                      DateFormat.MMMMEEEEd().format(dateToDisplay);
                   final planName = listOfYourWorkouts[i].planName;
                   return GestureDetector(
                     onTap: () {
@@ -65,42 +65,54 @@ class _WorkoutStatScreenState extends State<WorkoutStatScreen> {
                       elevation: 10,
                       margin: EdgeInsets.all(5),
                       shadowColor: Colors.black,
-                      color: Theme.of(context).primaryColor,
-                      child: Container(
-                        child: Column(
-                          children: [
-                            ListTile(
-                              leading: FaIcon(
-                                FontAwesomeIcons.calendar,
-                                color: Colors.white,
-                              ),
-                              title: Text(
-                                dateOfWorkout,
-                                style: TextStyle(color: Colors.white),
+                      color: Colors.white,
+                      child: Column(
+                        children: [
+                          ListTile(
+                            leading: FaIcon(
+                              FontAwesomeIcons.calendar,
+                              color: Colors.black,
+                            ),
+                            title: Text(
+                              dateOfWorkout,
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ),
+                          Container(
+                            height: MediaQuery.of(context).size.height / 5,
+                            color: Colors.black,
+                          ),
+                          ListTile(
+                            leading: FaIcon(
+                              FontAwesomeIcons.bullseye,
+                              color: Colors.black,
+                            ),
+                            title: Text(
+                              planName,
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                          ListTile(
+                            // leading: FaIcon(
+                            // FontAwesomeIcons.bookOpen,
+                            // color: Colors.white,
+
+                            trailing: FlatButton(
+                              height: 10,
+                              color: Colors.grey[200],
+                              onPressed: () {},
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  "See Workout",
+                                  style: TextStyle(color: Colors.black),
+                                ),
                               ),
                             ),
-                            ListTile(
-                              leading: FaIcon(
-                                FontAwesomeIcons.bullseye,
-                                color: Colors.white,
-                              ),
-                              title: Text(
-                                planName,
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                            ListTile(
-                              leading: FaIcon(
-                                FontAwesomeIcons.bookOpen,
-                                color: Colors.white,
-                              ),
-                              title: Text(
-                                "Tap to see details of Workout",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            )
-                          ],
-                        ),
+                          )
+                        ],
                       ),
                     ),
                   );

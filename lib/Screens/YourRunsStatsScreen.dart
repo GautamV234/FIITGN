@@ -69,50 +69,112 @@ class _YourRunsState extends State<YourRuns> {
                     elevation: 10,
                     margin: EdgeInsets.all(5),
                     shadowColor: Colors.black,
-                    color: Theme.of(context).primaryColor,
-                    child: Container(
-                      child: Column(
-                        children: [
-                          ListTile(
-                            leading: FaIcon(
-                              FontAwesomeIcons.calendar,
-                              color: Colors.white,
-                            ),
-                            title: runStats[i].dateOfRun == null
-                                ? Text("Problem")
-                                : Text(
-                                    DateFormat.yMMMEd()
-                                        .format(DateTime.parse(
-                                            runStats[i].dateOfRun))
-                                        .toString(),
-                                    style: TextStyle(color: Colors.white),
+                    // child: Container(
+                    //   height: MediaQuery.of(context).size.height / 3,
+                    child: Column(
+                      children: [
+                        ListTile(
+                          leading: FaIcon(
+                            FontAwesomeIcons.calendar,
+                            color: Colors.black,
+                          ),
+                          title: runStats[i].dateOfRun == null
+                              ? Text("Problem")
+                              : Text(
+                                  DateFormat.MMMMEEEEd()
+                                      .format(
+                                          DateTime.parse(runStats[i].dateOfRun))
+                                      .toString(),
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                        ),
+                        Container(
+                          height: MediaQuery.of(context).size.height / 5,
+                          color: Colors.black,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(20, 10, 0, 20),
+                              child: Row(
+                                children: [
+                                  Column(
+                                    children: [
+                                      Text(
+                                        'DISTANCE',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                      Text('$distance'),
+                                      Text('kilometres')
+                                    ],
                                   ),
-                          ),
-                          ListTile(
-                            leading: FaIcon(
-                              FontAwesomeIcons.road,
-                              color: Colors.white,
+                                  SizedBox(
+                                    width: 15,
+                                  ),
+                                  Container(
+                                    width: 1,
+                                    color: Colors.grey,
+                                  ),
+                                  SizedBox(width: 15),
+                                  Column(
+                                    children: [
+                                      Text(
+                                        'SPEED',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                      Text('$avgSpeed'),
+                                      Text('KMPH')
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                            title: Text("$distance kms",
-                                style: TextStyle(color: Colors.white)),
-                          ),
-                          ListTile(
-                            leading: FaIcon(
-                              FontAwesomeIcons.tachometerAlt,
-                              color: Colors.white,
+                            Text(''),
+                          ],
+                        ),
+                        // ListTile(
+                        //   leading: FaIcon(
+                        //     FontAwesomeIcons.road,
+                        //     color: Colors.black,
+                        //   ),
+                        //   title: Text("$distance kms",
+                        //       style: TextStyle(color: Colors.black)),
+                        // ),
+                        // ListTile(
+                        //   leading: FaIcon(
+                        //     FontAwesomeIcons.tachometerAlt,
+                        //     color: Colors.black,
+                        //   ),
+                        //   title: Text("$avgSpeed m/s",
+                        //       style: TextStyle(color: Colors.black)),
+                        // ),
+
+                        ListTile(
+                          trailing: FlatButton(
+                            color: Colors.grey[300],
+                            height: 10,
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                  context, YourRunPolyLineScreen.routeName,
+                                  arguments: i); // passing the index
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                'See Run',
+                                style: TextStyle(color: Colors.black),
+                              ),
                             ),
-                            title: Text("$avgSpeed m/s",
-                                style: TextStyle(color: Colors.white)),
                           ),
-                          Divider(),
-                          ListTile(
-                            title: Text(
-                              'Tap to see your Run',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 );
