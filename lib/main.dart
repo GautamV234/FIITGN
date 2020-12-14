@@ -19,6 +19,7 @@ import './Screens/workoutLoggingScreen.dart';
 import './Screens/WorkoutStatsScreen.dart';
 import './Screens/WorkoutDetailsScreen.dart';
 import './Screens/NoWorkoutPlanSelectedScreen.dart';
+import 'Screens/StatsScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -44,13 +45,14 @@ class MyApp extends StatelessWidget {
         title: 'FIITGN',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primaryColor: Color.fromRGBO(0, 0, 100, 1),
-          accentColor: Colors.amber,
+          primaryColor: Color(0xFFF05454),
+          accentColor: Color(0xFF414141),
+          backgroundColor: Color(0xFFF0F0F0),
           //fontFamily: 'Poppins'),
         ),
         // home: StoreReturnProvider().class_userInput_isSet
-        //     ? SignInFIITGN()
-        //     : DetailsScreen(),
+        // ? SignInFIITGN()
+        // : DetailsScreen(),
 
         home: SignInGoogle().isSignedIn == true ? HomeScreen() : SignInGoogle(),
 
@@ -71,7 +73,8 @@ class MyApp extends StatelessWidget {
           WorkoutStatScreen.routeName: (_) => WorkoutStatScreen(),
           WorkoutDetailScreen.routeName: (_) => WorkoutDetailScreen(),
           NoWorkoutPlanSelectedScreen.routeName: (_) =>
-              NoWorkoutPlanSelectedScreen()
+              NoWorkoutPlanSelectedScreen(),
+          StatsScreen.routeName: (_) => StatsScreen(),
           //
         },
       ),

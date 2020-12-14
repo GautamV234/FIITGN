@@ -266,7 +266,7 @@ class _ShowResultsScreenState extends State<ShowResultsScreen> {
                           );
                         },
                         elevation: 10,
-                        color: Theme.of(context).accentColor,
+                        color: Theme.of(context).primaryColor,
                         child: Text('See Run'),
                       ),
                       RaisedButton(
@@ -316,7 +316,7 @@ class _ShowResultsScreenState extends State<ShowResultsScreen> {
                           );
                         },
                         elevation: 10,
-                        color: Theme.of(context).accentColor,
+                        color: Theme.of(context).primaryColor,
                         child: Text('Save Progress'),
                       ),
                     ],

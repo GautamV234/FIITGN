@@ -14,7 +14,7 @@ class CardioScreen extends StatelessWidget {
       children: <Widget>[
         Stack(children: [
           Container(
-            height: MediaQuery.of(context).size.width,
+            width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30.0),
                 boxShadow: [
@@ -27,49 +27,70 @@ class CardioScreen extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(30.0),
               child: Image.asset(
-                'assets/runTile.jpg',
+                'assets/newActivity.jpeg',
                 fit: BoxFit.cover,
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 40),
-            child: Row(
-              children: <Widget>[
-                IconButton(
-                  icon: Icon(Icons.arrow_back),
-                  iconSize: 30.0,
-                  color: Colors.black,
-                  onPressed: () => Navigator.pop(context),
-                )
-              ],
-            ),
-          ),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10,
+                vertical: 40,
+              ),
+              child: IconButton(
+                icon: Icon(Icons.arrow_back),
+                iconSize: MediaQuery.of(context).size.width / 13.5,
+                color: Colors.black,
+                onPressed: () => Navigator.pop(context),
+              )),
           Positioned(
-            left: 16,
-            top: 320,
+            left: MediaQuery.of(context).size.width / 25.5,
+            bottom: MediaQuery.of(context).size.height / 29.22,
             child: Text(
               'What would you like\nto do today?',
               style: TextStyle(
-                fontSize: 40,
+                fontSize: MediaQuery.of(context).size.width / 10.3,
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: Colors.black,
               ),
             ),
           )
-        ]),
+        ]), // make everything below this stack horizontally scrollable
+
         Padding(
-          padding: const EdgeInsets.all(50.0),
           child: ListTile(
+            leading: Text('Running'),
             trailing: Icon(Icons.run_circle),
-            title: Text(
-              'Running',
-            ),
             onTap: () {
               Navigator.of(context).pushReplacementNamed(MapScreen.routeName);
             },
           ),
+          padding: const EdgeInsets.all(40.0),
+          // child: Container(
+          //   //  color: Colors.grey,
+          //   decoration: BoxDecoration(
+          //       borderRadius: BorderRadius.circular(20), color: Colors.grey),
+          //   height: 200,
+          //   width: MediaQuery.of(context).size.width,
+          //   child: Row(
+          //     children: [
+          //       ClipRRect(
+          //         borderRadius: BorderRadius.circular(20),
+          //         child: Image.asset(
+          //           'newActivity.jpeg',
+          //           height: 200,
+          //         ),
+          //       ),
+          //       Text('Running')
+          //     ],
+          //   ),
+          //   // trailing: Icon(Icons.run_circle),
+          //   // title: Text(
+          //   //   'Running',
+          //   // ),
+          // ),
         ),
+
         // Padding(
         //   padding: const EdgeInsets.all(50.0),
         //   child: ListTile(

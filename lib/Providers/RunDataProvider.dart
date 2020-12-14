@@ -6,6 +6,8 @@ import 'dart:convert';
 
 class RunDataProvider with ChangeNotifier {
   String _uid;
+  // temporary change for dev purpose on next line. Revert after.
+  // _uid = '6xjRKs7BI6TLvM6aekhyAUidPAc2';
   String _token;
 
   List<RunModel> _yourRunsList = [

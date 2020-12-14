@@ -33,33 +33,6 @@ class _WorkoutLoggingScreenState extends State<WorkoutLoggingScreen> {
     super.dispose();
   }
 
-  // @override
-  // void initState() {
-  //   final workoutDataProvider = Provider.of<WorkoutDataProvider>(context);
-
-  //   workoutDataProvider.currentPlan.then((value) {
-  //     currentPlanName = value;
-  //   });
-  //   // TODO: implement initState
-  //   super.initState();
-  // }
-
-  // Future<void> getCurrentPlan() async {
-  //   print("get Current Plan initialized");
-  //   final workoutDataProvider =
-  //       Provider.of<WorkoutDataProvider>(context, listen: false);
-  //   currentPlanName = await workoutDataProvider.currentPlan;
-  //   print("Current plan Name set==" + currentPlanName);
-  //   setState(() {});
-  // }
-
-  // @override
-  // void initState() {
-  //   getCurrentPlan();
-  //   // TODO: implement initState
-  //   super.initState();
-  // }
-
   Future<bool> _onBackPressed() async {
     return showDialog(
       context: context,
@@ -212,6 +185,24 @@ class _WorkoutLoggingScreenState extends State<WorkoutLoggingScreen> {
                         SingleChildScrollView(
                           child: Column(
                             children: [
+                              // Padding(
+                              //   padding: const EdgeInsets.all(10),
+                              //   child: Row(
+                              //     children: [
+                              //       Text(
+                              //         "You have chosen " + currentPlanName,
+                              //         style: TextStyle(
+                              //             fontWeight: FontWeight.bold,
+                              //             fontSize: 20),
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
+                              // Text(
+                              //   "Choose Workouts",
+                              //   style: TextStyle(
+                              //       fontWeight: FontWeight.bold, fontSize: 20),
+                              // ),
                               ListView.builder(
                                 shrinkWrap: true,
                                 physics: ScrollPhysics(),
@@ -239,6 +230,8 @@ class _WorkoutLoggingScreenState extends State<WorkoutLoggingScreen> {
                                       left: 10,
                                       bottom: 15,
                                       child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceAround,
                                         children: [
@@ -263,11 +256,17 @@ class _WorkoutLoggingScreenState extends State<WorkoutLoggingScreen> {
                                                   actions: [
                                                     Container(
                                                       child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
                                                         children: [
                                                           Row(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .center,
                                                             children: [
                                                               Text(
-                                                                  "Add Set Number"),
+                                                                  "Add Set Number:  "),
                                                               Container(
                                                                 width: MediaQuery.of(
                                                                             context)
@@ -288,7 +287,7 @@ class _WorkoutLoggingScreenState extends State<WorkoutLoggingScreen> {
                                                           Row(
                                                             children: [
                                                               Text(
-                                                                  "Add rep count"),
+                                                                  "Add Rep Count:  "),
                                                               Container(
                                                                 width: MediaQuery.of(
                                                                             context)
@@ -452,87 +451,141 @@ class _WorkoutLoggingScreenState extends State<WorkoutLoggingScreen> {
                       ],
                     ),
                     Container(
-                      color: Theme.of(context).accentColor,
+                      color: Colors.grey[200],
                       child: Column(
                         children: [
-                          Center(
-                            child: Text(
-                              "Workout Details",
-                              style: TextStyle(
-                                  fontSize: 50, fontWeight: FontWeight.bold),
-                            ),
+                          SizedBox(
+                            height: 50,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                    "Workout Details",
+                                    style: TextStyle(
+                                        fontSize:
+                                            MediaQuery.of(context).size.width /
+                                                10,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  FloatingActionButton(
+                                    onPressed: () {
+                                      saveData(uid, dateIso, setsAndReps,
+                                          currentPlanName);
+                                    },
+                                    child: Icon(Icons.save),
+                                  ),
+                                ]),
                           ),
                           Expanded(
                             child: ListView.builder(
                               itemCount: setsAndReps.length,
                               itemBuilder: (ctx, t) {
-                                print("abcde");
-                                return Stack(children: [
-                                  ClipRRect(
-                                    child: Image(
-                                      image: AssetImage(
-                                        currentExerciseModel
-                                            .firstWhere((element) =>
-                                                element.exerciseName ==
-                                                setsAndReps[t].exerciseName)
-                                            .assetImageUrl,
-                                      ),
-                                    ),
+                                // print("abcde");
+                                return Container(
+                                  margin: EdgeInsets.fromLTRB(20, 5, 20, 5),
+                                  height:
+                                      MediaQuery.of(context).size.height / 10,
+                                  width: MediaQuery.of(context).size.width,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(20),
                                   ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(20, 5, 20, 5),
-                                    height: 120,
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(20),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            setsAndReps[t].exerciseName,
-                                            style: TextStyle(
-                                                fontSize: 30,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                  "Set - " +
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          child: Image(
+                                            fit: BoxFit.cover,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                4,
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                10,
+                                            image: AssetImage(
+                                              currentExerciseModel
+                                                  .firstWhere((element) =>
+                                                      element.exerciseName ==
                                                       setsAndReps[t]
-                                                          .setNumber
+                                                          .exerciseName)
+                                                  .assetImageUrl,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 16,
+                                        ),
+
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              setsAndReps[t].exerciseName,
+                                              style: TextStyle(
+                                                  fontSize:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .width /
+                                                          20.5,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                    "Set - " +
+                                                        setsAndReps[t]
+                                                            .setNumber
+                                                            .toString(),
+                                                    style: TextStyle(
+                                                        fontSize: 18)),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text(
+                                                  "|",
+                                                  style:
+                                                      TextStyle(fontSize: 18),
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text(
+                                                  "Reps - " +
+                                                      setsAndReps[t]
+                                                          .numOfReps
                                                           .toString(),
                                                   style:
-                                                      TextStyle(fontSize: 18)),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              Text(
-                                                "|",
-                                                style: TextStyle(fontSize: 18),
-                                              ),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              Text(
-                                                "Reps - " +
-                                                    setsAndReps[t]
-                                                        .numOfReps
-                                                        .toString(),
-                                                style: TextStyle(fontSize: 18),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
+                                                      TextStyle(fontSize: 18),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+
+                                        // Center(
+                                        //   child:
+                                        // ),
+                                      ],
                                     ),
                                   ),
+
                                   //     ClipRRect(
                                   //       borderRadius: BorderRadius.circular(20.0),
                                   //     child: Image(
@@ -554,7 +607,7 @@ class _WorkoutLoggingScreenState extends State<WorkoutLoggingScreen> {
                                   //         fontWeight: FontWeight.bold),
                                   //  ),
                                   //         ],
-                                ]);
+                                );
                                 //  );
                               },
                             ),
