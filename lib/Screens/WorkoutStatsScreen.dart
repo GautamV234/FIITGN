@@ -79,8 +79,13 @@ class _WorkoutStatScreenState extends State<WorkoutStatScreen> {
                             ),
                           ),
                           Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: ExactAssetImage(
+                                      "assets/fitnessPlan2.jpg"),
+                                  fit: BoxFit.cover),
+                            ),
                             height: MediaQuery.of(context).size.height / 5,
-                            color: Colors.black,
                           ),
                           ListTile(
                             leading: FaIcon(
@@ -102,7 +107,11 @@ class _WorkoutStatScreenState extends State<WorkoutStatScreen> {
                             trailing: FlatButton(
                               height: 10,
                               color: Colors.grey[200],
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context).pushNamed(
+                                    WorkoutDetailScreen.routeName,
+                                    arguments: listOfSetsReps);
+                              },
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(

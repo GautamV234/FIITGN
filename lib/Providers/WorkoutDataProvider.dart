@@ -16,7 +16,7 @@ class WorkoutDataProvider with ChangeNotifier {
   static final List<ExerciseModel> _exercises = [
     ExerciseModel(
       exerciseName: "Jump Squats",
-      assetImageUrl: "assets/jumpSquats.gif",
+      assetImageUrl: "assets/jumpSquats.jpeg",
     ),
     ExerciseModel(
       exerciseName: "Pushups",
@@ -24,7 +24,7 @@ class WorkoutDataProvider with ChangeNotifier {
     ),
     ExerciseModel(
       exerciseName: "Situps",
-      assetImageUrl: "assets/Situps.gif",
+      assetImageUrl: "assets/Situps.jpeg",
     ),
     ExerciseModel(
       exerciseName: "Jumping Jacks",

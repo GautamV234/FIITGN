@@ -220,8 +220,17 @@ class _MapScreenState extends State<MapScreen> {
     }
   }
 
-  Future<bool> _onBackPressed() {
-    // print("Checing connection");
+  void _showSnackBar(GlobalKey<ScaffoldState> key) {
+    print("a");
+    final snackBar =
+        SnackBar(content: Text("Invalid Email Id - Enter IITGN Email ID"));
+    key.currentState.showSnackBar(snackBar);
+  }
+
+  Future<bool> _onBackPressed(GlobalKey<ScaffoldState> key) {
+    print("Checing connection");
+    _showSnackBar(key);
+    print("After function");
     return Future<bool>.value(false);
   }
 
@@ -235,6 +244,7 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var key = new GlobalKey<ScaffoldState>();
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Container(
@@ -247,7 +257,7 @@ class _MapScreenState extends State<MapScreen> {
         //   title: Text('Track Your Run'),
         // ),
         body: WillPopScope(
-          onWillPop: _onBackPressed,
+          onWillPop: () => _onBackPressed(key),
           child: Column(
             children: [
               Container(

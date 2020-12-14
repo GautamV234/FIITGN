@@ -70,18 +70,17 @@ flutter:
     - assets/distance.png   
     - assets/runTile.jpg
     - assets/statsTile1.png
-    - assets/comingSoonTile.png
     - assets/fitGif.gif 
     - assets/runMan.png
     - assets/chinUp.gif
     - assets/jumpingJack.gif
-    - assets/jumpSquats.gif
+    - assets/jumpSquats.jpeg
     - assets/pushUp.gif
     - assets/Workout.gif
     - assets/WorkoutStats.png
-    - assets/WorkoutTabs.jpg
+    - assets/iitgnMess.jpg
     - assets/WorkoutStats2.gif
-    - assets/Situps.gif
+    - assets/Situps.jpeg
     - assets/MountainClimbers.gif
     - assets/Deadlift.gif
     - assets/fitnessPlan.jpg
@@ -94,6 +93,9 @@ flutter:
     - assets/statsTile2.jpeg
     - assets/WorkoutStats3.jpeg
     - assets/newActivity.jpeg
+    - assets/yourRunsblur.jpg
+    - assets/yourWorkblurr.jpg
+    - assets/runBud.jpg
 
     # - assets/Tile.jpg
     # - images/a_dot_ham.jpeg

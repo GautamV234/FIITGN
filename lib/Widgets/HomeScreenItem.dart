@@ -16,7 +16,7 @@ class HomeScreenItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => {
-        if (routeName != 'None')
+        if (routeName != '')
           {
             Navigator.pushNamed(context, routeName),
           } //IMAGE ADD KARO WITH Image.asset url and text is the title. description bhi add karo alag se.

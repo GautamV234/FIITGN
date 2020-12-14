@@ -230,6 +230,8 @@ class _WorkoutLoggingScreenState extends State<WorkoutLoggingScreen> {
                                       left: 10,
                                       bottom: 15,
                                       child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceAround,
                                         children: [
@@ -254,11 +256,17 @@ class _WorkoutLoggingScreenState extends State<WorkoutLoggingScreen> {
                                                   actions: [
                                                     Container(
                                                       child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
                                                         children: [
                                                           Row(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .center,
                                                             children: [
                                                               Text(
-                                                                  "Add Set Number"),
+                                                                  "Add Set Number:  "),
                                                               Container(
                                                                 width: MediaQuery.of(
                                                                             context)
@@ -279,7 +287,7 @@ class _WorkoutLoggingScreenState extends State<WorkoutLoggingScreen> {
                                                           Row(
                                                             children: [
                                                               Text(
-                                                                  "Add rep count"),
+                                                                  "Add Rep Count:  "),
                                                               Container(
                                                                 width: MediaQuery.of(
                                                                             context)
@@ -499,6 +507,11 @@ class _WorkoutLoggingScreenState extends State<WorkoutLoggingScreen> {
                                           borderRadius:
                                               BorderRadius.circular(20),
                                           child: Image(
+                                            fit: BoxFit.cover,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                4,
                                             height: MediaQuery.of(context)
                                                     .size
                                                     .height /
