@@ -99,7 +99,7 @@ class _YourRunsState extends State<YourRuns> {
                 String distance = runStats[i].distanceCovered;
                 String avgSpeed = runStats[i].avgSpeed;
                 String avgSpeedInKmph =
-                    (double.parse(avgSpeed) * 5 / 18).toString();
+                    (double.parse(avgSpeed) * 5 / 18).toStringAsFixed(2);
                 // print(timeInHrs + " : " + timeInMins + " : " + tim);
                 return GestureDetector(
                   onTap: () {
