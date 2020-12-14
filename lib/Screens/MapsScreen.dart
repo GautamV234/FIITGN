@@ -159,10 +159,8 @@ class _MapScreenState extends State<MapScreen> {
         print("This portion is being run");
         flag = 1;
       }
-
-      // print("Marker is updated");
-
       if (_locationSubscription != null) {
+        print("Yo Yo Yo");
         _locationSubscription.cancel();
       }
 
@@ -228,6 +226,7 @@ class _MapScreenState extends State<MapScreen> {
   @override
   void dispose() {
     if (_locationSubscription != null) {
+      print("Heeheehaa");
       _locationSubscription.cancel();
     }
     super.dispose();

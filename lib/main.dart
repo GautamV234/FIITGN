@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
         ),
         // home: StoreReturnProvider().class_userInput_isSet
         // ? SignInFIITGN()
-        //     : DetailsScreen(),
+        // : DetailsScreen(),
 
         home: SignInGoogle().isSignedIn == true ? HomeScreen() : SignInGoogle(),
 
