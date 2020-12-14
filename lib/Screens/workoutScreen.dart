@@ -66,7 +66,7 @@ class WorkoutHomeScreen extends StatelessWidget {
                 child: IconButton(
                   icon: Icon(Icons.arrow_back),
                   iconSize: MediaQuery.of(context).size.width / 13.5,
-                  color: Colors.black,
+                  color: Colors.white,
                   onPressed: () => Navigator.pop(context),
                 ),
               ),
@@ -86,44 +86,100 @@ class WorkoutHomeScreen extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              child: ListView(
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      //// add code to verify from Shared Pref to check if plan already selected
-                      workoutPlanName =
-                          await workoutDataProvider.getCurrentPlan;
-                      if (workoutPlanName == "") {
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 20,
+                    ),
+                    InkWell(
+                      onTap: () {
                         Navigator.pushNamed(
-                            context, NoWorkoutPlanSelectedScreen.routeName);
-                      } else {
-                        print("Plan was already Set");
+                            context, CustomPlansScreen.routeName);
+                      },
+                      child: Container(
+                        height: MediaQuery.of(context).size.height / 17,
+                        alignment: Alignment.center,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(0),
+                          color: Colors.grey[400],
+                        ),
+                        child: Text(
+                          'Select Workout Plan',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize:
+                                  MediaQuery.of(context).size.height / 30),
+                        ),
+                        //   trailing: Icon(Icons.),
+                      ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 40,
+                    ),
+                    InkWell(
+                      onTap: () {
                         Navigator.pushNamed(
-                            context, WorkoutLoggingScreen.routeName,
-                            arguments: workoutPlanName);
-                      }
-                    },
-                    child: ListTile(
-                      title: Text('Start Working out'),
+                            context, CustomPlansScreen.routeName);
+                      },
+                      child: Container(
+                        height: MediaQuery.of(context).size.height / 17,
+                        alignment: Alignment.center,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(0),
+                          color: Colors.grey[400],
+                        ),
+                        child: Text(
+                          'Create Custom Plan',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize:
+                                  MediaQuery.of(context).size.height / 30),
+                        ),
+                        //   trailing: Icon(Icons.),
+                      ),
                     ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.pushNamed(context, CustomPlansScreen.routeName);
-                    },
-                    child: ListTile(
-                      title: Text('Select Workout Plan'),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 40,
                     ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      //  feature to be added later
-                    },
-                    child: ListTile(
-                      title: Text('Create Plan'),
+                    InkWell(
+                      onTap: () async {
+                        //// add code to verify from Shared Pref to check if plan already selected
+                        workoutPlanName =
+                            await workoutDataProvider.getCurrentPlan;
+                        if (workoutPlanName == "") {
+                          Navigator.pushNamed(
+                              context, NoWorkoutPlanSelectedScreen.routeName);
+                        } else {
+                          print("Plan was already Set");
+                          Navigator.pushNamed(
+                              context, WorkoutLoggingScreen.routeName,
+                              arguments: workoutPlanName);
+                        }
+                      },
+                      child: Container(
+                        height: MediaQuery.of(context).size.height / 17,
+                        alignment: Alignment.center,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(0),
+                          color: Colors.grey[400],
+                        ),
+                        child: Text(
+                          'Start Workout',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize:
+                                  MediaQuery.of(context).size.height / 30),
+                        ),
+                        //   trailing: Icon(Icons.),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               // child: ListView(children: [
               //   ListView.builder(

@@ -8,7 +8,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class WorkoutDataProvider with ChangeNotifier {
-  String _uid;
+  // String _uid;
+  String _uid = '6xjRKs7BI6TLvM6aekhyAUidPAc2';
   String _token;
   String currentPlanPrivate = "";
 
@@ -23,7 +24,7 @@ class WorkoutDataProvider with ChangeNotifier {
     ),
     ExerciseModel(
       exerciseName: "Situps",
-      assetImageUrl: "assets/Situps.gif",
+      assetImageUrl: "assets/Situps.jpeg",
     ),
     ExerciseModel(
       exerciseName: "Jumping Jacks",
