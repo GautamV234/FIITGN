@@ -2,26 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import '../Providers/RunDataProvider.dart';
+import '../Providers/CycleDataProvider.dart';
 import 'HomeScreen.dart';
 import 'PolylineShow.dart';
 // import "package:latlong/latlong.dart" as latLng;
 
-class ShowResultsScreen extends StatefulWidget {
-  static const routeName = '\showResultsScreen';
+class ShowCycleResultsScreen extends StatefulWidget {
+  static const routeName = '\showCycleResultsScreen';
 
   @override
-  _ShowResultsScreenState createState() => _ShowResultsScreenState();
+  _ShowCycleResultsScreenState createState() => _ShowCycleResultsScreenState();
 }
 
-class _ShowResultsScreenState extends State<ShowResultsScreen> {
+class _ShowCycleResultsScreenState extends State<ShowCycleResultsScreen> {
   final primaryColorThisScreen = Color(0XFF6D3FFF);
 
   final accentColorThisScreen = Color(0XFF233C63);
 
   @override
   Widget build(BuildContext context) {
-    final runStatsProvider = Provider.of<RunDataProvider>(context);
+    final runStatsProvider = Provider.of<CycleDataProvider>(context);
     final routeArgs = ModalRoute.of(context).settings.arguments as Map;
     List<Map<String, double>> listOfLatLng = routeArgs['listOfLatLng'];
 
@@ -71,7 +71,7 @@ class _ShowResultsScreenState extends State<ShowResultsScreen> {
         elevation: 0,
         titleSpacing: 10,
         title: Text(
-          'Run Results',
+          'Cycling Results',
         ),
       ),
       body: _isLoading
@@ -148,7 +148,7 @@ class _ShowResultsScreenState extends State<ShowResultsScreen> {
                               padding: EdgeInsets.only(top: 30),
                             ),
                             Text(
-                              'Time of Run'.toUpperCase(),
+                              'Time of Cycling'.toUpperCase(),
                               style: TextStyle(
                                 color: Theme.of(context).accentColor,
                                 // fontFamily: 'Bebas',
@@ -267,7 +267,7 @@ class _ShowResultsScreenState extends State<ShowResultsScreen> {
                         },
                         elevation: 10,
                         color: Theme.of(context).primaryColor,
-                        child: Text('See Run'),
+                        child: Text('See Track'),
                       ),
                       RaisedButton(
                         onPressed: () {
@@ -277,7 +277,7 @@ class _ShowResultsScreenState extends State<ShowResultsScreen> {
                             _isLoading = true;
                           });
                           runStatsProvider
-                              .addNewRunData(
+                              .addNewCycleData(
                             dateOfRun,
                             avgSpeedString,
                             distanceString,

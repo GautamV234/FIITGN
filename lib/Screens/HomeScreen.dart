@@ -2,13 +2,10 @@ import 'package:Fiitgn1/Screens/MapsScreen.dart';
 import 'package:Fiitgn1/Screens/finalAuthentication.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'CardioScreen.dart';
-// import 'YourRunsStatsScreen.dart';
+import '../Screens/CycleScreen.dart';
 import '../Widgets/HomeScreenItem.dart';
 import 'workoutScreen.dart';
-// import 'WorkoutStatsScreen.dart';
 import 'package:flutter/services.dart';
-// import './MapsScreen.dart';
 import './StatsScreen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -25,7 +22,7 @@ class HomeScreen extends StatelessWidget {
             actions: [
               FlatButton(
                 onPressed: () {
-                  Navigator.of(ctx).pop(true);
+                  // Navigator.of(ctx).pop(true);
                   SystemNavigator.pop();
                 },
                 child: Text('Yes'),
@@ -91,7 +88,7 @@ class HomeScreen extends StatelessWidget {
     {
       'title': 'Start Cycling',
       'url': 'assets/newActivity.jpeg',
-      'routeName': '',
+      'routeName': CycleScreen.routeName,
       'description':
           'Cycling can be accessed from here. Get out there and get those legs working!'
     },
@@ -109,13 +106,6 @@ class HomeScreen extends StatelessWidget {
       'description':
           'Your running statistics can be seen here. Keep a watch and aim to reach higher and higher everyday.'
     },
-
-    // {
-    //   'title': 'Workout Stats',
-    //   'url': 'assets/WorkoutStats3.jpeg',
-    //   'routeName': WorkoutStatScreen.routeName,
-    //   'description': 'Getting a bit redundant gotta think new here',
-    // },
     {
       'title': 'Running Buddy',
       'url': 'assets/runBud.jpg',

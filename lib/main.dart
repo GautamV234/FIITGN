@@ -20,6 +20,10 @@ import './Screens/WorkoutStatsScreen.dart';
 import './Screens/WorkoutDetailsScreen.dart';
 import './Screens/NoWorkoutPlanSelectedScreen.dart';
 import 'Screens/StatsScreen.dart';
+import './Screens/CycleScreen.dart';
+import './Screens/ShowCycleResults.dart';
+import './Screens/yourCycleStatsScreen.dart';
+import './Providers/CycleDataProvider.dart';
 
 void main() {
   runApp(MyApp());
@@ -39,6 +43,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider.value(
           value: WorkoutDataProvider(),
+        ),
+        ChangeNotifierProvider.value(
+          value: CycleDataProvider(),
         ),
       ],
       child: MaterialApp(
@@ -75,6 +82,9 @@ class MyApp extends StatelessWidget {
           NoWorkoutPlanSelectedScreen.routeName: (_) =>
               NoWorkoutPlanSelectedScreen(),
           StatsScreen.routeName: (_) => StatsScreen(),
+          CycleScreen.routeName: (_) => CycleScreen(),
+          ShowCycleResultsScreen.routeName: (_) => ShowCycleResultsScreen(),
+          YourCycleStats.routeName: (_) => YourCycleStats(),
           //
         },
       ),

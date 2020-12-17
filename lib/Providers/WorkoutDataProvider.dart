@@ -331,7 +331,8 @@ class WorkoutDataProvider with ChangeNotifier {
             //     );
             //   },
             // );
-            listOfSetsReps.add(
+            listOfSetsReps.insert(
+              0,
               new WorkoutLogModel(
                 exerciseName: element['exerciseName'],
                 numOfReps: element['numOfReps'],

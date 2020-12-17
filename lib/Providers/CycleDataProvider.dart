@@ -1,14 +1,15 @@
 // import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import './RunModel.dart';
+// import './RunModel.dart';
+import '../Providers/CycleModel.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class RunDataProvider with ChangeNotifier {
+class CycleDataProvider with ChangeNotifier {
   String _uid;
   String _token;
 
-  List<RunModel> _yourRunsList = [
+  List<CycleModel> _yourCycleList = [
     // RunModel(
     //   uid: 'gautam.pv@iitgn.ac.in',
     //   dateOfRun: 'Thu, Oct 22, 2020',
@@ -56,15 +57,15 @@ class RunDataProvider with ChangeNotifier {
 
   Future<void> getRunStatsFromDb() async {
     final url =
-        'https://authentications-c0299.firebaseio.com/RunData.json?auth=$_token&orderBy="uid"&equalTo="$_uid"';
+        'https://authentications-c0299.firebaseio.com/CycleData.json?auth=$_token&orderBy="uid"&equalTo="$_uid"';
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
-      final List<RunModel> loadedList = [];
+      final List<CycleModel> loadedList = [];
       // print(extractedData['-MMvLcgO2K3wHZkueZcV']['listOfLatLng'].runtimeType);
       extractedData.forEach((statId, statVal) {
         loadedList.add(
-          new RunModel(
+          new CycleModel(
             databaseID: statId,
             uid: statVal['uid'],
             dateOfRun: statVal['dateOfRun'],
@@ -82,12 +83,12 @@ class RunDataProvider with ChangeNotifier {
 
         // print(loadedList[0].avgSpeed);
         // print(loadedList[0].databaseID);
-        // print(loadedList[0].dateOfRun);
+        print(loadedList[0].dateOfRun);
         // print(loadedList[0].distanceCovered);
         // print(loadedList[0].initialLatitude);
         // print(loadedList[0].initialLongitude);
 
-        _yourRunsList = loadedList;
+        _yourCycleList = loadedList;
         notifyListeners();
       });
       print("Loaded List is ready");
@@ -97,11 +98,11 @@ class RunDataProvider with ChangeNotifier {
     }
   }
 
-  List<RunModel> get yourRunsList {
-    return [..._yourRunsList];
+  List<CycleModel> get yourCycleList {
+    return [..._yourCycleList];
   }
 
-  Future<void> addNewRunData(
+  Future<void> addNewCycleData(
     // uid is already passed through the provider
     String dateOfRun,
     String avgSpeed,
@@ -116,7 +117,7 @@ class RunDataProvider with ChangeNotifier {
   ) {
     print("The Uid Is " + _uid);
     final url =
-        'https://authentications-c0299.firebaseio.com/RunData.json?auth=$_token';
+        'https://authentications-c0299.firebaseio.com/CycleData.json?auth=$_token';
     return http
         .post(
       url,
@@ -139,9 +140,9 @@ class RunDataProvider with ChangeNotifier {
         .then(
       (response) {
         var databaseId = json.decode(response.body)['name'];
-        _yourRunsList.insert(
+        _yourCycleList.insert(
           0,
-          RunModel(
+          CycleModel(
             databaseID: databaseId,
             uid: _uid,
             dateOfRun: dateOfRun,

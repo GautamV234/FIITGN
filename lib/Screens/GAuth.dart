@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../Providers/RunDataProvider.dart';
 import '../Providers/WorkoutDataProvider.dart';
-
+import '../Providers/CycleDataProvider.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'HomeScreen.dart';
 
@@ -30,6 +30,8 @@ class _SignInGoogleState extends State<SignInGoogle> {
 
     final runStatsProvider = Provider.of<RunDataProvider>(context);
     final workoutStatsProvider = Provider.of<WorkoutDataProvider>(context);
+    final cycleStatsProvider = Provider.of<CycleDataProvider>(context);
+
     //
     //
     _signIn() async {
@@ -50,12 +52,13 @@ class _SignInGoogleState extends State<SignInGoogle> {
           print(user.uid);
           runStatsProvider.setUid(user.uid);
           workoutStatsProvider.setUid(user.uid);
+          cycleStatsProvider.setUid(user.uid);
           final idTOKEN = await user.getIdToken();
           String token = idTOKEN.token;
           //print("token is " + token);
           runStatsProvider.setToken(token);
           workoutStatsProvider.setToken(token);
-
+          cycleStatsProvider.setToken(token);
           // SignInGoogle().setIsSignedIn(true);
           SignInGoogle().isSignedIn = true;
           isSignedInPrivate = true;
