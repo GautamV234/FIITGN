@@ -21,7 +21,7 @@ class CustomPlansScreen extends StatelessWidget {
                 children: <Widget>[
                   IconButton(
                     icon: Icon(Icons.arrow_back),
-                    iconSize: 30.0,
+                    iconSize: MediaQuery.of(context).size.width / 13.5,
                     color: Colors.black,
                     onPressed: () => Navigator.pop(context),
                   )
@@ -34,7 +34,7 @@ class CustomPlansScreen extends StatelessWidget {
               child: Text(
                 'Custom Plans',
                 style: TextStyle(
-                  fontSize: 50,
+                  fontSize: MediaQuery.of(context).size.width / 10.3,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -58,8 +58,8 @@ class CustomPlansScreen extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      left: 14,
-                      bottom: 20,
+                      left: MediaQuery.of(context).size.width / 29.3,
+                      bottom: MediaQuery.of(context).size.height / 43.8,
                       child: RaisedButton(
                         onPressed: () async {
                           workoutDataProvider // add await in case when I add shared pref
@@ -70,14 +70,14 @@ class CustomPlansScreen extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      bottom: 70,
-                      left: 14,
+                      bottom: MediaQuery.of(context).size.height / 12.5,
+                      left: MediaQuery.of(context).size.width / 29.3,
                       child: Text(
                         customPlansList[i].planName,
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
-                            fontSize: 50),
+                            fontSize: MediaQuery.of(context).size.width / 8.3),
                       ),
                     ),
                   ],

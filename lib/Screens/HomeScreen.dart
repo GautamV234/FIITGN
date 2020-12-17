@@ -1,12 +1,15 @@
+import 'package:Fiitgn1/Screens/MapsScreen.dart';
 import 'package:Fiitgn1/Screens/finalAuthentication.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'CardioScreen.dart';
-import 'YourRunsStatsScreen.dart';
+// import 'YourRunsStatsScreen.dart';
 import '../Widgets/HomeScreenItem.dart';
 import 'workoutScreen.dart';
-import 'WorkoutStatsScreen.dart';
+// import 'WorkoutStatsScreen.dart';
 import 'package:flutter/services.dart';
+// import './MapsScreen.dart';
+import './StatsScreen.dart';
 
 class HomeScreen extends StatelessWidget {
   final List<IconData> rowOfItem = [
@@ -79,43 +82,51 @@ class HomeScreen extends StatelessWidget {
 
   final List homeScreenList = [
     {
-      'title': 'Start an Activity',
+      'title': 'Start Running',
       'url': 'assets/runTile.jpg',
-      'routeName': CardioScreen.routeName,
+      'routeName': MapScreen.routeName,
       'description':
-          'Various activites like running and cycling can be accessed from here. Get out there and get those legs working!'
+          'Running can be accessed from here. Get out there and get those legs working!'
     },
     {
-      'title': 'Your Activities',
-      'url': 'assets/statsTile1.png',
-      'routeName': YourRuns.routeName,
+      'title': 'Start Cycling',
+      'url': 'assets/newActivity.jpeg',
+      'routeName': '',
       'description':
-          'Your running statistics can be seen here. Keep a watch and aim to reach higher and higher everyday.'
+          'Cycling can be accessed from here. Get out there and get those legs working!'
     },
     {
       'title': 'Workout',
-      'url': 'assets/Workout.gif',
+      'url': 'assets/Workout.jpeg',
       'routeName': WorkoutHomeScreen.routeName,
       'description':
           'Had a quick warmup or a gruelling cardio session? Whichever it is, record it here and keep a tab on all those calories you are burning!'
     },
     {
-      'title': 'Workout Stats',
-      'url': 'assets/WorkoutStats2.gif',
-      'routeName': WorkoutStatScreen.routeName,
-      'description': 'Getting a bit redundant gotta think new here',
+      'title': 'Your Activities',
+      'url': 'assets/statsTile2.jpeg',
+      'routeName': StatsScreen.routeName,
+      'description':
+          'Your running statistics can be seen here. Keep a watch and aim to reach higher and higher everyday.'
     },
+
+    // {
+    //   'title': 'Workout Stats',
+    //   'url': 'assets/WorkoutStats3.jpeg',
+    //   'routeName': WorkoutStatScreen.routeName,
+    //   'description': 'Getting a bit redundant gotta think new here',
+    // },
     {
-      'title': 'Work In Progress',
-      'url': 'assets/comingSoonTile.png',
-      'routeName': 'None',
+      'title': 'Running Buddy',
+      'url': 'assets/runBud.jpg',
+      'routeName': '',
       'description':
           'This section is under construction. Check back in later to view some exciting new stuff!'
     },
     {
-      'title': 'Work In Progress',
-      'url': 'assets/comingSoonTile.png',
-      'routeName': 'None',
+      'title': 'Know Your Mess',
+      'url': 'assets/iitgnMess.jpg',
+      'routeName': '',
       'description':
           'This section is under construction. Check back in later to view some exciting new stuff!',
     },
@@ -125,7 +136,10 @@ class HomeScreen extends StatelessWidget {
   @override
   static const routeName = '\HomeScreen';
   Widget build(BuildContext context) {
+    var deviceSize = MediaQuery.of(context);
+    print(deviceSize);
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       // backgroundColor: Colors.black,
       // appBar: AppBar(
       //   leading: InkWell(
@@ -168,7 +182,7 @@ class HomeScreen extends StatelessWidget {
         child: SafeArea(
           child: ListView(
             padding: const EdgeInsets.symmetric(
-              vertical: 30.0,
+              vertical: 20,
             ),
             children: <Widget>[
               Padding(
@@ -176,7 +190,7 @@ class HomeScreen extends StatelessWidget {
                 child: Text(
                   'FIITGN',
                   style: TextStyle(
-                    fontSize: 50,
+                    fontSize: deviceSize.size.width / 8,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -186,11 +200,11 @@ class HomeScreen extends StatelessWidget {
                 child: Text(
                   'THE COMPLETE FITNESS APP',
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: deviceSize.size.width / 20,
                   ),
                 ),
               ),
-              SizedBox(height: 20.0),
+              SizedBox(height: deviceSize.size.width / 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
@@ -199,7 +213,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: 20,
+                height: deviceSize.size.width / 20,
               ),
               ListView.builder(
                 shrinkWrap: true,

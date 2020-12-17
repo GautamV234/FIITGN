@@ -20,11 +20,11 @@ class WorkoutDetailScreen extends StatelessWidget {
                     elevation: 10,
                     margin: EdgeInsets.all(5),
                     shadowColor: Colors.black,
-                    color: Theme.of(context).primaryColor,
+                    color: Colors.white,
                     child: ListTile(
                       title: Text(
                         listOfSetsAndReps[i].exerciseName,
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: Colors.black),
                       ),
                       subtitle: Row(
                         children: [
@@ -32,11 +32,11 @@ class WorkoutDetailScreen extends StatelessWidget {
                               "Set " +
                                   listOfSetsAndReps[i].setNumber.toString() +
                                   " | ",
-                              style: TextStyle(color: Colors.white)),
+                              style: TextStyle(color: Colors.black)),
                           Text(
                               "Reps " +
                                   listOfSetsAndReps[i].numOfReps.toString(),
-                              style: TextStyle(color: Colors.white)),
+                              style: TextStyle(color: Colors.black)),
                         ],
                       ),
                     ),

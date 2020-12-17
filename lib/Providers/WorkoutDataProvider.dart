@@ -9,6 +9,7 @@ import 'dart:convert';
 
 class WorkoutDataProvider with ChangeNotifier {
   String _uid;
+  // String _uid = '6xjRKs7BI6TLvM6aekhyAUidPAc2';
   String _token;
   String currentPlanPrivate = "";
 
@@ -23,7 +24,7 @@ class WorkoutDataProvider with ChangeNotifier {
     ),
     ExerciseModel(
       exerciseName: "Situps",
-      assetImageUrl: "assets/Situps.gif",
+      assetImageUrl: "assets/Situps.jpeg",
     ),
     ExerciseModel(
       exerciseName: "Jumping Jacks",
@@ -172,7 +173,7 @@ class WorkoutDataProvider with ChangeNotifier {
           (element) => element.exerciseName == "Pushups",
         ),
         _exercises.firstWhere(
-          (element) => element.exerciseName == "Chinups",
+          (element) => element.exerciseName == "Mountain Climber",
         ),
         _exercises.firstWhere(
           (element) => element.exerciseName == "Situps",
