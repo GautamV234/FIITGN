@@ -27,11 +27,14 @@ class StatsScreen extends StatelessWidget {
                       )
                     ],
                   ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(30.0),
-                    child: Image.asset(
-                      'assets/statsTile2.jpeg',
-                      fit: BoxFit.cover,
+                  child: Hero(
+                    tag: 4,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(30.0),
+                      child: Image.asset(
+                        'assets/statsTile2.jpeg',
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),

@@ -6,6 +6,7 @@ import '../Providers/WorkoutDataProvider.dart';
 import '../Providers/CycleDataProvider.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'HomeScreen.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 class SignInGoogle extends StatefulWidget {
   static const routeName = '\SignInScreen';
@@ -102,59 +103,205 @@ class _SignInGoogleState extends State<SignInGoogle> {
 
     return Scaffold(
       key: key,
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        color: Colors.black,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
+      body: Stack(children: [
+        Image.asset(
+          'assets/iitgnCamp.jpg',
+          height: MediaQuery.of(context).size.height / 1.8,
+          width: MediaQuery.of(context).size.width,
+          fit: BoxFit.cover,
+        ),
+        Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+
+          // color: ,
+          // child: Padding(
+          //   padding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
+          //   child:
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            //    mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Image.asset("assets/fitGif.gif"),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-                child: Text("Welcome to FIITGN.",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 50,
-                        color: Colors.white)),
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 3,
               ),
-              SizedBox(height: 100),
-              AnimatedContainer(
-                duration: Duration(seconds: 1),
-                // height: MediaQuery.of(context).size.height*0.07,
-                width: MediaQuery.of(context).size.height * 0.7,
-                child: FlatButton(
-                  onPressed: () async {
-                    bool outCome = await _signIn();
-
-                    if (outCome == false) {
-                      _showSnackBar();
-                    }
-                  },
-                  shape: RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(40.0),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Container(
-                      child: Text(
-                        "Login with IITGN ID(Google)",
-                        style: TextStyle(
-                          color: Colors.white.withAlpha(230),
-                        ),
-                      ),
+              // Container(
+              //   height: MediaQuery.of(context).size.height / 10,
+              //   width: MediaQuery.of(context).size.width / 5,
+              //   child: Image.asset(
+              //     "assets/iitgnlogo-emblem.png",
+              //   ),
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+              //   child: Text(
+              //     "FIITGN",
+              //     style: TextStyle(
+              //         fontWeight: FontWeight.bold,
+              //         fontSize: MediaQuery.of(context).size.width / 7,
+              //         color: Colors.black),
+              //   ),
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.fromLTRB(8, 8, 2, 8),
+              //   child: Text(
+              //     "THE COMPLETE FITNESS APP",
+              //     style: TextStyle(
+              //         fontSize: MediaQuery.of(context).size.width / 18,
+              //         color: Colors.black),
+              //   ),
+              // ),
+              SizedBox(height: MediaQuery.of(context).size.height / 25),
+              Expanded(
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    color: Color(0xFFDDDDDD),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(
+                          MediaQuery.of(context).size.height / 20),
+                      topRight: Radius.circular(
+                          MediaQuery.of(context).size.height / 20),
                     ),
                   ),
-                  color: Color.fromRGBO(228, 110, 96, 1),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 40,
+                      ),
+                      Container(
+                        height: MediaQuery.of(context).size.height / 10,
+                        width: MediaQuery.of(context).size.width / 5,
+                        child: Image.asset(
+                          "assets/iitgnlogo-emblem.png",
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+                        child: Text(
+                          "FIITGN",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: MediaQuery.of(context).size.width / 7,
+                              color: Colors.black),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(8, 8, 2, 8),
+                        child: Text(
+                          "THE COMPLETE FITNESS APP",
+                          style: TextStyle(
+                              fontSize: MediaQuery.of(context).size.width / 18,
+                              color: Colors.black),
+                        ),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 20,
+                      ),
+                      SignInButtonBuilder(
+                        text: 'Login with IITGN ID',
+                        icon: Icons.email,
+                        onPressed: () async {
+                          bool outCome = await _signIn();
+
+                          if (outCome == false) {
+                            _showSnackBar();
+                          }
+                        },
+                        backgroundColor: Color(0xFF3F7B70),
+                      ),
+
+                      // SignInButton(
+                      //   Buttons.Google,
+                      //   text: "Sign up with Google",
+                      //   onPressed: () {},
+                      // ),
+                      // ClipRRect(
+                      //     borderRadius: BorderRadius.only(
+                      //       topLeft: Radius.circular(
+                      //           MediaQuery.of(context).size.height / 20),
+                      //       topRight: Radius.circular(
+                      //           MediaQuery.of(context).size.height / 20),
+                      //     ),
+                      //     child: Image.asset(
+                      //       'assets/iitgnCamp.jpg',
+                      //       fit: BoxFit.cover,
+                      //       height: MediaQuery.of(context).size.height / 3.5,
+                      //       width: MediaQuery.of(context).size.width,
+                      //     )),
+                      // AnimatedContainer(
+                      //   height: MediaQuery.of(context).size.height / 14,
+                      //   duration: Duration(seconds: 1),
+                      //   // height: MediaQuery.of(context).size.height*0.07,
+                      //   width: MediaQuery.of(context).size.width / 1.5,
+                      //   child: FlatButton(
+                      //     onPressed: () async {
+                      //       bool outCome = await _signIn();
+
+                      //       if (outCome == false) {
+                      //         _showSnackBar();
+                      //       }
+                      //     },
+                      //     shape: RoundedRectangleBorder(
+                      //       borderRadius: new BorderRadius.circular(40.0),
+                      //     ),
+                      //     child: Padding(
+                      //       padding: const EdgeInsets.all(16.0),
+                      //       child: Container(
+                      //         child: Text(
+                      //           "Login with IITGN ID(Google)",
+                      //           style: TextStyle(
+                      //             color: Colors.white.withAlpha(230),
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     ),
+                      //     color: Color.fromRGBO(228, 110, 96, 1),
+                      //   ),
+                      // ),
+                    ],
+                  ),
                 ),
               ),
+              // AnimatedContainer(
+              //   duration: Duration(seconds: 1),
+              //   // height: MediaQuery.of(context).size.height*0.07,
+              //   width: MediaQuery.of(context).size.height * 0.7,
+              //   child: FlatButton(
+              //     onPressed: () async {
+              //       bool outCome = await _signIn();
+
+              //       if (outCome == false) {
+              //         _showSnackBar();
+              //       }
+              //     },
+              //     shape: RoundedRectangleBorder(
+              //       borderRadius: new BorderRadius.circular(40.0),
+              //     ),
+              //     child: Padding(
+              //       padding: const EdgeInsets.all(16.0),
+              //       child: Container(
+              //         child: Text(
+              //           "Login with IITGN ID(Google)",
+              //           style: TextStyle(
+              //             color: Colors.white.withAlpha(230),
+              //           ),
+              //         ),
+              //       ),
+              //     ),
+              //     color: Color.fromRGBO(228, 110, 96, 1),
+              //   ),
+              // ),
             ],
           ),
         ),
-      ),
+        // Image.asset(
+        //   'assets/iitgnCamp.jpg',
+        //   height: MediaQuery.of(context).size.height / 1.8,
+        //   width: MediaQuery.of(context).size.width,
+        //   fit: BoxFit.cover,
+        // )
+      ]),
     );
   }
 }

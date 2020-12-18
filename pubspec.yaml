@@ -42,6 +42,7 @@ dependencies:
   image_picker: ^0.6.7+12
   shared_preferences: ^0.5.12+2
   http: ^0.12.2
+  flutter_signin_button: ^1.1.0
 
   
   # The following adds the Cupertino Icons font to your application.
@@ -96,6 +97,7 @@ flutter:
     - assets/yourRunsblur.jpg
     - assets/yourWorkblurr.jpg
     - assets/runBud.jpg
+    - assets/iitgnCamp.jpg
 
     # - assets/Tile.jpg
     # - images/a_dot_ham.jpeg
