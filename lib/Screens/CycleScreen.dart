@@ -5,15 +5,15 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:flutter/services.dart';
 import 'dart:math';
-import 'ShowRunResults.dart';
+import '../Screens/ShowCycleResults.dart';
 
-class MapScreen extends StatefulWidget {
-  static const routeName = 'MapScreen';
+class CycleScreen extends StatefulWidget {
+  static const routeName = 'CycleMapScreen';
   @override
-  _MapScreenState createState() => _MapScreenState();
+  _CycleScreenState createState() => _CycleScreenState();
 }
 
-class _MapScreenState extends State<MapScreen> {
+class _CycleScreenState extends State<CycleScreen> {
   final GlobalKey<ScaffoldState> key = new GlobalKey<ScaffoldState>();
   int finishFlag = 0;
   String apiKey = 'AIzaSyDkyZ5LN0apdkxOHnRbR-qHY3Hw3uqs1-s';
@@ -161,11 +161,11 @@ class _MapScreenState extends State<MapScreen> {
             .add({'latitude': storeInitialLat, 'longitude': storeInitialLong});
         // listOfLatLngForPoly.add(LatLng(storeInitialLat, storeInitialLong));
         startingTime = DateTime.now();
-        print("This portion is being run");
+        // print("This portion is being run");
         flag = 1;
       }
       if (_locationSubscription != null) {
-        print("Yo Yo Yo");
+        // print("Yo Yo Yo");
         _locationSubscription.cancel();
       }
 
@@ -224,23 +224,23 @@ class _MapScreenState extends State<MapScreen> {
   }
 
   _showSnackBar() {
-    print("a");
+    // print("a");
     final snackBar = SnackBar(content: Text("Sorry! Back button is disabled"));
     key.currentState.showSnackBar(snackBar);
-    print('b');
+    // print('b');
   }
 
   Future<bool> _onBackPressed() {
-    print("Checing connection");
+    // print("Checing connection");
     // await _showSnackBar(key);
-    print("After function");
+    // print("After function");
     return Future<bool>.value(false);
   }
 
   @override
   void dispose() {
     if (_locationSubscription != null) {
-      print("Heeheehaa");
+      // print("Heeheehaa");
       _locationSubscription.cancel();
     }
     super.dispose();
@@ -376,163 +376,84 @@ class _MapScreenState extends State<MapScreen> {
                 ],
               ),
               Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: InkWell(
-                    onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (ctx) {
-                          var actions2 = [
-                            FlatButton(
-                              onPressed: () {
-                                if (isChanged) {
-                                  // storing final location
-                                  storeFinalLat = finalLatitude;
-                                  storeFinalLong = finalLongitude;
-                                  endingTime = DateTime.now();
-                                  passingToShowResults['initialLat'] =
-                                      storeInitialLat;
-                                  passingToShowResults['initialLong'] =
-                                      storeInitialLong;
-                                  passingToShowResults['finalLat'] =
-                                      storeFinalLat;
-                                  passingToShowResults['finalLong'] =
-                                      storeFinalLong;
-                                  passingToShowResults['initialTime'] =
-                                      startingTime;
-                                  passingToShowResults['finalTime'] =
-                                      endingTime;
-                                  passingToShowResults['distance'] = distance;
-                                  passingToShowResults['listOfLatLng'] =
-                                      listOfLatLngForPoly;
+                padding: const EdgeInsets.all(10.0),
+                child: InkWell(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (ctx) {
+                        var actions2 = [
+                          FlatButton(
+                            onPressed: () {
+                              if (isChanged) {
+                                // storing final location
+                                storeFinalLat = finalLatitude;
+                                storeFinalLong = finalLongitude;
+                                endingTime = DateTime.now();
+                                passingToShowResults['initialLat'] =
+                                    storeInitialLat;
+                                passingToShowResults['initialLong'] =
+                                    storeInitialLong;
+                                passingToShowResults['finalLat'] =
+                                    storeFinalLat;
+                                passingToShowResults['finalLong'] =
+                                    storeFinalLong;
+                                passingToShowResults['initialTime'] =
+                                    startingTime;
+                                passingToShowResults['finalTime'] = endingTime;
+                                passingToShowResults['distance'] = distance;
+                                passingToShowResults['listOfLatLng'] =
+                                    listOfLatLngForPoly;
 
-                                  print("All parameters stored successfully");
-                                  // updatePolyLines(
-                                  //   initialLatitude,
-                                  //   initialLongitude,
-                                  //   finalLatitude,
-                                  //   finalLongitude,
-                                  // );
+                                print("All parameters stored successfully");
+                                // updatePolyLines(
+                                //   initialLatitude,
+                                //   initialLongitude,
+                                //   finalLatitude,
+                                //   finalLongitude,
+                                // );
 
-                                  _locationSubscription.cancel();
-                                  Navigator.of(context).pushReplacementNamed(
-                                      ShowResultsScreen.routeName,
-                                      arguments: passingToShowResults);
-                                }
-                              },
-                              child: Text('Yes'),
-                            ),
-                            FlatButton(
-                              onPressed: () {
-                                Navigator.of(ctx).pop(true);
-                              },
-                              child: Text('No'),
-                            ),
-                          ];
-                          return AlertDialog(
-                            title: Text('Are you sure you want to end Run?'),
-                            actions: actions2,
-                          );
-                        },
-                      );
-                    },
-                    child: finishFlag == 0
-                        ? Container()
-                        : Container(
-                            alignment: Alignment.center,
-                            width: MediaQuery.of(context).size.width,
-                            height: MediaQuery.of(context).size.height / 25,
-                            child: Text(
-                              'Finish',
-                              style: TextStyle(
-                                  fontSize:
-                                      MediaQuery.of(context).size.height / 30,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Colors.red[200]),
+                                _locationSubscription.cancel();
+                                Navigator.of(context).pushReplacementNamed(
+                                    ShowCycleResultsScreen.routeName,
+                                    arguments: passingToShowResults);
+                              }
+                            },
+                            child: Text('Yes'),
                           ),
-                  )),
-              // Positioned(
-              //     child: ListTile(
-              //   tileColor: Color.fromRGBO(0, 0, 100, 1),
-              //   leading: Icon(Icons.panorama_fish_eye_sharp),
-              //   title: Text(
-              //     "Distance - $dist metres",
-              //     style: TextStyle(color: Colors.white, fontSize: 25),
-              //   ),
-              //   subtitle: Text(
-              //     "Speed - $speedString m/s",
-              //     style: TextStyle(color: Colors.white, fontSize: 25),
-              //   ),
-              // )),
-              // Positioned(
-              //   bottom: 19,
-              //   left: 10,
-              //   child: FloatingActionButton(
-              //     heroTag: "2",
-              //     backgroundColor: Colors.red,
-              //     child: Icon(Icons.cancel),
-              //     onPressed: () {
-              //       showDialog(
-              //         context: context,
-              //         builder: (ctx) {
-              //           var actions2 = [
-              //             FlatButton(
-              //               onPressed: () {
-              //                 if (isChanged) {
-              //                   // storing final location
-              //                   storeFinalLat = finalLatitude;
-              //                   storeFinalLong = finalLongitude;
-              //                   endingTime = DateTime.now();
-              //                   passingToShowResults['initialLat'] =
-              //                       storeInitialLat;
-              //                   passingToShowResults['initialLong'] =
-              //                       storeInitialLong;
-              //                   passingToShowResults['finalLat'] =
-              //                       storeFinalLat;
-              //                   passingToShowResults['finalLong'] =
-              //                       storeFinalLong;
-              //                   passingToShowResults['initialTime'] =
-              //                       startingTime;
-              //                   passingToShowResults['finalTime'] = endingTime;
-              //                   passingToShowResults['distance'] = distance;
-              //                   passingToShowResults['listOfLatLng'] =
-              //                       listOfLatLngForPoly;
-
-              //                   print("All parameters stored successfully");
-              //                   // updatePolyLines(
-              //                   //   initialLatitude,
-              //                   //   initialLongitude,
-              //                   //   finalLatitude,
-              //                   //   finalLongitude,
-              //                   // );
-
-              //                   _locationSubscription.cancel();
-              //                   Navigator.of(context).pushReplacementNamed(
-              //                       ShowResultsScreen.routeName,
-              //                       arguments: passingToShowResults);
-              //                 }
-              //               },
-              //               child: Text('Yes'),
-              //             ),
-              //             FlatButton(
-              //               onPressed: () {
-              //                 Navigator.of(ctx).pop(true);
-              //               },
-              //               child: Text('No'),
-              //             ),
-              //           ];
-              //           return AlertDialog(
-              //             title: Text('Are you sure you want to end Run?'),
-              //             actions: actions2,
-              //           );
-              //         },
-              //       );
-              //     },
-              //   ),
-              // ),
+                          FlatButton(
+                            onPressed: () {
+                              Navigator.of(ctx).pop(true);
+                            },
+                            child: Text('No'),
+                          ),
+                        ];
+                        return AlertDialog(
+                          title: Text('Are you sure you want to end?'),
+                          actions: actions2,
+                        );
+                      },
+                    );
+                  },
+                  child: finishFlag == 0
+                      ? Container()
+                      : Container(
+                          alignment: Alignment.center,
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height / 25,
+                          child: Text(
+                            'Finish',
+                            style: TextStyle(
+                                fontSize:
+                                    MediaQuery.of(context).size.height / 30,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.red[200]),
+                        ),
+                ),
+              ),
             ],
           ),
         ),

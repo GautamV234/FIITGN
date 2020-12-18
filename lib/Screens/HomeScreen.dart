@@ -2,13 +2,10 @@ import 'package:Fiitgn1/Screens/MapsScreen.dart';
 import 'package:Fiitgn1/Screens/finalAuthentication.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'CardioScreen.dart';
-// import 'YourRunsStatsScreen.dart';
+import '../Screens/CycleScreen.dart';
 import '../Widgets/HomeScreenItem.dart';
 import 'workoutScreen.dart';
-// import 'WorkoutStatsScreen.dart';
 import 'package:flutter/services.dart';
-// import './MapsScreen.dart';
 import './StatsScreen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -25,7 +22,7 @@ class HomeScreen extends StatelessWidget {
             actions: [
               FlatButton(
                 onPressed: () {
-                  Navigator.of(ctx).pop(true);
+                  // Navigator.of(ctx).pop(true);
                   SystemNavigator.pop();
                 },
                 child: Text('Yes'),
@@ -86,42 +83,40 @@ class HomeScreen extends StatelessWidget {
       'url': 'assets/runTile.jpg',
       'routeName': MapScreen.routeName,
       'description':
-          'Running can be accessed from here. Get out there and get those legs working!'
+          'Running can be accessed from here. Get out there and get those legs working!',
+      'heroID': 1,
     },
     {
       'title': 'Start Cycling',
       'url': 'assets/newActivity.jpeg',
-      'routeName': '',
+      'routeName': CycleScreen.routeName,
       'description':
-          'Cycling can be accessed from here. Get out there and get those legs working!'
+          'Cycling can be accessed from here. Get out there and get those legs working!',
+      'heroID': 2,
     },
     {
       'title': 'Workout',
       'url': 'assets/Workout.jpeg',
       'routeName': WorkoutHomeScreen.routeName,
       'description':
-          'Had a quick warmup or a gruelling cardio session? Whichever it is, record it here and keep a tab on all those calories you are burning!'
+          'Had a quick warmup or a gruelling cardio session? Whichever it is, record it here and keep a tab on all those calories you are burning!',
+      'heroID': 3,
     },
     {
       'title': 'Your Activities',
       'url': 'assets/statsTile2.jpeg',
       'routeName': StatsScreen.routeName,
       'description':
-          'Your running statistics can be seen here. Keep a watch and aim to reach higher and higher everyday.'
+          'Your running statistics can be seen here. Keep a watch and aim to reach higher and higher everyday.',
+      'heroID': 4,
     },
-
-    // {
-    //   'title': 'Workout Stats',
-    //   'url': 'assets/WorkoutStats3.jpeg',
-    //   'routeName': WorkoutStatScreen.routeName,
-    //   'description': 'Getting a bit redundant gotta think new here',
-    // },
     {
       'title': 'Running Buddy',
       'url': 'assets/runBud.jpg',
       'routeName': '',
       'description':
-          'This section is under construction. Check back in later to view some exciting new stuff!'
+          'This section is under construction. Check back in later to view some exciting new stuff!',
+      'heroID': 5,
     },
     {
       'title': 'Know Your Mess',
@@ -129,6 +124,7 @@ class HomeScreen extends StatelessWidget {
       'routeName': '',
       'description':
           'This section is under construction. Check back in later to view some exciting new stuff!',
+      'heroID': 6,
     },
   ];
   // String uid;
@@ -139,7 +135,7 @@ class HomeScreen extends StatelessWidget {
     var deviceSize = MediaQuery.of(context);
     print(deviceSize);
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
+      backgroundColor: Color(0xFFDDDDDD),
       // backgroundColor: Colors.black,
       // appBar: AppBar(
       //   leading: InkWell(
@@ -224,6 +220,7 @@ class HomeScreen extends StatelessWidget {
                   title: homeScreenList[i]['title'],
                   url: homeScreenList[i]['url'],
                   description: homeScreenList[i]['description'],
+                  heroID: homeScreenList[i]['heroID'],
                 ),
               ),
             ],
