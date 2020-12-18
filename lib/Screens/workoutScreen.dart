@@ -29,7 +29,7 @@ class WorkoutHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final workoutDataProvider = Provider.of<WorkoutDataProvider>(context);
     return Scaffold(
-      // backgroundColor: Colors.black,
+      backgroundColor: Color(0xFFDDDDDD),
       //  appBar: AppBar(
       //     title: Text('Workout'),
       //      elevation: 12,
@@ -39,7 +39,7 @@ class WorkoutHomeScreen extends StatelessWidget {
           Stack(
             children: [
               Container(
-                height: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height / 3,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30.0),
                   boxShadow: [
@@ -50,11 +50,14 @@ class WorkoutHomeScreen extends StatelessWidget {
                     )
                   ],
                 ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(30.0),
-                  child: Image.asset(
-                    'assets/Workout.jpeg',
-                    fit: BoxFit.cover,
+                child: Hero(
+                  tag: 3,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(30.0),
+                    child: Image.asset(
+                      'assets/Workout.jpeg',
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
@@ -101,14 +104,15 @@ class WorkoutHomeScreen extends StatelessWidget {
                       child: Container(
                         height: MediaQuery.of(context).size.height / 17,
                         alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width,
+                        width: MediaQuery.of(context).size.width / 1.5,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(0),
-                          color: Colors.grey[400],
+                          borderRadius: BorderRadius.circular(20),
+                          color: Color(0xFF3F7B70),
                         ),
                         child: Text(
                           'Select Workout Plan',
                           style: TextStyle(
+                              color: Color(0xFFDDDDDD),
                               fontWeight: FontWeight.bold,
                               fontSize:
                                   MediaQuery.of(context).size.height / 30),
@@ -127,14 +131,15 @@ class WorkoutHomeScreen extends StatelessWidget {
                       child: Container(
                         height: MediaQuery.of(context).size.height / 17,
                         alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width,
+                        width: MediaQuery.of(context).size.width / 1.5,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(0),
-                          color: Colors.grey[400],
+                          borderRadius: BorderRadius.circular(20),
+                          color: Color(0xFF3F7B70),
                         ),
                         child: Text(
                           'Create Custom Plan',
                           style: TextStyle(
+                              color: Color(0xFFDDDDDD),
                               fontWeight: FontWeight.bold,
                               fontSize:
                                   MediaQuery.of(context).size.height / 30),
@@ -163,14 +168,15 @@ class WorkoutHomeScreen extends StatelessWidget {
                       child: Container(
                         height: MediaQuery.of(context).size.height / 17,
                         alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width,
+                        width: MediaQuery.of(context).size.width / 1.5,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(0),
-                          color: Colors.grey[400],
+                          borderRadius: BorderRadius.circular(20),
+                          color: Color(0xFF3F7B70),
                         ),
                         child: Text(
                           'Start Workout',
                           style: TextStyle(
+                              color: Color(0xFFDDDDDD),
                               fontWeight: FontWeight.bold,
                               fontSize:
                                   MediaQuery.of(context).size.height / 30),

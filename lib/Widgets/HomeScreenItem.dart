@@ -5,12 +5,14 @@ class HomeScreenItem extends StatelessWidget {
   final url;
   final routeName;
   final description;
+  final heroID;
 
   HomeScreenItem({
     this.title,
     this.routeName,
     this.url,
     this.description,
+    this.heroID,
   });
   @override
   Widget build(BuildContext context) {
@@ -43,13 +45,16 @@ class HomeScreenItem extends StatelessWidget {
                 children: <Widget>[
                   //    Hero(
                   //    tag: url,
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
-                    child: Image.asset(
-                      url,
-                      height: MediaQuery.of(context).size.height / 4.87,
-                      width: MediaQuery.of(context).size.width / 2.28,
-                      fit: BoxFit.cover,
+                  Hero(
+                    tag: heroID,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: Image.asset(
+                        url,
+                        height: MediaQuery.of(context).size.height / 4.87,
+                        width: MediaQuery.of(context).size.width / 2.28,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ],
