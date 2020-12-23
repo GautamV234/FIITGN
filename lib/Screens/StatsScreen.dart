@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import './YourRunsStatsScreen.dart';
 import './yourCycleStatsScreen.dart';
@@ -101,7 +100,7 @@ class StatsScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     image: DecorationImage(
-                        image: ExactAssetImage("assets/yourRunsblur.jpg"),
+                        image: ExactAssetImage("assets/cyclingStats.jpg"),
                         fit: BoxFit.cover),
                   ),
                   width: MediaQuery.of(context).size.width,

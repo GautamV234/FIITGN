@@ -87,38 +87,6 @@ class _MapScreenState extends State<MapScreen> {
     );
   }
 
-  // void updatePolyLines(double initialLat, double initialLong, double finalLat,
-  //     double finalLong) async {
-  //   List<PointLatLng> result = await polylinePoints?.getRouteBetweenCoordinates(
-  //     apiKey,
-  //     initialLat,
-  //     initialLong,
-  //     finalLat,
-  //     finalLong,
-  //   );
-  //   if (result.isNotEmpty) {
-  //     // loop through all PointLatLng points and convert them
-  //     // to a list of LatLng, required by the Polyline
-  //     result.forEach((PointLatLng point) {
-  //       polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-  //     });
-  //   }
-  //   setState(() {
-  //     // create a Polyline instance
-  //     // with an id, an RGB color and the list of LatLng pairs
-  //     Polyline polyline = Polyline(
-  //         polylineId: PolylineId("poly"),
-  //         color: Color.fromARGB(255, 40, 122, 198),
-  //         points: polylineCoordinates);
-
-  //     // add the constructed polyline as a set of points
-  //     // to the polyline set, which will eventually
-  //     // end up showing up on the map
-  //     _polylines.add(polyline);
-  //     print("This just ran");
-  //   });
-  // }
-
   double distanceCovered(double initialLatitude, double initialLongitude,
       double finalLatitude, double finalLongitude) {
     // converting all values to radians
@@ -172,12 +140,15 @@ class _MapScreenState extends State<MapScreen> {
       _locationSubscription =
           _locationTracker.onLocationChanged().listen((newLocalData) {
         if (_controller != null) {
-          _controller.animateCamera(CameraUpdate.newCameraPosition(
+          _controller.animateCamera(
+            CameraUpdate.newCameraPosition(
               new CameraPosition(
                   target: LatLng(newLocalData.latitude, newLocalData.longitude),
                   bearing: 192.232,
                   tilt: 0,
-                  zoom: 18.00)));
+                  zoom: 18.00),
+            ),
+          );
         }
         updateMarkerAndCircle(newLocalData, imageData);
         finalLatitude = newLocalData.latitude;

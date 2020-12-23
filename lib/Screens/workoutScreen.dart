@@ -40,6 +40,7 @@ class WorkoutHomeScreen extends StatelessWidget {
             children: [
               Container(
                 height: MediaQuery.of(context).size.height / 3,
+                width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30.0),
                   boxShadow: [

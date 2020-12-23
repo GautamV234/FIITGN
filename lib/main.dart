@@ -61,8 +61,7 @@ class MyApp extends StatelessWidget {
         // ? SignInFIITGN()
         // : DetailsScreen(),
 
-        home: //SignInGoogle().isSignedIn == true ?
-            HomeScreen(), // : SignInGoogle(),
+        home: SignInGoogle().isSignedIn == true ? HomeScreen() : SignInGoogle(),
 
         routes: {
           CardioScreen.routeName: (ctx) => CardioScreen(),
