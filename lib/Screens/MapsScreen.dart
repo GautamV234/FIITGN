@@ -1,21 +1,23 @@
-import 'dart:typed_data';
+// import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:location/location.dart';
+import 'package:location/location.dart' as loc;
 import 'package:flutter/services.dart';
 import 'dart:math';
 import 'ShowRunResults.dart';
 
+import 'package:background_location/background_location.dart' as bLoc;
+
 class MapScreen extends StatefulWidget {
-  static const routeName = 'MapScreen';
+  static const routeName = 'NewMapScreen';
   @override
   _MapScreenState createState() => _MapScreenState();
 }
 
 class _MapScreenState extends State<MapScreen> {
   final GlobalKey<ScaffoldState> key = new GlobalKey<ScaffoldState>();
-  int finishFlag = 0;
+  int finishFlag = 0; // flag to check if finish should be showed or no
   String apiKey = 'AIzaSyDkyZ5LN0apdkxOHnRbR-qHY3Hw3uqs1-s';
   bool isChanged = false;
   DateTime startingTime;
@@ -40,7 +42,7 @@ class _MapScreenState extends State<MapScreen> {
 
   StreamSubscription _locationSubscription;
   GoogleMapController _controller;
-  Location _locationTracker = Location();
+  loc.Location _locationTracker = loc.Location();
   Marker marker;
   Circle circle;
   // PolylinePoints polylinePoints = PolylinePoints();
@@ -52,28 +54,21 @@ class _MapScreenState extends State<MapScreen> {
     zoom: 18.00,
   );
 
-  Future<Uint8List> getMarker() async {
-    ByteData byteData =
-        await DefaultAssetBundle.of(context).load("assets/runMan.png");
-    return byteData.buffer.asUint8List();
-  }
-
-  void updateMarkerAndCircle(LocationData newLocalData, Uint8List imageData) {
-    LatLng latlng = LatLng(newLocalData.latitude, newLocalData.longitude);
+  void updateMarkerAndCircle(double latitude, double longitude) {
+    // print("newLocalData type is" + newLocalData.runtimeType.toString());
+    LatLng latlng = LatLng(latitude, longitude);
     this.setState(
       () {
-        marker = Marker(
-          markerId: MarkerId("home"),
-          visible: false,
-          position: latlng,
-          rotation: newLocalData.heading,
-          draggable: false,
-          zIndex: 2,
-          flat: true,
-          anchor: Offset(0.5, 0.5),
-          icon: BitmapDescriptor.fromBytes(imageData),
-        );
-        // print("Marker is made");
+        // marker = Marker(
+        //   markerId: MarkerId("home"),
+        //   visible: false,
+        //   position: latlng,
+        //   rotation: newLocalData.heading,
+        //   draggable: false,
+        //   zIndex: 2,
+        //   flat: true,
+        //   anchor: Offset(0.5, 0.5),
+        // );
         circle = Circle(
           circleId: CircleId("car"),
           radius: 2,
@@ -82,7 +77,6 @@ class _MapScreenState extends State<MapScreen> {
           center: latlng,
           fillColor: Colors.blue.withAlpha(70),
         );
-        // print("Circle is made");
       },
     );
   }
@@ -108,12 +102,13 @@ class _MapScreenState extends State<MapScreen> {
 
   void getCurrentLocation() async {
     try {
-      Uint8List imageData = await getMarker();
-      // print("Image is loaded");
-      var location = await _locationTracker.getLocation();
-      // print("Location is loaded");
-      // print(location);
-      updateMarkerAndCircle(location, imageData);
+      loc.LocationData location = await _locationTracker.getLocation();
+      print("location gotten");
+      await bLoc.BackgroundLocation.setNotificationTitle(
+          "FIITGN is running in the background");
+      await bLoc.BackgroundLocation.startLocationService();
+      print('location services started');
+      updateMarkerAndCircle(location.latitude, location.longitude);
       isChanged = true;
       if (flag == 0) {
         initialLatitude = location.latitude;
@@ -123,49 +118,36 @@ class _MapScreenState extends State<MapScreen> {
         storeInitialLat = initialLatitude;
         storeInitialLong = initialLongitude;
         setState(() {
-          finishFlag = 1;
+          finishFlag = 1; // flag to check if finish should be showed or no
         });
         listOfLatLngForPoly
             .add({'latitude': storeInitialLat, 'longitude': storeInitialLong});
-        // listOfLatLngForPoly.add(LatLng(storeInitialLat, storeInitialLong));
         startingTime = DateTime.now();
-        print("This portion is being run");
+        // print("This portion is being run");
         flag = 1;
       }
       if (_locationSubscription != null) {
-        print("Yo Yo Yo");
         _locationSubscription.cancel();
       }
-
-      _locationSubscription =
-          _locationTracker.onLocationChanged().listen((newLocalData) {
+      print("stream beginning");
+      bLoc.BackgroundLocation.getLocationUpdates((location) {
+        print("code entered the stream");
         if (_controller != null) {
+          print("stream going on");
           _controller.animateCamera(
             CameraUpdate.newCameraPosition(
               new CameraPosition(
-                  target: LatLng(newLocalData.latitude, newLocalData.longitude),
+                  target: LatLng(location.latitude, location.longitude),
                   bearing: 192.232,
                   tilt: 0,
                   zoom: 18.00),
             ),
           );
         }
-        updateMarkerAndCircle(newLocalData, imageData);
-        finalLatitude = newLocalData.latitude;
-        finalLongitude = newLocalData.longitude;
-
-        // LatLng initialLatLng = LatLng(initialLatitude, initialLongitude);
-        // LatLng finalLatLng = LatLng(finalLatitude, finalLongitude);
-        // print("$initialLatLng $finalLatLng");
-
-        // updatePolyLines(
-        //   initialLatitude,
-        //   initialLongitude,
-        //   finalLatitude,
-        //   finalLongitude,
-        // );
-
-        if (newLocalData.speed <= speedThreshold) {
+        updateMarkerAndCircle(location.latitude, location.longitude);
+        finalLatitude = location.latitude;
+        finalLongitude = location.longitude;
+        if (location.speed <= speedThreshold) {
           // print(newLocalData.speed.toString());
           print("speed too slow to count distance");
           // dont increase distance
@@ -175,10 +157,10 @@ class _MapScreenState extends State<MapScreen> {
                       finalLongitude) *
                   1000;
         }
-
         print("Distance is $dist metres");
-        double speed = newLocalData.speed;
+        double speed = location.speed;
         print("Speed is $speedString");
+        print("Accuracy is" + location.accuracy.toString());
         speedString = speed.toStringAsFixed(2);
         dist = distance.toStringAsFixed(2);
         initialLatitude = finalLatitude;
@@ -187,6 +169,46 @@ class _MapScreenState extends State<MapScreen> {
         listOfLatLngForPoly
             .add({'latitude': initialLatitude, 'longitude': initialLongitude});
       });
+      // _locationSubscription =
+      //     _locationTracker.onLocationChanged().listen((newLocalData) {
+      //   if (_controller != null) {
+      //     print("stream going on");
+      //     _controller.animateCamera(
+      //       CameraUpdate.newCameraPosition(
+      //         new CameraPosition(
+      //             target: LatLng(newLocalData.latitude, newLocalData.longitude),
+      //             bearing: 192.232,
+      //             tilt: 0,
+      //             zoom: 18.00),
+      //       ),
+      //     );
+      //   }
+      // updateMarkerAndCircle(newLocalData);
+      // finalLatitude = newLocalData.latitude;
+      // finalLongitude = newLocalData.longitude;
+
+      // if (newLocalData.speed <= speedThreshold) {
+      //   // print(newLocalData.speed.toString());
+      //   print("speed too slow to count distance");
+      //   // dont increase distance
+      // } else {
+      //   distance = distance +
+      //       distanceCovered(initialLatitude, initialLongitude, finalLatitude,
+      //               finalLongitude) *
+      //           1000;
+      // }
+
+      // print("Distance is $dist metres");
+      // double speed = newLocalData.speed;
+      // print("Speed is $speedString");
+      // speedString = speed.toStringAsFixed(2);
+      // dist = distance.toStringAsFixed(2);
+      // initialLatitude = finalLatitude;
+      // initialLongitude = finalLongitude;
+      // // listOfLatLngForPoly.add(LatLng(initialLatitude, initialLongitude));
+      // listOfLatLngForPoly
+      //     .add({'latitude': initialLatitude, 'longitude': initialLongitude});
+      // });
     } on PlatformException catch (e) {
       if (e.code == 'PERMISSION DENIED') {
         debugPrint("Permission Denied");
@@ -244,7 +266,7 @@ class _MapScreenState extends State<MapScreen> {
                 child: GoogleMap(
                   initialCameraPosition: initialPosition,
                   mapType: MapType.normal,
-                  markers: Set.of((marker != null) ? [marker] : []),
+                  // markers: Set.of((marker != null) ? [marker] : []),
                   circles: Set.of((circle != null) ? [circle] : []),
                   polylines: _polylines,
                   onMapCreated: (GoogleMapController controller) {
@@ -356,40 +378,40 @@ class _MapScreenState extends State<MapScreen> {
                           var actions2 = [
                             FlatButton(
                               onPressed: () {
-                                if (isChanged) {
-                                  // storing final location
-                                  storeFinalLat = finalLatitude;
-                                  storeFinalLong = finalLongitude;
-                                  endingTime = DateTime.now();
-                                  passingToShowResults['initialLat'] =
-                                      storeInitialLat;
-                                  passingToShowResults['initialLong'] =
-                                      storeInitialLong;
-                                  passingToShowResults['finalLat'] =
-                                      storeFinalLat;
-                                  passingToShowResults['finalLong'] =
-                                      storeFinalLong;
-                                  passingToShowResults['initialTime'] =
-                                      startingTime;
-                                  passingToShowResults['finalTime'] =
-                                      endingTime;
-                                  passingToShowResults['distance'] = distance;
-                                  passingToShowResults['listOfLatLng'] =
-                                      listOfLatLngForPoly;
+                                // if (isChanged) {
+                                // storing final location
+                                storeFinalLat = finalLatitude;
+                                storeFinalLong = finalLongitude;
+                                endingTime = DateTime.now();
+                                passingToShowResults['initialLat'] =
+                                    storeInitialLat;
+                                passingToShowResults['initialLong'] =
+                                    storeInitialLong;
+                                passingToShowResults['finalLat'] =
+                                    storeFinalLat;
+                                passingToShowResults['finalLong'] =
+                                    storeFinalLong;
+                                passingToShowResults['initialTime'] =
+                                    startingTime;
+                                passingToShowResults['finalTime'] = endingTime;
+                                passingToShowResults['distance'] = distance;
+                                passingToShowResults['listOfLatLng'] =
+                                    listOfLatLngForPoly;
 
-                                  print("All parameters stored successfully");
-                                  // updatePolyLines(
-                                  //   initialLatitude,
-                                  //   initialLongitude,
-                                  //   finalLatitude,
-                                  //   finalLongitude,
-                                  // );
+                                print("All parameters stored successfully");
+                                // updatePolyLines(
+                                //   initialLatitude,
+                                //   initialLongitude,
+                                //   finalLatitude,
+                                //   finalLongitude,
+                                // );
 
-                                  _locationSubscription.cancel();
-                                  Navigator.of(context).pushReplacementNamed(
-                                      ShowResultsScreen.routeName,
-                                      arguments: passingToShowResults);
-                                }
+                                // _locationSubscription.cancel();
+                                bLoc.BackgroundLocation.stopLocationService();
+                                Navigator.of(context).pushReplacementNamed(
+                                    ShowResultsScreen.routeName,
+                                    arguments: passingToShowResults);
+                                // }
                               },
                               child: Text('Yes'),
                             ),
@@ -425,85 +447,6 @@ class _MapScreenState extends State<MapScreen> {
                                 color: Colors.red[200]),
                           ),
                   )),
-              // Positioned(
-              //     child: ListTile(
-              //   tileColor: Color.fromRGBO(0, 0, 100, 1),
-              //   leading: Icon(Icons.panorama_fish_eye_sharp),
-              //   title: Text(
-              //     "Distance - $dist metres",
-              //     style: TextStyle(color: Colors.white, fontSize: 25),
-              //   ),
-              //   subtitle: Text(
-              //     "Speed - $speedString m/s",
-              //     style: TextStyle(color: Colors.white, fontSize: 25),
-              //   ),
-              // )),
-              // Positioned(
-              //   bottom: 19,
-              //   left: 10,
-              //   child: FloatingActionButton(
-              //     heroTag: "2",
-              //     backgroundColor: Colors.red,
-              //     child: Icon(Icons.cancel),
-              //     onPressed: () {
-              //       showDialog(
-              //         context: context,
-              //         builder: (ctx) {
-              //           var actions2 = [
-              //             FlatButton(
-              //               onPressed: () {
-              //                 if (isChanged) {
-              //                   // storing final location
-              //                   storeFinalLat = finalLatitude;
-              //                   storeFinalLong = finalLongitude;
-              //                   endingTime = DateTime.now();
-              //                   passingToShowResults['initialLat'] =
-              //                       storeInitialLat;
-              //                   passingToShowResults['initialLong'] =
-              //                       storeInitialLong;
-              //                   passingToShowResults['finalLat'] =
-              //                       storeFinalLat;
-              //                   passingToShowResults['finalLong'] =
-              //                       storeFinalLong;
-              //                   passingToShowResults['initialTime'] =
-              //                       startingTime;
-              //                   passingToShowResults['finalTime'] = endingTime;
-              //                   passingToShowResults['distance'] = distance;
-              //                   passingToShowResults['listOfLatLng'] =
-              //                       listOfLatLngForPoly;
-
-              //                   print("All parameters stored successfully");
-              //                   // updatePolyLines(
-              //                   //   initialLatitude,
-              //                   //   initialLongitude,
-              //                   //   finalLatitude,
-              //                   //   finalLongitude,
-              //                   // );
-
-              //                   _locationSubscription.cancel();
-              //                   Navigator.of(context).pushReplacementNamed(
-              //                       ShowResultsScreen.routeName,
-              //                       arguments: passingToShowResults);
-              //                 }
-              //               },
-              //               child: Text('Yes'),
-              //             ),
-              //             FlatButton(
-              //               onPressed: () {
-              //                 Navigator.of(ctx).pop(true);
-              //               },
-              //               child: Text('No'),
-              //             ),
-              //           ];
-              //           return AlertDialog(
-              //             title: Text('Are you sure you want to end Run?'),
-              //             actions: actions2,
-              //           );
-              //         },
-              //       );
-              //     },
-              //   ),
-              // ),
             ],
           ),
         ),

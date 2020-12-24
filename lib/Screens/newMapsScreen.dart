@@ -1,22 +1,23 @@
-// import 'dart:typed_data';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart' as loc;
 import 'package:flutter/services.dart';
 import 'dart:math';
-import '../Screens/ShowCycleResults.dart';
+import 'ShowRunResults.dart';
+
 import 'package:background_location/background_location.dart' as bLoc;
 
-class CycleScreen extends StatefulWidget {
-  static const routeName = 'CycleMapScreen';
+class NewMapScreen extends StatefulWidget {
+  static const routeName = 'NewMapScreen';
   @override
-  _CycleScreenState createState() => _CycleScreenState();
+  _NewMapScreenState createState() => _NewMapScreenState();
 }
 
-class _CycleScreenState extends State<CycleScreen> {
+class _NewMapScreenState extends State<NewMapScreen> {
   final GlobalKey<ScaffoldState> key = new GlobalKey<ScaffoldState>();
-  int finishFlag = 0;
+  int finishFlag = 0; // flag to check if finish should be showed or no
   String apiKey = 'AIzaSyDkyZ5LN0apdkxOHnRbR-qHY3Hw3uqs1-s';
   bool isChanged = false;
   DateTime startingTime;
@@ -53,12 +54,6 @@ class _CycleScreenState extends State<CycleScreen> {
     zoom: 18.00,
   );
 
-  // Future<Uint8List> getMarker() async {
-  //   ByteData byteData =
-  //       await DefaultAssetBundle.of(context).load("assets/runMan.png");
-  //   return byteData.buffer.asUint8List();
-  // }
-
   void updateMarkerAndCircle(double latitude, double longitude) {
     // print("newLocalData type is" + newLocalData.runtimeType.toString());
     LatLng latlng = LatLng(latitude, longitude);
@@ -85,38 +80,6 @@ class _CycleScreenState extends State<CycleScreen> {
       },
     );
   }
-
-  // void updatePolyLines(double initialLat, double initialLong, double finalLat,
-  //     double finalLong) async {
-  //   List<PointLatLng> result = await polylinePoints?.getRouteBetweenCoordinates(
-  //     apiKey,
-  //     initialLat,
-  //     initialLong,
-  //     finalLat,
-  //     finalLong,
-  //   );
-  //   if (result.isNotEmpty) {
-  //     // loop through all PointLatLng points and convert them
-  //     // to a list of LatLng, required by the Polyline
-  //     result.forEach((PointLatLng point) {
-  //       polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-  //     });
-  //   }
-  //   setState(() {
-  //     // create a Polyline instance
-  //     // with an id, an RGB color and the list of LatLng pairs
-  //     Polyline polyline = Polyline(
-  //         polylineId: PolylineId("poly"),
-  //         color: Color.fromARGB(255, 40, 122, 198),
-  //         points: polylineCoordinates);
-
-  //     // add the constructed polyline as a set of points
-  //     // to the polyline set, which will eventually
-  //     // end up showing up on the map
-  //     _polylines.add(polyline);
-  //     print("This just ran");
-  //   });
-  // }
 
   double distanceCovered(double initialLatitude, double initialLongitude,
       double finalLatitude, double finalLongitude) {
@@ -164,6 +127,7 @@ class _CycleScreenState extends State<CycleScreen> {
         flag = 1;
       }
       if (_locationSubscription != null) {
+        // print("Yo Yo Yo");
         _locationSubscription.cancel();
       }
       print("stream beginning");
@@ -197,7 +161,6 @@ class _CycleScreenState extends State<CycleScreen> {
         print("Distance is $dist metres");
         double speed = location.speed;
         print("Speed is $speedString");
-        print("Accuracy is" + location.accuracy.toString());
         speedString = speed.toStringAsFixed(2);
         dist = distance.toStringAsFixed(2);
         initialLatitude = finalLatitude;
@@ -254,23 +217,23 @@ class _CycleScreenState extends State<CycleScreen> {
   }
 
   _showSnackBar() {
-    // print("a");
+    print("a");
     final snackBar = SnackBar(content: Text("Sorry! Back button is disabled"));
     key.currentState.showSnackBar(snackBar);
-    // print('b');
+    print('b');
   }
 
   Future<bool> _onBackPressed() {
-    // print("Checing connection");
+    print("Checing connection");
     // await _showSnackBar(key);
-    // print("After function");
+    print("After function");
     return Future<bool>.value(false);
   }
 
   @override
   void dispose() {
     if (_locationSubscription != null) {
-      // print("Heeheehaa");
+      print("Heeheehaa");
       _locationSubscription.cancel();
     }
     super.dispose();
@@ -406,85 +369,84 @@ class _CycleScreenState extends State<CycleScreen> {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: InkWell(
-                  onTap: () {
-                    showDialog(
-                      context: context,
-                      builder: (ctx) {
-                        var actions2 = [
-                          FlatButton(
-                            onPressed: () {
-                              if (isChanged) {
-                                // storing final location
-                                storeFinalLat = finalLatitude;
-                                storeFinalLong = finalLongitude;
-                                endingTime = DateTime.now();
-                                passingToShowResults['initialLat'] =
-                                    storeInitialLat;
-                                passingToShowResults['initialLong'] =
-                                    storeInitialLong;
-                                passingToShowResults['finalLat'] =
-                                    storeFinalLat;
-                                passingToShowResults['finalLong'] =
-                                    storeFinalLong;
-                                passingToShowResults['initialTime'] =
-                                    startingTime;
-                                passingToShowResults['finalTime'] = endingTime;
-                                passingToShowResults['distance'] = distance;
-                                passingToShowResults['listOfLatLng'] =
-                                    listOfLatLngForPoly;
+                  padding: const EdgeInsets.all(10.0),
+                  child: InkWell(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (ctx) {
+                          var actions2 = [
+                            FlatButton(
+                              onPressed: () {
+                                if (isChanged) {
+                                  // storing final location
+                                  storeFinalLat = finalLatitude;
+                                  storeFinalLong = finalLongitude;
+                                  endingTime = DateTime.now();
+                                  passingToShowResults['initialLat'] =
+                                      storeInitialLat;
+                                  passingToShowResults['initialLong'] =
+                                      storeInitialLong;
+                                  passingToShowResults['finalLat'] =
+                                      storeFinalLat;
+                                  passingToShowResults['finalLong'] =
+                                      storeFinalLong;
+                                  passingToShowResults['initialTime'] =
+                                      startingTime;
+                                  passingToShowResults['finalTime'] =
+                                      endingTime;
+                                  passingToShowResults['distance'] = distance;
+                                  passingToShowResults['listOfLatLng'] =
+                                      listOfLatLngForPoly;
 
-                                print("All parameters stored successfully");
-                                // updatePolyLines(
-                                //   initialLatitude,
-                                //   initialLongitude,
-                                //   finalLatitude,
-                                //   finalLongitude,
-                                // );
+                                  print("All parameters stored successfully");
+                                  // updatePolyLines(
+                                  //   initialLatitude,
+                                  //   initialLongitude,
+                                  //   finalLatitude,
+                                  //   finalLongitude,
+                                  // );
 
-                                // _locationSubscription.cancel();
-                                bLoc.BackgroundLocation.stopLocationService();
-                                Navigator.of(context).pushReplacementNamed(
-                                    ShowCycleResultsScreen.routeName,
-                                    arguments: passingToShowResults);
-                              }
-                            },
-                            child: Text('Yes'),
+                                  _locationSubscription.cancel();
+                                  Navigator.of(context).pushReplacementNamed(
+                                      ShowResultsScreen.routeName,
+                                      arguments: passingToShowResults);
+                                }
+                              },
+                              child: Text('Yes'),
+                            ),
+                            FlatButton(
+                              onPressed: () {
+                                Navigator.of(ctx).pop(true);
+                              },
+                              child: Text('No'),
+                            ),
+                          ];
+                          return AlertDialog(
+                            title: Text('Are you sure you want to end Run?'),
+                            actions: actions2,
+                          );
+                        },
+                      );
+                    },
+                    child: finishFlag == 0
+                        ? Container()
+                        : Container(
+                            alignment: Alignment.center,
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height / 25,
+                            child: Text(
+                              'Finish',
+                              style: TextStyle(
+                                  fontSize:
+                                      MediaQuery.of(context).size.height / 30,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.red[200]),
                           ),
-                          FlatButton(
-                            onPressed: () {
-                              Navigator.of(ctx).pop(true);
-                            },
-                            child: Text('No'),
-                          ),
-                        ];
-                        return AlertDialog(
-                          title: Text('Are you sure you want to end?'),
-                          actions: actions2,
-                        );
-                      },
-                    );
-                  },
-                  child: finishFlag == 0
-                      ? Container()
-                      : Container(
-                          alignment: Alignment.center,
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height / 25,
-                          child: Text(
-                            'Finish',
-                            style: TextStyle(
-                                fontSize:
-                                    MediaQuery.of(context).size.height / 30,
-                                fontWeight: FontWeight.w600),
-                          ),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.red[200]),
-                        ),
-                ),
-              ),
+                  )),
             ],
           ),
         ),

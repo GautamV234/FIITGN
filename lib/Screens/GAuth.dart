@@ -7,6 +7,7 @@ import '../Providers/CycleDataProvider.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'HomeScreen.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInGoogle extends StatefulWidget {
   static const routeName = '\SignInScreen';
@@ -21,6 +22,21 @@ class SignInGoogle extends StatefulWidget {
 
 class _SignInGoogleState extends State<SignInGoogle> {
   bool isSignedInPrivate = SignInGoogle().isSignedIn;
+
+  saveUIDToDevice(String uid) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('uid', uid);
+  }
+
+  saveTokenToDevice(String token) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('token', token);
+  }
+
+  saveIsSignedInStatus(bool signedInStatus) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setBool('signedInStatus', signedInStatus);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,15 +67,19 @@ class _SignInGoogleState extends State<SignInGoogle> {
           AuthResult result = await _auth.signInWithCredential(credential);
           FirebaseUser user = await _auth.currentUser();
           print(user.uid);
-          runStatsProvider.setUid(user.uid);
-          workoutStatsProvider.setUid(user.uid);
-          cycleStatsProvider.setUid(user.uid);
+          // add methods to add it to shared pref
+          await saveUIDToDevice(user.uid);
+          // runStatsProvider.setUid(user.uid);
+          // workoutStatsProvider.setUid(user.uid);
+          // cycleStatsProvider.setUid(user.uid);
           final idTOKEN = await user.getIdToken();
           String token = idTOKEN.token;
           //print("token is " + token);
-          runStatsProvider.setToken(token);
-          workoutStatsProvider.setToken(token);
-          cycleStatsProvider.setToken(token);
+          await saveTokenToDevice(token);
+          await saveIsSignedInStatus(true);
+          // runStatsProvider.setToken(token);
+          // workoutStatsProvider.setToken(token);
+          // cycleStatsProvider.setToken(token);
           // SignInGoogle().setIsSignedIn(true);
           SignInGoogle().isSignedIn = true;
           isSignedInPrivate = true;
@@ -113,44 +133,12 @@ class _SignInGoogleState extends State<SignInGoogle> {
         Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-
-          // color: ,
-          // child: Padding(
-          //   padding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
-          //   child:
           child: Column(
-            //    mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               SizedBox(
                 height: MediaQuery.of(context).size.height / 3,
               ),
-              // Container(
-              //   height: MediaQuery.of(context).size.height / 10,
-              //   width: MediaQuery.of(context).size.width / 5,
-              //   child: Image.asset(
-              //     "assets/iitgnlogo-emblem.png",
-              //   ),
-              // ),
-              // Padding(
-              //   padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-              //   child: Text(
-              //     "FIITGN",
-              //     style: TextStyle(
-              //         fontWeight: FontWeight.bold,
-              //         fontSize: MediaQuery.of(context).size.width / 7,
-              //         color: Colors.black),
-              //   ),
-              // ),
-              // Padding(
-              //   padding: const EdgeInsets.fromLTRB(8, 8, 2, 8),
-              //   child: Text(
-              //     "THE COMPLETE FITNESS APP",
-              //     style: TextStyle(
-              //         fontSize: MediaQuery.of(context).size.width / 18,
-              //         color: Colors.black),
-              //   ),
-              // ),
               SizedBox(height: MediaQuery.of(context).size.height / 25),
               Expanded(
                 child: Container(
@@ -210,97 +198,13 @@ class _SignInGoogleState extends State<SignInGoogle> {
                         },
                         backgroundColor: Color(0xFF3F7B70),
                       ),
-
-                      // SignInButton(
-                      //   Buttons.Google,
-                      //   text: "Sign up with Google",
-                      //   onPressed: () {},
-                      // ),
-                      // ClipRRect(
-                      //     borderRadius: BorderRadius.only(
-                      //       topLeft: Radius.circular(
-                      //           MediaQuery.of(context).size.height / 20),
-                      //       topRight: Radius.circular(
-                      //           MediaQuery.of(context).size.height / 20),
-                      //     ),
-                      //     child: Image.asset(
-                      //       'assets/iitgnCamp.jpg',
-                      //       fit: BoxFit.cover,
-                      //       height: MediaQuery.of(context).size.height / 3.5,
-                      //       width: MediaQuery.of(context).size.width,
-                      //     )),
-                      // AnimatedContainer(
-                      //   height: MediaQuery.of(context).size.height / 14,
-                      //   duration: Duration(seconds: 1),
-                      //   // height: MediaQuery.of(context).size.height*0.07,
-                      //   width: MediaQuery.of(context).size.width / 1.5,
-                      //   child: FlatButton(
-                      //     onPressed: () async {
-                      //       bool outCome = await _signIn();
-
-                      //       if (outCome == false) {
-                      //         _showSnackBar();
-                      //       }
-                      //     },
-                      //     shape: RoundedRectangleBorder(
-                      //       borderRadius: new BorderRadius.circular(40.0),
-                      //     ),
-                      //     child: Padding(
-                      //       padding: const EdgeInsets.all(16.0),
-                      //       child: Container(
-                      //         child: Text(
-                      //           "Login with IITGN ID(Google)",
-                      //           style: TextStyle(
-                      //             color: Colors.white.withAlpha(230),
-                      //           ),
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     color: Color.fromRGBO(228, 110, 96, 1),
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),
               ),
-              // AnimatedContainer(
-              //   duration: Duration(seconds: 1),
-              //   // height: MediaQuery.of(context).size.height*0.07,
-              //   width: MediaQuery.of(context).size.height * 0.7,
-              //   child: FlatButton(
-              //     onPressed: () async {
-              //       bool outCome = await _signIn();
-
-              //       if (outCome == false) {
-              //         _showSnackBar();
-              //       }
-              //     },
-              //     shape: RoundedRectangleBorder(
-              //       borderRadius: new BorderRadius.circular(40.0),
-              //     ),
-              //     child: Padding(
-              //       padding: const EdgeInsets.all(16.0),
-              //       child: Container(
-              //         child: Text(
-              //           "Login with IITGN ID(Google)",
-              //           style: TextStyle(
-              //             color: Colors.white.withAlpha(230),
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //     color: Color.fromRGBO(228, 110, 96, 1),
-              //   ),
-              // ),
             ],
           ),
         ),
-        // Image.asset(
-        //   'assets/iitgnCamp.jpg',
-        //   height: MediaQuery.of(context).size.height / 1.8,
-        //   width: MediaQuery.of(context).size.width,
-        //   fit: BoxFit.cover,
-        // )
       ]),
     );
   }

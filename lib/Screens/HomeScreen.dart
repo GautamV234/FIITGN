@@ -2,17 +2,58 @@ import 'package:Fiitgn1/Screens/MapsScreen.dart';
 import 'package:Fiitgn1/Screens/finalAuthentication.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../Screens/CycleScreen.dart';
 import '../Widgets/HomeScreenItem.dart';
 import 'workoutScreen.dart';
 import 'package:flutter/services.dart';
 import './StatsScreen.dart';
+import '../Providers/CycleDataProvider.dart';
+import '../Providers/RunDataProvider.dart';
+import '../Providers/WorkoutDataProvider.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  static const routeName = '\HomeScreen';
+
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  insideInIt() async {
+    final runStatsProvider =
+        Provider.of<RunDataProvider>(context, listen: false);
+    final workoutStatsProvider =
+        Provider.of<WorkoutDataProvider>(context, listen: false);
+    final cycleStatsProvider =
+        Provider.of<CycleDataProvider>(context, listen: false);
+    final prefs = await SharedPreferences.getInstance();
+    String uid = prefs.getString('uid');
+    String token = prefs.getString('token');
+    runStatsProvider.setUid(uid);
+    runStatsProvider.setToken(token);
+    workoutStatsProvider.setUid(uid);
+    workoutStatsProvider.setToken(token);
+    cycleStatsProvider.setUid(uid);
+    cycleStatsProvider.setToken(token);
+    print("Uids and tokens are set");
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Future.delayed(Duration.zero, insideInIt);
+  }
+
   final List<IconData> rowOfItem = [
     FontAwesomeIcons.signOutAlt,
     FontAwesomeIcons.user,
   ];
+
   Future<bool> _onBackPressed(BuildContext ctx) {
     return showDialog(
         context: ctx,
@@ -47,7 +88,12 @@ class HomeScreen extends StatelessWidget {
                   title: Text('Do you Want to Logout?'),
                   actions: <Widget>[
                     FlatButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        final prefs = await SharedPreferences.getInstance();
+                        await prefs.setBool('signedInStatus', false);
+                        await prefs.setString('token', "");
+                        await prefs.setString('uid', "");
+                        print("all awaits before logout completed");
                         logoutUser();
                       },
                       child: Text('Yes'),
@@ -127,10 +173,7 @@ class HomeScreen extends StatelessWidget {
       'heroID': 6,
     },
   ];
-  // String uid;
-  // HomeScreen({@required this.uid});
-  @override
-  static const routeName = '\HomeScreen';
+
   Widget build(BuildContext context) {
     var deviceSize = MediaQuery.of(context);
     print(deviceSize);

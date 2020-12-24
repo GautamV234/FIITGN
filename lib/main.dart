@@ -24,6 +24,7 @@ import './Screens/CycleScreen.dart';
 import './Screens/ShowCycleResults.dart';
 import './Screens/yourCycleStatsScreen.dart';
 import './Providers/CycleDataProvider.dart';
+import './Screens/SplashScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -61,7 +62,7 @@ class MyApp extends StatelessWidget {
         // ? SignInFIITGN()
         // : DetailsScreen(),
 
-        home: SignInGoogle().isSignedIn == true ? HomeScreen() : SignInGoogle(),
+        home: SplashScreen(),
 
         routes: {
           CardioScreen.routeName: (ctx) => CardioScreen(),
