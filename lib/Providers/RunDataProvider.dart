@@ -49,12 +49,14 @@ class RunDataProvider with ChangeNotifier {
 
   void setUid(String userUid) {
     _uid = userUid;
-    // print('uid has been set');
+    print('uid has been set');
     notifyListeners();
-    // print("uid is $_uid");
+    print("uid is $_uid");
   }
 
   Future<void> getRunStatsFromDb() async {
+    // print(_uid);
+    // print(_token);
     final url =
         'https://authentications-c0299.firebaseio.com/RunData.json?auth=$_token&orderBy="uid"&equalTo="$_uid"';
     try {
