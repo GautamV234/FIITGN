@@ -31,7 +31,9 @@ class _HomeScreenState extends State<HomeScreen> {
     final cycleStatsProvider =
         Provider.of<CycleDataProvider>(context, listen: false);
     final prefs = await SharedPreferences.getInstance();
+    print('got instance');
     String uid = prefs.getString('uid');
+    print('gotten uid is' + uid);
     String token = prefs.getString('token');
     runStatsProvider.setUid(uid);
     runStatsProvider.setToken(token);
@@ -64,6 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
               FlatButton(
                 onPressed: () {
                   // Navigator.of(ctx).pop(true);
+                  print('Exiting App');
                   SystemNavigator.pop();
                 },
                 child: Text('Yes'),
@@ -93,6 +96,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         await prefs.setBool('signedInStatus', false);
                         await prefs.setString('token', "");
                         await prefs.setString('uid', "");
+                        print('checking this part');
+                        print(prefs.getString('token'));
                         print("all awaits before logout completed");
                         logoutUser();
                       },
@@ -126,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final List homeScreenList = [
     {
       'title': 'Start Running',
-      'url': 'assets/runTile.jpg',
+      'url': 'assets/10765.png',
       'routeName': MapScreen.routeName,
       'description':
           'Running can be accessed from here. Get out there and get those legs working!',
@@ -134,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
     },
     {
       'title': 'Start Cycling',
-      'url': 'assets/newActivity.jpeg',
+      'url': 'assets/11241.png',
       'routeName': CycleScreen.routeName,
       'description':
           'Cycling can be accessed from here. Get out there and get those legs working!',
@@ -142,7 +147,7 @@ class _HomeScreenState extends State<HomeScreen> {
     },
     {
       'title': 'Workout',
-      'url': 'assets/Workout.jpeg',
+      'url': 'assets/4805.png',
       'routeName': WorkoutHomeScreen.routeName,
       'description':
           'Had a quick warmup or a gruelling cardio session? Whichever it is, record it here and keep a tab on all those calories you are burning!',
@@ -150,7 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
     },
     {
       'title': 'Your Activities',
-      'url': 'assets/statsTile2.jpeg',
+      'url': 'assets/statLady.png',
       'routeName': StatsScreen.routeName,
       'description':
           'Your running statistics can be seen here. Keep a watch and aim to reach higher and higher everyday.',
@@ -158,15 +163,15 @@ class _HomeScreenState extends State<HomeScreen> {
     },
     {
       'title': 'Running Buddy',
-      'url': 'assets/runBud.jpg',
+      'url': 'assets/6517.png',
       'routeName': '',
       'description':
           'This section is under construction. Check back in later to view some exciting new stuff!',
       'heroID': 5,
     },
     {
-      'title': 'Know Your Mess',
-      'url': 'assets/iitgnMess.jpg',
+      'title': 'Know Your Diet',
+      'url': 'assets/6569.png',
       'routeName': '',
       'description':
           'This section is under construction. Check back in later to view some exciting new stuff!',
@@ -178,7 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
     var deviceSize = MediaQuery.of(context);
     print(deviceSize);
     return Scaffold(
-      backgroundColor: Color(0xFFDDDDDD),
+      backgroundColor: Colors.white,
       // backgroundColor: Colors.black,
       // appBar: AppBar(
       //   leading: InkWell(
@@ -219,51 +224,165 @@ class _HomeScreenState extends State<HomeScreen> {
       body: WillPopScope(
         onWillPop: () => _onBackPressed(context),
         child: SafeArea(
-          child: ListView(
-            padding: const EdgeInsets.symmetric(
-              vertical: 20,
-            ),
+          child: Column(
+            // padding: const EdgeInsets.symmetric(
+            //   vertical: 20,
+            // ),
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0, right: 120.0),
-                child: Text(
-                  'FIITGN',
-                  style: TextStyle(
-                    fontSize: deviceSize.size.width / 8,
-                    fontWeight: FontWeight.bold,
+              // Padding(
+              //   padding: const EdgeInsets.only(left: 20.0, right: 120.0),
+              Stack(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [Colors.teal[300], Colors.white],
+                      ),
+                    ),
+                    // color: Colors.green[200],
+
+                    height: MediaQuery.of(context).size.height * 0.30,
+                    width: MediaQuery.of(context).size.width,
+                    //       child: Image.asset(
+                    //       'assets/homePage.jpg',
+                    //     fit: BoxFit.cover,
                   ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0, right: 120.0),
-                child: Text(
-                  'THE COMPLETE FITNESS APP',
-                  style: TextStyle(
-                    fontSize: deviceSize.size.width / 20,
+                  //   ),
+                  Positioned(
+                    left: MediaQuery.of(context).size.width / 20,
+                    top: MediaQuery.of(context).size.height / 26,
+                    child: Text(
+                      'Hello.',
+                      style: TextStyle(
+                        fontFamily: 'Raleway',
+                        fontSize: deviceSize.size.width / 6.5,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              SizedBox(height: deviceSize.size.width / 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  buildIcon(1, context),
-                  buildIcon(0, context),
+                  Positioned(
+                    left: MediaQuery.of(context).size.width / 19,
+                    top: MediaQuery.of(context).size.height / 9.2,
+                    child: Text(
+                      'Welcome to FIITGN.',
+                      style: TextStyle(
+                        fontFamily: 'Raleway',
+                        fontSize: deviceSize.size.width / 16,
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: MediaQuery.of(context).size.width / 25,
+                    top: MediaQuery.of(context).size.height / 6,
+                    child: Container(
+                      child: IconButton(
+                        icon: Icon(FontAwesomeIcons.signOutAlt),
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (ctx) => AlertDialog(
+                                    title: Text('Do you want to Logout?'),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        onPressed: () {
+                                          logoutUser();
+                                        },
+                                        child: Text('Yes'),
+                                      ),
+                                      FlatButton(
+                                        onPressed: () {
+                                          Navigator.of(ctx).pop(true);
+                                        },
+                                        child: Text('No'),
+                                      )
+                                    ],
+                                  ));
+                        },
+                      ),
+                    ),
+                  )
+                  // SignInButtonBuilder(
+                  //   text: 'LOGOUT',
+                  //   icon: FontAwesomeIcons.signOutAlt,
+                  //   onPressed: () {
+                  //     showDialog(
+                  //         context: context,
+                  //         builder: (ctx) => AlertDialog(
+                  //               title: Text('Do you want to Logout?'),
+                  //               actions: <Widget>[
+                  //                 FlatButton(
+                  //                   onPressed: () {
+                  //                     logoutUser();
+                  //                   },
+                  //                   child: Text('Yes'),
+                  //                 ),
+                  //                 FlatButton(
+                  //                   onPressed: () {
+                  //                     Navigator.of(ctx).pop(true);
+                  //                   },
+                  //                   child: Text('No'),
+                  //                 )
+                  //               ],
+                  //             ));
+                  //   },
+                  //   backgroundColor: Colors.transparent,
+                  // ),
                 ],
               ),
-              SizedBox(
-                height: deviceSize.size.width / 20,
-              ),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: ScrollPhysics(),
-                itemCount: homeScreenList.length,
-                itemBuilder: (ctx, i) => HomeScreenItem(
-                  routeName: homeScreenList[i]['routeName'],
-                  title: homeScreenList[i]['title'],
-                  url: homeScreenList[i]['url'],
-                  description: homeScreenList[i]['description'],
-                  heroID: homeScreenList[i]['heroID'],
+              // Text(
+              //   'FIITGN',
+              //   style: TextStyle(
+              //     fontFamily: 'LemonMilk',
+              //     fontSize: deviceSize.size.width / 8,
+              //     fontWeight: FontWeight.bold,
+              //   ),
+              // ),
+
+              // Padding(
+              //   padding: const EdgeInsets.only(left: 20.0, right: 120.0),
+              //   child: Text(
+              //     'THE COMPLETE FITNESS APP',
+              //     style: TextStyle(
+              //       fontFamily: 'Raleway',
+              //       fontSize: deviceSize.size.width / 20,
+              //     ),
+              //   ),
+              // ),
+              //    SizedBox(height: deviceSize.size.width / 20),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //   children: <Widget>[
+              //     buildIcon(1, context),
+              //     buildIcon(0, context),
+              //   ],
+              // ),
+              // SizedBox(
+              //   height: deviceSize.size.width / 16,
+              // ),
+              Expanded(
+                child: Container(
+                  child: //GridView(
+                      //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      //         crossAxisCount: 2),
+                      //     children: [
+                      GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing:
+                            MediaQuery.of(context).size.height / 80),
+                    shrinkWrap: true,
+                    physics: ScrollPhysics(),
+                    itemCount: homeScreenList.length,
+                    itemBuilder: (ctx, i) => HomeScreenItem(
+                      routeName: homeScreenList[i]['routeName'],
+                      title: homeScreenList[i]['title'],
+                      url: homeScreenList[i]['url'],
+                      description: homeScreenList[i]['description'],
+                      heroID: homeScreenList[i]['heroID'],
+                    ),
+                  ),
                 ),
               ),
             ],

@@ -30,6 +30,7 @@ class SignInFIITGN extends StatefulWidget {
 final FirebaseAuth _fireBaseAuth = FirebaseAuth.instance;
 
 logoutUser() async {
+  print('Logging Out');
   googleSignInObject.signOut();
   FirebaseAuth.instance.signOut();
   // SharedPreferences log = await SharedPreferences.getInstance();

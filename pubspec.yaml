@@ -44,6 +44,7 @@ dependencies:
   http: ^0.12.2
   flutter_signin_button: ^1.1.0
   background_location: ^0.2.2
+  animated_text_kit: ^3.1.0
 
   
   # The following adds the Cupertino Icons font to your application.
@@ -99,6 +100,13 @@ flutter:
     - assets/yourWorkblurr.jpg
     - assets/runBud.jpg
     - assets/iitgnCamp.jpg
+    - assets/homePage.jpg
+    - assets/4805.png
+    - assets/6517.png
+    - assets/10765.png
+    - assets/11241.png
+    - assets/6569.png
+    - assets/statLady.png
     - assets/cyclingStats.jpg
 
     # - assets/Tile.jpg
@@ -115,6 +123,13 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+    - family: Raleway
+      fonts:
+        - asset: assets/fonts/Raleway-Regular.ttf
+    - family: LemonMilk
+      fonts:
+        - asset: assets/fonts/LEMONMILK-Light.otf
   # fonts:
     # - family: Schyler
     #   fonts:
