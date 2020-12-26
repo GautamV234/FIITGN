@@ -223,7 +223,7 @@ class _CycleScreenState extends State<CycleScreen> {
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: [Color(0xFF145374), Colors.white],
+                      colors: [Colors.red[300], Colors.white],
                     ),
                   ),
                   //  color: Colors.black,
@@ -238,12 +238,12 @@ class _CycleScreenState extends State<CycleScreen> {
                       children: [
                         Container(
                             height: MediaQuery.of(context).size.height / 11,
-                            child: Image.asset('assets/10765.png')),
+                            child: Image.asset('assets/11241.png')),
                         SizedBox(
                           width: MediaQuery.of(context).size.width / 7,
                         ),
                         Text(
-                          'Running',
+                          'Cycling',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontFamily: 'Raleway',
@@ -259,7 +259,7 @@ class _CycleScreenState extends State<CycleScreen> {
                   ),
                 ),
                 Container(
-                  height: MediaQuery.of(context).size.height / 1.8,
+                  height: MediaQuery.of(context).size.height / 2,
                   width: MediaQuery.of(context).size.width,
                   child: GoogleMap(
                     initialCameraPosition: initialPosition,
@@ -307,8 +307,8 @@ class _CycleScreenState extends State<CycleScreen> {
                                     onTap: getCurrentLocation,
                                     child: Container(
                                       alignment: Alignment.center,
-                                      width: MediaQuery.of(context).size.width /
-                                          2.5,
+                                      width:
+                                          MediaQuery.of(context).size.width / 4,
                                       height:
                                           MediaQuery.of(context).size.height /
                                               25,
@@ -318,7 +318,8 @@ class _CycleScreenState extends State<CycleScreen> {
                                             fontSize: MediaQuery.of(context)
                                                     .size
                                                     .height /
-                                                30,
+                                                50,
+                                            fontFamily: 'Raleway',
                                             fontWeight: FontWeight.w600),
                                       ),
                                       decoration: BoxDecoration(
@@ -384,7 +385,7 @@ class _CycleScreenState extends State<CycleScreen> {
                                           ];
                                           return AlertDialog(
                                             title: Text(
-                                                'Are you sure you want to end Run?'),
+                                                'Are you sure you want to end Cycling?'),
                                             actions: actions2,
                                           );
                                         },
@@ -397,19 +398,20 @@ class _CycleScreenState extends State<CycleScreen> {
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
-                                                2.5,
+                                                4,
                                             height: MediaQuery.of(context)
                                                     .size
                                                     .height /
                                                 25,
                                             child: Text(
-                                              'End Run',
+                                              'End Cycling',
                                               style: TextStyle(
                                                   fontSize:
                                                       MediaQuery.of(context)
                                                               .size
                                                               .height /
-                                                          30,
+                                                          50,
+                                                  fontFamily: 'Raleway',
                                                   fontWeight: FontWeight.w600),
                                             ),
                                             decoration: BoxDecoration(
@@ -434,12 +436,12 @@ class _CycleScreenState extends State<CycleScreen> {
                                             50),
                               ),
                               //    color: Colors.white,
-                              width: MediaQuery.of(context).size.width / 3,
+                              //     width: MediaQuery.of(context).size.width / 3,
                             ),
                           ],
                         ),
                         SizedBox(
-                          height: MediaQuery.of(context).size.height / 80,
+                          height: MediaQuery.of(context).size.height / 100,
                         ),
                         Row(
                           children: [
