@@ -273,7 +273,7 @@ class _MapScreenState extends State<MapScreen> {
                   ),
                 ),
                 Container(
-                  height: MediaQuery.of(context).size.height / 1.8,
+                  height: MediaQuery.of(context).size.height / 2,
                   width: MediaQuery.of(context).size.width,
                   child: GoogleMap(
                     initialCameraPosition: initialPosition,
@@ -321,8 +321,8 @@ class _MapScreenState extends State<MapScreen> {
                                     onTap: getCurrentLocation,
                                     child: Container(
                                       alignment: Alignment.center,
-                                      width: MediaQuery.of(context).size.width /
-                                          2.5,
+                                      width:
+                                          MediaQuery.of(context).size.width / 4,
                                       height:
                                           MediaQuery.of(context).size.height /
                                               25,
@@ -332,7 +332,8 @@ class _MapScreenState extends State<MapScreen> {
                                             fontSize: MediaQuery.of(context)
                                                     .size
                                                     .height /
-                                                30,
+                                                50,
+                                            fontFamily: 'Raleway',
                                             fontWeight: FontWeight.w600),
                                       ),
                                       decoration: BoxDecoration(
@@ -411,7 +412,7 @@ class _MapScreenState extends State<MapScreen> {
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
-                                                2.5,
+                                                4,
                                             height: MediaQuery.of(context)
                                                     .size
                                                     .height /
@@ -423,7 +424,8 @@ class _MapScreenState extends State<MapScreen> {
                                                       MediaQuery.of(context)
                                                               .size
                                                               .height /
-                                                          30,
+                                                          50,
+                                                  fontFamily: 'Raleway',
                                                   fontWeight: FontWeight.w600),
                                             ),
                                             decoration: BoxDecoration(
@@ -448,12 +450,12 @@ class _MapScreenState extends State<MapScreen> {
                                             50),
                               ),
                               //    color: Colors.white,
-                              width: MediaQuery.of(context).size.width / 3,
+                              //        width: MediaQuery.of(context).size.width / 3,
                             ),
                           ],
                         ),
                         SizedBox(
-                          height: MediaQuery.of(context).size.height / 80,
+                          height: MediaQuery.of(context).size.height / 100,
                         ),
                         Row(
                           children: [
