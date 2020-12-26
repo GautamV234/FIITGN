@@ -144,16 +144,16 @@ class _CycleScreenState extends State<CycleScreen> {
         updateMarkerAndCircle(location.latitude, location.longitude);
         finalLatitude = location.latitude;
         finalLongitude = location.longitude;
-        if (location.speed <= speedThreshold) {
-          // print(newLocalData.speed.toString());
-          print("speed too slow to count distance");
-          // dont increase distance
-        } else {
-          distance = distance +
-              distanceCovered(initialLatitude, initialLongitude, finalLatitude,
-                      finalLongitude) *
-                  1000;
-        }
+        // if (location.speed <= speedThreshold) {
+        // print(newLocalData.speed.toString());
+        // print("speed too slow to count distance");
+        // dont increase distance
+        // } else {
+        distance = distance +
+            distanceCovered(initialLatitude, initialLongitude, finalLatitude,
+                    finalLongitude) *
+                1000;
+        // }
         print("Distance is $dist metres");
         double speed = location.speed;
         print("Speed is $speedString");
