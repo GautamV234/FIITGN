@@ -352,6 +352,9 @@ class WorkoutDataProvider with ChangeNotifier {
         );
 
         _yourWorkouts = loadedData;
+        _yourWorkouts.sort((a, b) {
+          return b.date.compareTo(a.date);
+        });
         notifyListeners();
       });
       print("Loaded List for Workout Stats is ready");

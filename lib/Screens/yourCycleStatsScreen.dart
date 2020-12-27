@@ -79,6 +79,9 @@ class _YourCycleStatsState extends State<YourCycleStats> {
   Widget build(BuildContext context) {
     final runStatsProvider = Provider.of<CycleDataProvider>(context);
     final List<CycleModel> cycleStats = runStatsProvider.yourCycleList;
+    cycleStats.sort((a, b) {
+      return b.dateOfRun.compareTo(a.dateOfRun);
+    });
     print(cycleStats);
     // final temp = runStatsProvider.getRunStatsFromDb();
     return cycleStats.length == 0

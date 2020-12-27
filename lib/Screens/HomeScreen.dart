@@ -33,9 +33,12 @@ class _HomeScreenState extends State<HomeScreen> {
     final prefs = await SharedPreferences.getInstance();
     print('got instance');
     String uid = prefs.getString('uid');
-    print('gotten uid is' + uid);
     String token = prefs.getString('token');
+    print('gotten uid is' + uid);
+    print('gotten token is' + token);
+    // String token = prefs.getString('token');
     runStatsProvider.setUid(uid);
+    //
     runStatsProvider.setToken(token);
     workoutStatsProvider.setUid(uid);
     workoutStatsProvider.setToken(token);
@@ -112,19 +115,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ));
       },
-      child: Container(
-        height: 60.0,
-        width: 60.0,
-        decoration: BoxDecoration(
-          color: Color(0xFFE7EBEE),
-          borderRadius: BorderRadius.circular(30.0),
-        ),
-        child: Icon(
-          rowOfItem[index],
-          size: 25.0,
-          color: Colors.blue[300],
-        ),
-      ),
+      // child: Container(
+      //   height: 60.0,
+      //   width: 60.0,
+      //   decoration: BoxDecoration(
+      //     color: Color(0xFFE7EBEE),
+      //     borderRadius: BorderRadius.circular(30.0),
+      //   ),
+      //   child: Icon(
+      //     rowOfItem[index],
+      //     size: 25.0,
+      //     color: Colors.blue[300],
+      //   ),
+      // ),
     );
   }
 
@@ -264,7 +267,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Positioned(
                     left: MediaQuery.of(context).size.width / 19,
-                    top: MediaQuery.of(context).size.height / 9.2,
+                    top: MediaQuery.of(context).size.height / 8,
                     child: Text(
                       'Welcome to FIITGN.',
                       style: TextStyle(

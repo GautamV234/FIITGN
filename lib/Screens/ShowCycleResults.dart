@@ -44,9 +44,9 @@ class _ShowCycleResultsScreenState extends State<ShowCycleResultsScreen> {
       'initialLong': initialLong,
       'listOfLatLng': listOfLatLng,
     };
-    double distance = routeArgs['distance'] / 1000;
+    double distance = routeArgs['distance'];
     String distanceString = distance.toStringAsFixed(2); // distance in kms
-    final percent = distance / 10;
+    final percent = distance * 10;
     DateTime initialTime = routeArgs['initialTime'];
     final String startTime = DateFormat.Hm().format(initialTime);
     final String dateOfRun = initialTime.toIso8601String();

@@ -90,6 +90,9 @@ class RunDataProvider with ChangeNotifier {
         // print(loadedList[0].initialLongitude);
 
         _yourRunsList = loadedList;
+        _yourRunsList.sort((a, b) {
+          return b.dateOfRun.compareTo(a.dateOfRun);
+        });
         notifyListeners();
       });
       print("Loaded List is ready");

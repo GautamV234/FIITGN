@@ -263,11 +263,6 @@ class _MapScreenState extends State<MapScreen> {
                               fontFamily: 'Raleway',
                               fontSize: MediaQuery.of(context).size.width / 12),
                         )
-                        // FloatingActionButton(
-                        //   backgroundColor: Colors.transparent,
-                        //   onPressed: () {},
-                        //   child: Icon(Icons.gps_fixed),
-                        // )
                       ],
                     ),
                   ),
@@ -457,75 +452,83 @@ class _MapScreenState extends State<MapScreen> {
                         SizedBox(
                           height: MediaQuery.of(context).size.height / 100,
                         ),
-                        Row(
-                          children: [
-                            SizedBox(
-                              width:
-                                  (3 / 8) * (MediaQuery.of(context).size.width),
-                            ),
-                            Container(
-                              width: MediaQuery.of(context).size.width / 4,
-                              child: Text(
-                                dist,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize:
-                                        MediaQuery.of(context).size.width / 7,
-                                    fontWeight: FontWeight.w700),
+                        Container(
+                          height: MediaQuery.of(context).size.height / 10,
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                width: (3 / 8) *
+                                    (MediaQuery.of(context).size.width),
                               ),
-                            ),
-                            Container(
-                              width: (3 / 16) *
-                                  (MediaQuery.of(context).size.width),
-                              child: Center(
+                              Container(
+                                width: MediaQuery.of(context).size.width / 4,
                                 child: Text(
-                                  'kms',
+                                  dist,
                                   style: TextStyle(
                                       color: Colors.white,
-                                      fontFamily: 'Raleway'),
+                                      fontSize:
+                                          MediaQuery.of(context).size.height /
+                                              25,
+                                      fontWeight: FontWeight.w700),
                                 ),
                               ),
-                            ),
-                            SizedBox(
-                              width: (3 / 16) *
-                                  (MediaQuery.of(context).size.width),
-                            ),
-                          ],
+                              Container(
+                                width: (3 / 16) *
+                                    (MediaQuery.of(context).size.width),
+                                child: Center(
+                                  child: Text(
+                                    'kms',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'Raleway'),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: (3 / 16) *
+                                    (MediaQuery.of(context).size.width),
+                              ),
+                            ],
+                          ),
                         ),
-                        Row(
-                          children: [
-                            SizedBox(
-                              width:
-                                  (3 / 8) * (MediaQuery.of(context).size.width),
-                            ),
-                            Container(
-                              width: MediaQuery.of(context).size.width / 4,
-                              child: Text(
-                                speedString,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize:
-                                        MediaQuery.of(context).size.width / 7,
-                                    fontWeight: FontWeight.w700),
+                        Container(
+                          height: MediaQuery.of(context).size.height / 10,
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                width: (3 / 8) *
+                                    (MediaQuery.of(context).size.width),
                               ),
-                            ),
-                            Container(
-                              width: (3 / 16) *
-                                  (MediaQuery.of(context).size.width),
-                              child: Center(
+                              Container(
+                                width: MediaQuery.of(context).size.width / 4,
                                 child: Text(
-                                  'KMPH',
+                                  speedString,
                                   style: TextStyle(
                                       color: Colors.white,
-                                      fontFamily: 'Raleway'),
+                                      fontSize:
+                                          MediaQuery.of(context).size.height /
+                                              25,
+                                      fontWeight: FontWeight.w700),
                                 ),
                               ),
-                            ),
-                            SizedBox(
-                              width: (3 / 16) *
-                                  (MediaQuery.of(context).size.width),
-                            ),
-                          ],
+                              Container(
+                                width: (3 / 16) *
+                                    (MediaQuery.of(context).size.width),
+                                child: Center(
+                                  child: Text(
+                                    'm/s',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'Raleway'),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: (3 / 16) *
+                                    (MediaQuery.of(context).size.width),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),

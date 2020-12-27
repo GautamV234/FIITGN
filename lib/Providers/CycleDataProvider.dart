@@ -89,6 +89,9 @@ class CycleDataProvider with ChangeNotifier {
         // print(loadedList[0].initialLongitude);
 
         _yourCycleList = loadedList;
+        _yourCycleList.sort((a, b) {
+          return b.dateOfRun.compareTo(a.dateOfRun);
+        });
         notifyListeners();
       });
       print("Loaded List is ready");

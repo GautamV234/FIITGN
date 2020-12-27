@@ -77,7 +77,10 @@ class _YourRunsState extends State<YourRuns> {
   Widget build(BuildContext context) {
     final runStatsProvider = Provider.of<RunDataProvider>(context);
     final List<RunModel> runStats = runStatsProvider.yourRunsList;
-    print(runStats);
+    // runStats.sort((a, b) {
+    //   return b.dateOfRun.compareTo(a.dateOfRun);
+    // });
+    // print("yo yo " + runStats.toString());
     // final temp = runStatsProvider.getRunStatsFromDb();
     return runStats.length == 0
         ? Scaffold(
@@ -98,8 +101,8 @@ class _YourRunsState extends State<YourRuns> {
               itemBuilder: (ctx, i) {
                 String distance = runStats[i].distanceCovered;
                 String avgSpeed = runStats[i].avgSpeed;
-                String avgSpeedInKmph =
-                    (double.parse(avgSpeed) * 5 / 18).toStringAsFixed(2);
+                // String avgSpeedInKmph =
+                // (double.parse(avgSpeed) * 5 / 18).toStringAsFixed(2);
                 // print(timeInHrs + " : " + timeInMins + " : " + tim);
                 return GestureDetector(
                   onTap: () {
@@ -174,7 +177,7 @@ class _YourRunsState extends State<YourRuns> {
                                           fontSize: 20,
                                         ),
                                       ),
-                                      Text(avgSpeedInKmph),
+                                      Text(avgSpeed),
                                       Text('KMPH')
                                     ],
                                   ),

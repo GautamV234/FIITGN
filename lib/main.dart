@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
         // ? SignInFIITGN()
         // : DetailsScreen(),
 
-        home: HomeScreen(), //SplashScreen(),
+        home: SplashScreen(),
 
         routes: {
           CardioScreen.routeName: (ctx) => CardioScreen(),
