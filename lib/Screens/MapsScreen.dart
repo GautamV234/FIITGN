@@ -7,7 +7,6 @@ import 'package:location/location.dart' as loc;
 import 'package:flutter/services.dart';
 import 'dart:math';
 import 'ShowRunResults.dart';
-
 import 'package:background_location/background_location.dart' as bLoc;
 
 class MapScreen extends StatefulWidget {
@@ -36,7 +35,7 @@ class _MapScreenState extends State<MapScreen> {
   Map<dynamic, dynamic> passingToShowResults = Map();
   int flag = 0;
   int iter = 1;
-  double distance = 0;
+  double distance = 0.0;
   double speedThreshold = 1.0;
   int buttonFlag = 0;
   String dist = "";
@@ -347,6 +346,7 @@ class _MapScreenState extends State<MapScreen> {
                                               onPressed: () {
                                                 storeFinalLat = finalLatitude;
                                                 storeFinalLong = finalLongitude;
+                                                print(distance);
                                                 endingTime = DateTime.now();
                                                 passingToShowResults[
                                                         'initialLat'] =

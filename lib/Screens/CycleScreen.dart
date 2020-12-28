@@ -151,14 +151,13 @@ class _CycleScreenState extends State<CycleScreen> {
         // } else {
         distance = distance +
             distanceCovered(initialLatitude, initialLongitude, finalLatitude,
-                    finalLongitude) *
-                1000;
+                finalLongitude);
         // }
-        print("Distance is $dist metres");
+        // print("Distance is $dist metres");
         double speed = location.speed;
-        print("Speed is $speedString");
-        print("Accuracy is" + location.accuracy.toString());
-        speedString = speed.toStringAsFixed(2);
+        // print("Speed is $speedString");
+        // print("Accuracy is" + location.accuracy.toString());
+        speedString = speed.toStringAsFixed(1);
         dist = distance.toStringAsFixed(2);
         initialLatitude = finalLatitude;
         initialLongitude = finalLongitude;

@@ -46,7 +46,7 @@ class _ShowResultsScreenState extends State<ShowResultsScreen> {
     };
     double distance = routeArgs['distance'];
     String distanceString = distance.toStringAsFixed(2); // distance in kms
-    final percent = distance * 10;
+    // final percent = distance * 10;
     DateTime initialTime = routeArgs['initialTime'];
     final String startTime = DateFormat.Hm().format(initialTime);
     final String dateOfRun = initialTime.toIso8601String();
@@ -119,31 +119,31 @@ class _ShowResultsScreenState extends State<ShowResultsScreen> {
                         width: MediaQuery.of(context).size.width,
                         child: Column(
                           children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Text(
-                                  '0 kms'.toUpperCase(),
-                                  style: TextStyle(
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                                Text(
-                                  '10 kms'.toUpperCase(),
-                                  style: TextStyle(
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            LinearPercentIndicator(
-                              lineHeight: 8.0,
-                              percent: percent,
-                              linearStrokeCap: LinearStrokeCap.roundAll,
-                              backgroundColor:
-                                  Theme.of(context).accentColor.withAlpha(30),
-                              progressColor: Theme.of(context).primaryColor,
-                            ),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            //   children: <Widget>[
+                            //     Text(
+                            //       '0 kms'.toUpperCase(),
+                            //       style: TextStyle(
+                            //         color: Colors.grey,
+                            //       ),
+                            //     ),
+                            //     Text(
+                            //       '10 kms'.toUpperCase(),
+                            //       style: TextStyle(
+                            //         color: Colors.grey,
+                            //       ),
+                            //     ),
+                            //   ],
+                            // ),
+                            // LinearPercentIndicator(
+                            //   lineHeight: 8.0,
+                            //   percent: percent,
+                            //   linearStrokeCap: LinearStrokeCap.roundAll,
+                            //   backgroundColor:
+                            //       Theme.of(context).accentColor.withAlpha(30),
+                            //   progressColor: Theme.of(context).primaryColor,
+                            // ),
                             Padding(
                               padding: EdgeInsets.only(top: 30),
                             ),
