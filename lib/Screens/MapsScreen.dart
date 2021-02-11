@@ -105,8 +105,12 @@ class _MapScreenState extends State<MapScreen> {
     try {
       loc.LocationData location = await _locationTracker.getLocation();
       // print("location gotten");
-      await bLoc.BackgroundLocation.setNotificationTitle(
-          "FIITGN is running in the background");
+      // await bLoc.BackgroundLocation.setAndroidNotification(
+      //   title: 'FIITGN is running in the background',
+      //   message: 'Please keep the device active',
+      //   icon: "@mipmap/ic_launcher",
+      // );
+      // await bLoc.BackgroundLocation.setAndroidConfiguration(interval: 1000);
       await bLoc.BackgroundLocation.startLocationService();
       // print('location services started');
       updateMarkerAndCircle(location.latitude, location.longitude);
@@ -177,10 +181,10 @@ class _MapScreenState extends State<MapScreen> {
   void endRun() {}
 
   _showSnackBar() {
-    print("a");
+    // print("a");
     final snackBar = SnackBar(content: Text("Sorry! Back button is disabled"));
     key.currentState.showSnackBar(snackBar);
-    print('b');
+    // print('b');
   }
 
   Future<bool> _onBackPressed() {

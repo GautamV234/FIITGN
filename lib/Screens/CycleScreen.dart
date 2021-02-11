@@ -101,8 +101,12 @@ class _CycleScreenState extends State<CycleScreen> {
     try {
       loc.LocationData location = await _locationTracker.getLocation();
       print("location gotten");
-      await bLoc.BackgroundLocation.setNotificationTitle(
-          "FIITGN is running in the background");
+      // await bLoc.BackgroundLocation.setAndroidNotification(
+      //   title: 'FIITGN is running in the background',
+      //   message: 'Please keep the device active',
+      //   icon: "@mipmap/ic_launcher",
+      // );
+      // await bLoc.BackgroundLocation.setAndroidConfiguration(interval: 1000);
       await bLoc.BackgroundLocation.startLocationService();
       print('location services started');
       updateMarkerAndCircle(location.latitude, location.longitude);
