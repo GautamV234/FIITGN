@@ -86,6 +86,7 @@ class MyApp extends StatelessWidget {
           CycleScreen.routeName: (_) => CycleScreen(),
           ShowCycleResultsScreen.routeName: (_) => ShowCycleResultsScreen(),
           YourCycleStats.routeName: (_) => YourCycleStats(),
+
           //
         },
       ),

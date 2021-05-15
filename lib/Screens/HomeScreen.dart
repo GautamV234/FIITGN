@@ -12,7 +12,6 @@ import '../Providers/CycleDataProvider.dart';
 import '../Providers/RunDataProvider.dart';
 import '../Providers/WorkoutDataProvider.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -30,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Provider.of<WorkoutDataProvider>(context, listen: false);
     final cycleStatsProvider =
         Provider.of<CycleDataProvider>(context, listen: false);
+
     final prefs = await SharedPreferences.getInstance();
     print('got instance');
     String uid = prefs.getString('uid');
@@ -38,12 +38,12 @@ class _HomeScreenState extends State<HomeScreen> {
     print('gotten token is' + token);
     // String token = prefs.getString('token');
     runStatsProvider.setUid(uid);
-    //
     runStatsProvider.setToken(token);
     workoutStatsProvider.setUid(uid);
     workoutStatsProvider.setToken(token);
     cycleStatsProvider.setUid(uid);
     cycleStatsProvider.setToken(token);
+
     print("Uids and tokens are set");
   }
 

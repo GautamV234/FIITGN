@@ -64,37 +64,31 @@ class RunDataProvider with ChangeNotifier {
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       final List<RunModel> loadedList = [];
       // print(extractedData['-MMvLcgO2K3wHZkueZcV']['listOfLatLng'].runtimeType);
-      extractedData.forEach((statId, statVal) {
-        loadedList.add(
-          new RunModel(
-            databaseID: statId,
-            uid: statVal['uid'],
-            dateOfRun: statVal['dateOfRun'],
-            avgSpeed: statVal['avgSpeed'],
-            distanceCovered: statVal['distanceCovered'],
-            startTime: statVal['startTime'],
-            timeOfRunSec: statVal['timeOfRunSec'],
-            timeOfRunMin: statVal['timeOfRunMin'],
-            timeOfRunHrs: statVal['timeOfRunHrs'],
-            listOfLatLng: statVal['listOfLatLng'],
-            initialLongitude: statVal['initialLongitude'],
-            initialLatitude: statVal['initialLatitude'],
-          ),
-        );
-
-        // print(loadedList[0].avgSpeed);
-        // print(loadedList[0].databaseID);
-        // print(loadedList[0].dateOfRun);
-        // print(loadedList[0].distanceCovered);
-        // print(loadedList[0].initialLatitude);
-        // print(loadedList[0].initialLongitude);
-
-        _yourRunsList = loadedList;
-        _yourRunsList.sort((a, b) {
-          return b.dateOfRun.compareTo(a.dateOfRun);
-        });
-        notifyListeners();
-      });
+      extractedData.forEach(
+        (statId, statVal) {
+          loadedList.add(
+            new RunModel(
+              databaseID: statId,
+              uid: statVal['uid'],
+              dateOfRun: statVal['dateOfRun'],
+              avgSpeed: statVal['avgSpeed'],
+              distanceCovered: statVal['distanceCovered'],
+              startTime: statVal['startTime'],
+              timeOfRunSec: statVal['timeOfRunSec'],
+              timeOfRunMin: statVal['timeOfRunMin'],
+              timeOfRunHrs: statVal['timeOfRunHrs'],
+              listOfLatLng: statVal['listOfLatLng'],
+              initialLongitude: statVal['initialLongitude'],
+              initialLatitude: statVal['initialLatitude'],
+            ),
+          );
+          _yourRunsList = loadedList;
+          _yourRunsList.sort((a, b) {
+            return b.dateOfRun.compareTo(a.dateOfRun);
+          });
+          notifyListeners();
+        },
+      );
       print("Loaded List is ready");
       print(json.decode(response.body));
     } catch (e) {

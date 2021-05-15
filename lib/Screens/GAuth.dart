@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../Providers/RunDataProvider.dart';
 import '../Providers/WorkoutDataProvider.dart';
 import '../Providers/CycleDataProvider.dart';
+
 import 'package:google_sign_in/google_sign_in.dart';
 import 'HomeScreen.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
@@ -45,9 +46,10 @@ class _SignInGoogleState extends State<SignInGoogle> {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     final GoogleSignIn googleSignIn = GoogleSignIn();
 
-    final runStatsProvider = Provider.of<RunDataProvider>(context);
-    final workoutStatsProvider = Provider.of<WorkoutDataProvider>(context);
-    final cycleStatsProvider = Provider.of<CycleDataProvider>(context);
+    // final runStatsProvider = Provider.of<RunDataProvider>(context);
+    // final workoutStatsProvider = Provider.of<WorkoutDataProvider>(context);
+    // final cycleStatsProvider = Provider.of<CycleDataProvider>(context);
+    // final groupStatsProvider = Provider.of<GroupDataProvider>(context);
 
     //
     //
@@ -67,6 +69,9 @@ class _SignInGoogleState extends State<SignInGoogle> {
           AuthResult result = await _auth.signInWithCredential(credential);
           FirebaseUser user = await _auth.currentUser();
           print(user.uid);
+
+          /// TODO - Collect user info and store on Db
+
           // add methods to add it to shared pref
           await saveUIDToDevice(user.uid);
           // runStatsProvider.setUid(user.uid);
