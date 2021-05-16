@@ -1,5 +1,4 @@
 import 'package:Fiitgn1/Screens/MapsScreen.dart';
-import 'package:Fiitgn1/Screens/finalAuthentication.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,6 +11,8 @@ import '../Providers/CycleDataProvider.dart';
 import '../Providers/RunDataProvider.dart';
 import '../Providers/WorkoutDataProvider.dart';
 import 'package:provider/provider.dart';
+import 'GAuth.dart';
+import '../Calendar-Schedule/schedueCalendar.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -45,6 +46,12 @@ class _HomeScreenState extends State<HomeScreen> {
     cycleStatsProvider.setToken(token);
 
     print("Uids and tokens are set");
+// #################################
+    // why are neeche ka not running ???
+    //////////////
+    // var a = await CalendarSchedule().reloadEvents();
+    // print("hhhh");
+// #######################################
   }
 
   @override
@@ -74,61 +81,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
                 child: Text('Yes'),
               ),
-              // FlatButton(
-              //   onPressed: () {
-              //     Navigator.of(ctx).pop(true);
-              //   },
-              //   child: Text('No'),
-              // ),
             ],
           );
         });
-  }
-
-  Widget buildIcon(int index, BuildContext context) {
-    return InkWell(
-      onTap: () {
-        showDialog(
-            context: context,
-            builder: (ctx) => AlertDialog(
-                  title: Text('Do you Want to Logout?'),
-                  actions: <Widget>[
-                    FlatButton(
-                      onPressed: () async {
-                        final prefs = await SharedPreferences.getInstance();
-                        await prefs.setBool('signedInStatus', false);
-                        await prefs.setString('token', "");
-                        await prefs.setString('uid', "");
-                        print('checking this part');
-                        print(prefs.getString('token'));
-                        print("all awaits before logout completed");
-                        logoutUser();
-                      },
-                      child: Text('Yes'),
-                    ),
-                    FlatButton(
-                      onPressed: () {
-                        Navigator.of(ctx).pop(true);
-                      },
-                      child: Text('No'),
-                    )
-                  ],
-                ));
-      },
-      // child: Container(
-      //   height: 60.0,
-      //   width: 60.0,
-      //   decoration: BoxDecoration(
-      //     color: Color(0xFFE7EBEE),
-      //     borderRadius: BorderRadius.circular(30.0),
-      //   ),
-      //   child: Icon(
-      //     rowOfItem[index],
-      //     size: 25.0,
-      //     color: Colors.blue[300],
-      //   ),
-      // ),
-    );
   }
 
   final List homeScreenList = [
@@ -187,43 +142,6 @@ class _HomeScreenState extends State<HomeScreen> {
     print(deviceSize);
     return Scaffold(
       backgroundColor: Colors.white,
-      // backgroundColor: Colors.black,
-      // appBar: AppBar(
-      //   leading: InkWell(
-      //     child: Icon(Icons.backspace_outlined),
-      //     // child: Icon(Icons.exit_to_app),
-      //     onTap: () {
-      //       showDialog(
-      //           context: context,
-      //           builder: (ctx) => AlertDialog(
-      //                 title: Text('Do you Want to Logout?'),
-      //                 actions: <Widget>[
-      //                   FlatButton(
-      //                     onPressed: () {
-      //                       logoutUser();
-      //                     },
-      //                     child: Text('Yes'),
-      //                   ),
-      //                   FlatButton(
-      //                       onPressed: () {
-      //                         Navigator.of(ctx).pop(true);
-      //                       },
-      //                       child: Text('No'))
-      //                 ],
-      //               ));
-      //     },
-      //   ),
-      // leading: GestureDetector(
-      // child: Icon(
-      // Icons.logout,
-      // ),
-      // onTap: () => signOutUser().whenComplete(
-      //   () => SystemNavigator.pop(),
-      // ),
-      // ),
-      // title: Text('FIITGN'),
-      // elevation: 12,
-      // ),
       body: WillPopScope(
         onWillPop: () => _onBackPressed(context),
         child: SafeArea(
@@ -284,93 +202,36 @@ class _HomeScreenState extends State<HomeScreen> {
                         icon: Icon(FontAwesomeIcons.signOutAlt),
                         onPressed: () {
                           showDialog(
-                              context: context,
-                              builder: (ctx) => AlertDialog(
-                                    title: Text('Do you want to Logout?'),
-                                    actions: <Widget>[
-                                      FlatButton(
-                                        onPressed: () {
-                                          logoutUser();
-                                        },
-                                        child: Text('Yes'),
-                                      ),
-                                      FlatButton(
-                                        onPressed: () {
-                                          Navigator.of(ctx).pop(true);
-                                        },
-                                        child: Text('No'),
-                                      )
-                                    ],
-                                  ));
+                            context: context,
+                            builder: (ctx) => AlertDialog(
+                              title: Text('Do you want to Logout?'),
+                              actions: <Widget>[
+                                FlatButton(
+                                  onPressed: () {
+                                    logoutUser();
+                                    SystemNavigator.pop();
+                                  },
+                                  child: Text('Yes'),
+                                ),
+                                FlatButton(
+                                  onPressed: () {
+                                    Navigator.of(ctx).pop(true);
+                                  },
+                                  child: Text('No'),
+                                )
+                              ],
+                            ),
+                          );
                         },
                       ),
                     ),
                   )
-                  // SignInButtonBuilder(
-                  //   text: 'LOGOUT',
-                  //   icon: FontAwesomeIcons.signOutAlt,
-                  //   onPressed: () {
-                  //     showDialog(
-                  //         context: context,
-                  //         builder: (ctx) => AlertDialog(
-                  //               title: Text('Do you want to Logout?'),
-                  //               actions: <Widget>[
-                  //                 FlatButton(
-                  //                   onPressed: () {
-                  //                     logoutUser();
-                  //                   },
-                  //                   child: Text('Yes'),
-                  //                 ),
-                  //                 FlatButton(
-                  //                   onPressed: () {
-                  //                     Navigator.of(ctx).pop(true);
-                  //                   },
-                  //                   child: Text('No'),
-                  //                 )
-                  //               ],
-                  //             ));
-                  //   },
-                  //   backgroundColor: Colors.transparent,
-                  // ),
                 ],
               ),
-              // Text(
-              //   'FIITGN',
-              //   style: TextStyle(
-              //     fontFamily: 'LemonMilk',
-              //     fontSize: deviceSize.size.width / 8,
-              //     fontWeight: FontWeight.bold,
-              //   ),
-              // ),
 
-              // Padding(
-              //   padding: const EdgeInsets.only(left: 20.0, right: 120.0),
-              //   child: Text(
-              //     'THE COMPLETE FITNESS APP',
-              //     style: TextStyle(
-              //       fontFamily: 'Raleway',
-              //       fontSize: deviceSize.size.width / 20,
-              //     ),
-              //   ),
-              // ),
-              //    SizedBox(height: deviceSize.size.width / 20),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-              //   children: <Widget>[
-              //     buildIcon(1, context),
-              //     buildIcon(0, context),
-              //   ],
-              // ),
-              // SizedBox(
-              //   height: deviceSize.size.width / 16,
-              // ),
               Expanded(
                 child: Container(
-                  child: //GridView(
-                      //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      //         crossAxisCount: 2),
-                      //     children: [
-                      GridView.builder(
+                  child: GridView.builder(
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         mainAxisSpacing:
