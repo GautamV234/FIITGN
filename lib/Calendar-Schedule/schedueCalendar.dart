@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:googleapis/calendar/v3.dart';
 import 'package:http/io_client.dart';
 import 'package:http/src/base_request.dart';
 import 'package:http/src/response.dart';
@@ -11,29 +12,111 @@ import 'package:googleapis/calendar/v3.dart' as calendar;
 class CalendarSchedule {
   //------------------------------------CALENDAR EVENTS--------------------------------------------//
 
-  var events;
+  // var events;
   Future reloadEvents() async {
-    for (int i = 1; i < 8; i++) {
-      events[i] = [];
-    }
+    // for (int i = 1; i < 8; i++) {
+    // events[i] = [];
+    // }
+    print("code came in the function reload events");
     var connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult != ConnectivityResult.none) {
       final GoogleSignIn googleSignInObject = GoogleSignIn();
-      FirebaseUser fireBaseUser;
+      // FirebaseUser fireBaseUser;
+      try {
       final FirebaseAuth fireBaseAuth = FirebaseAuth.instance;
-      googleSignInObject.signInSilently().then((value) async {
-        final authHeaders = await googleSignInObject.currentUser.authHeaders;
-        final httpClient = GoogleHttpClient(authHeaders);
-        createAndGetCalendarEvents(httpClient);
-      });
+        googleSignInObject.signInSilently().then((value) async {
+          final authHeaders = await googleSignInObject.currentUser.authHeaders;
+          final httpClient = GoogleHttpClient(authHeaders);
+          print(httpClient);
+          print("rishabh");
+          await createEventAndReminders(httpClient);
+        });
+      } catch (e) {
+        print(e);
+      }
     }
   }
 
   Future createAndGetCalendarEvents(GoogleHttpClient httpClient) async {
+    print("aditya");
     var eventsData =
         await calendar.CalendarApi(httpClient).events.list('primary');
-    print(eventsData);
+    // await calendar.CalendarApi(httpClient).events
+    calendar.Event event = calendar.Event();
+    eventsData.items.forEach((element) {
+      print(element.recurringEventId);
+    });
+    // print(eventsData.toString());
     print("Checking if the code works");
+  }
+
+  Future createEventAndReminders(GoogleHttpClient httpClient) async {
+    print("aditya");
+    var calendarEvent = calendar.CalendarApi(httpClient).events;
+    // print("Aditya2");
+    Event event = Event();
+    event.summary = "workout Name"; // this would have the title
+    // print("Aditya3");
+    event.description = "Six packs ban jaaenge";
+    // print("Aditya4");
+    EventDateTime start = new EventDateTime();
+    // print("Aditya5");
+    start.dateTime = DateTime.parse("2021-05-18 23:20:00.000");
+    start.timeZone = "GMT+05:30";
+    event.start = start;
+    // print("Aditya6");
+
+    EventDateTime end = new EventDateTime();
+    end.timeZone = "GMT+05:30";
+    end.dateTime = DateTime.parse("2021-05-18 23:25:00.000"); // change this
+    event.end = end;
+    event.endTimeUnspecified = true;
+    print("Aditya2");
+    
+    // setting the reminder
+    EventReminder reminder = EventReminder();
+    print("Aditya3");
+    reminder.method = 'popup';
+    print("Aditya4");
+    reminder.minutes = 1; // 1 minute before the event
+    print("Aditya5");
+    if (reminder == null) {
+      print("null reminder");
+    }
+
+    // event.reminders.useDefault = true;
+    print("Aditya6");
+    event.recurrence = ["RRULE:FREQ=DAILY"];
+    print("Aditya7");
+    event.recurringEventId = "1234";
+    print("Aditya8");
+    String calendarId = "primary";
+
+    try {
+      await calendarEvent.insert(event, calendarId).then((value) {
+        print("Event Status -> " + value.status);
+        if (value.status == "confirmed") {
+          print('Event added to Google Calendar');
+        } else {
+          print("Unable to add event to Google Calendar");
+        }
+      });
+
+      // await calendar.events
+      //     .insert(event, calendarId,
+      //         conferenceDataVersion: hasConferenceSupport ? 1 : 0,
+      //         sendUpdates: shouldNotifyAttendees ? "all" : "none")
+      //     .then((value) {
+      //   print("Event Status: ${value.status}");
+      //   if (value.status == "confirmed") {
+      //     print('Event added to Google Calendar');
+      //   } else {
+      //     print("Unable to add event to Google Calendar");
+      //   }
+      // });
+    } catch (e) {
+      print('Error creating event $e');
+    }
   }
 
   Future getEventsOnline(httpClient) async {
@@ -65,9 +148,9 @@ class CalendarSchedule {
       }
     });
 
-    for (int i = 1; i < 8; i++) {
-      events[i] = [];
-    }
+    // for (int i = 1; i < 8; i++) {
+    //   events[i] = [];
+    // }
 
     withoutRepeat.forEach((calendar.Event event) {
       if (event != null) {

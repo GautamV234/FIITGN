@@ -13,6 +13,7 @@ import '../Providers/WorkoutDataProvider.dart';
 import 'package:provider/provider.dart';
 import 'GAuth.dart';
 import '../Calendar-Schedule/schedueCalendar.dart';
+import '../Calendar-Schedule/calendar_try_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -127,10 +128,18 @@ class _HomeScreenState extends State<HomeScreen> {
           'This section is under construction. Check back in later to view some exciting new stuff!',
       'heroID': 5,
     },
+    // {
+    //   'title': 'Know Your Diet',
+    //   'url': 'assets/6569.png',
+    //   'routeName': '',
+    //   'description':
+    //       'This section is under construction. Check back in later to view some exciting new stuff!',
+    //   'heroID': 6,
+    // },
     {
-      'title': 'Know Your Diet',
+      'title': 'Calendar',
       'url': 'assets/6569.png',
-      'routeName': '',
+      'routeName': CalendarScreen.routeName,
       'description':
           'This section is under construction. Check back in later to view some exciting new stuff!',
       'heroID': 6,

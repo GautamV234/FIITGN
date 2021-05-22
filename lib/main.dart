@@ -1,3 +1,4 @@
+import 'Calendar-Schedule/calendar_try_screen.dart';
 import 'Screens/SelectWorkoutPlanScreen.dart';
 import 'package:flutter/material.dart';
 import 'Screens/CardioScreen.dart';
@@ -25,6 +26,8 @@ import './Screens/ShowCycleResults.dart';
 import './Screens/yourCycleStatsScreen.dart';
 import './Providers/CycleDataProvider.dart';
 import './Screens/SplashScreen.dart';
+// import 'lib/Calendar-Schedule/schedueCalendar.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -86,6 +89,7 @@ class MyApp extends StatelessWidget {
           CycleScreen.routeName: (_) => CycleScreen(),
           ShowCycleResultsScreen.routeName: (_) => ShowCycleResultsScreen(),
           YourCycleStats.routeName: (_) => YourCycleStats(),
+          CalendarScreen.routeName : (_) => CalendarScreen(),
 
           //
         },
