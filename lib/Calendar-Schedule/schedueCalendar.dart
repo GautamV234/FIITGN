@@ -8,29 +8,38 @@ import 'package:connectivity/connectivity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:googleapis/calendar/v3.dart' as calendar;
+import '../Screens/GAuth.dart';
 
 class CalendarSchedule {
   //------------------------------------CALENDAR EVENTS--------------------------------------------//
-
   // var events;
   Future reloadEvents() async {
-    // for (int i = 1; i < 8; i++) {
-    // events[i] = [];
-    // }
     print("code came in the function reload events");
     var connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult != ConnectivityResult.none) {
-      final GoogleSignIn googleSignInObject = GoogleSignIn();
+      // final GoogleSignIn googleSignInObject = SignInClass.googleSignIn;
       // FirebaseUser fireBaseUser;
       try {
-      final FirebaseAuth fireBaseAuth = FirebaseAuth.instance;
-        googleSignInObject.signInSilently().then((value) async {
-          final authHeaders = await googleSignInObject.currentUser.authHeaders;
-          final httpClient = GoogleHttpClient(authHeaders);
-          print(httpClient);
-          print("rishabh");
-          await createEventAndReminders(httpClient);
-        });
+        final FirebaseAuth fireBaseAuth = FirebaseAuth.instance;
+        final authHeaders = SignInClass.authHeaders;
+        print(authHeaders);
+
+        final httpClient = GoogleHttpClient(authHeaders);
+        print(httpClient);
+        print("rishabh");
+        await createEventAndReminders(httpClient);
+        //  // googleSignInObject.signInSilently().then((value) async {
+        //   if (googleSignInObject == null) {
+        //     print("null check");
+        //   }
+        //   final authHeaders = SignInClass.authHeaders;
+        //   print(authHeaders);
+
+        //   final httpClient = GoogleHttpClient(authHeaders);
+        //   print(httpClient);
+        //   print("rishabh");
+        //   await createEventAndReminders(httpClient);
+        // });
       } catch (e) {
         print(e);
       }
@@ -53,6 +62,13 @@ class CalendarSchedule {
   Future createEventAndReminders(GoogleHttpClient httpClient) async {
     print("aditya");
     var calendarEvent = calendar.CalendarApi(httpClient).events;
+    await calendar.CalendarApi(httpClient)
+        .calendarList
+        .get("primary")
+        .then((value) {
+      print(value.accessRole);
+      print("3333333333333333333333333333333333");
+    });
     // print("Aditya2");
     Event event = Event();
     event.summary = "workout Name"; // this would have the title
@@ -68,11 +84,11 @@ class CalendarSchedule {
 
     EventDateTime end = new EventDateTime();
     end.timeZone = "GMT+05:30";
-    end.dateTime = DateTime.parse("2021-05-18 23:25:00.000"); // change this
+    end.dateTime = DateTime.parse("2021-05-22 23:25:00.000"); // change this
     event.end = end;
     event.endTimeUnspecified = true;
     print("Aditya2");
-    
+
     // setting the reminder
     EventReminder reminder = EventReminder();
     print("Aditya3");
@@ -91,7 +107,7 @@ class CalendarSchedule {
     event.recurringEventId = "1234";
     print("Aditya8");
     String calendarId = "primary";
-
+    // calendar.CalendarList.get();
     try {
       await calendarEvent.insert(event, calendarId).then((value) {
         print("Event Status -> " + value.status);

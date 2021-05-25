@@ -36,10 +36,16 @@ class SignInClass {
     'email',
     'https://www.googleapis.com/auth/calendar',
   ]);
+  static var authHeaders;
 
   signIn() async {
-    // print("y");
+    print("Sign In Function was called");
     GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
+    print("%%%%%%%%%%%%%%%%%%%%");
+    authHeaders = await googleSignIn.currentUser.authHeaders;
+    print("***************");
+    print(authHeaders);
+    print("***************");
     // print("x");
     GoogleSignInAuthentication googleSignInAuthentication =
         await googleSignInAccount.authentication;
