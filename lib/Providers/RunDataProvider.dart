@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import './RunModel.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import './DataProvider.dart';
 
 class RunDataProvider with ChangeNotifier {
-  String _uid;
-  String _token;
+  // String _uid;
+  // String _token;
 
   List<RunModel> _yourRunsList = [
     // RunModel(
@@ -43,29 +44,35 @@ class RunDataProvider with ChangeNotifier {
 
 //  var x =  _yourRunsList[0];
 
-  void setToken(String token) {
-    _token = token;
-  }
+  // void setToken(String token) {
+  //   _token = token;
+  // }
 
-  void setUid(String userUid) {
-    _uid = userUid;
-    print('uid has been set');
-    notifyListeners();
-    print("uid is $_uid");
-  }
+  // void setUid(String userUid) {
+  //   _uid = userUid;
+  //   // print('uid has been set');
+  //   notifyListeners();
+  //   // print("uid is $_uid");
+  // }
 
   Future<void> getRunStatsFromDb() async {
-    // print(_uid);
-    // print(_token);
+    String _uid = Data_Provider().uid;
+    print("Run Data Provider uid --> " + _uid);
     final url =
-        'https://authentications-c0299.firebaseio.com/RunData.json?auth=$_token&orderBy="uid"&equalTo="$_uid"';
+        'https://authentications-c0299.firebaseio.com/RunData.json?orderBy="uid"&equalTo="$_uid"';
     try {
+      print("entered the try block");
       final response = await http.get(url);
+      print("t1");
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      print("t2");
       final List<RunModel> loadedList = [];
+      print("t3");
+      print(extractedData);
       // print(extractedData['-MMvLcgO2K3wHZkueZcV']['listOfLatLng'].runtimeType);
       extractedData.forEach(
         (statId, statVal) {
+          print("t4");
           loadedList.add(
             new RunModel(
               databaseID: statId,
@@ -82,6 +89,7 @@ class RunDataProvider with ChangeNotifier {
               initialLatitude: statVal['initialLatitude'],
             ),
           );
+          print("t5");
           _yourRunsList = loadedList;
           _yourRunsList.sort((a, b) {
             return b.dateOfRun.compareTo(a.dateOfRun);
@@ -92,6 +100,7 @@ class RunDataProvider with ChangeNotifier {
       print("Loaded List is ready");
       print(json.decode(response.body));
     } catch (e) {
+      print("Error --> " + e.toString());
       throw (e);
     }
   }
@@ -101,7 +110,7 @@ class RunDataProvider with ChangeNotifier {
   }
 
   Future<void> addNewRunData(
-    // uid is already passed through the provider
+    // uid through the Data Provider
     String dateOfRun,
     String avgSpeed,
     String distanceCovered,
@@ -113,9 +122,10 @@ class RunDataProvider with ChangeNotifier {
     double initialLatitude,
     double initialLongitude,
   ) {
-    print("The Uid Is " + _uid);
-    final url =
-        'https://authentications-c0299.firebaseio.com/RunData.json?auth=$_token';
+    // print("The Uid Is " + _uid);
+    String _uid = Data_Provider().uid;
+    print("Run Data Provider fetching uid --> " + _uid);
+    final url = 'https://authentications-c0299.firebaseio.com/RunData.json';
     return http
         .post(
       url,

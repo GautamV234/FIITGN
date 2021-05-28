@@ -1,3 +1,4 @@
+import 'package:Fiitgn1/Providers/DataProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../Providers/RunModel.dart';
@@ -25,9 +26,12 @@ class _YourRunsState extends State<YourRuns> {
   // }
 
   @override
-  void didChangeDependencies() {
+  void didChangeDependencies() async {
     if (isInit) {
-      Provider.of<RunDataProvider>(context).getRunStatsFromDb();
+      print("^^^^^^");
+      print(Data_Provider().name);
+      print("^^^^^^^");
+      await Provider.of<RunDataProvider>(context).getRunStatsFromDb();
     }
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();

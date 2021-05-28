@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import '../Providers/WorkoutDataProvider.dart';
 
 class WorkoutHomeScreen extends StatelessWidget {
-  static const routeName = '\workoutScreen';
+  static const routeName = '\WORKRKKKKK';
   String workoutPlanName = "";
   final List workoutScreenList = [
     {

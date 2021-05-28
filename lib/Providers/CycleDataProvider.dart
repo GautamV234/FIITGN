@@ -1,4 +1,5 @@
 // import 'package:provider/provider.dart';
+import 'package:Fiitgn1/Providers/DataProvider.dart';
 import 'package:flutter/material.dart';
 // import './RunModel.dart';
 import '../Providers/CycleModel.dart';
@@ -6,8 +7,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class CycleDataProvider with ChangeNotifier {
-  String _uid;
-  String _token;
+  // String _uid;
+  // String _token;
 
   List<CycleModel> _yourCycleList = [
     // RunModel(
@@ -44,24 +45,31 @@ class CycleDataProvider with ChangeNotifier {
 
 //  var x =  _yourRunsList[0];
 
-  void setToken(String token) {
-    _token = token;
-  }
+  // void setToken(String token) {
+  //   _token = token;
+  // }
 
-  void setUid(String userUid) {
-    _uid = userUid;
-    // print('uid has been set');
-    notifyListeners();
-    // print("uid is $_uid");
-  }
+  // void setUid(String userUid) {
+  //   _uid = userUid;
+  //   // print('uid has been set');
+  //   notifyListeners();
+  //   // print("uid is $_uid");
+  // }
 
   Future<void> getRunStatsFromDb() async {
+    String _uid = Data_Provider().uid;
+    print("Cycle Data Provider -->" + _uid);
     final url =
-        'https://authentications-c0299.firebaseio.com/CycleData.json?auth=$_token&orderBy="uid"&equalTo="$_uid"';
+        'https://authentications-c0299.firebaseio.com/CycleData.json?orderBy="uid"&equalTo="$_uid"';
     try {
+      print("enetered the try block");
       final response = await http.get(url);
+      print("t1");
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      print("t2");
       final List<CycleModel> loadedList = [];
+      print("t3");
+      print(extractedData);
       // print(extractedData['-MMvLcgO2K3wHZkueZcV']['listOfLatLng'].runtimeType);
       extractedData.forEach((statId, statVal) {
         loadedList.add(
@@ -80,7 +88,7 @@ class CycleDataProvider with ChangeNotifier {
             initialLatitude: statVal['initialLatitude'],
           ),
         );
-
+        print("t4");
         // print(loadedList[0].avgSpeed);
         // print(loadedList[0].databaseID);
         print(loadedList[0].dateOfRun);
@@ -106,7 +114,7 @@ class CycleDataProvider with ChangeNotifier {
   }
 
   Future<void> addNewCycleData(
-    // uid is already passed through the provider
+    // uid through the Data Provider
     String dateOfRun,
     String avgSpeed,
     String distanceCovered,
@@ -118,9 +126,9 @@ class CycleDataProvider with ChangeNotifier {
     double initialLatitude,
     double initialLongitude,
   ) {
+    String _uid = Data_Provider().uid;
     print("The Uid Is " + _uid);
-    final url =
-        'https://authentications-c0299.firebaseio.com/CycleData.json?auth=$_token';
+    final url = 'https://authentications-c0299.firebaseio.com/CycleData.json';
     return http
         .post(
       url,

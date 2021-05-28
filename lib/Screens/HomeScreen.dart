@@ -1,3 +1,4 @@
+import 'package:Fiitgn1/Providers/DataProvider.dart';
 import 'package:Fiitgn1/Screens/MapsScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -14,6 +15,11 @@ import 'package:provider/provider.dart';
 import 'GAuth.dart';
 import '../Calendar-Schedule/schedueCalendar.dart';
 import '../Calendar-Schedule/calendar_try_screen.dart';
+////////////WORKOUTS
+import '../Workouts/screens/workouts-home.dart';
+import '../Workouts/models/Admin_db_model.dart';
+import '../Workouts/models/Exercise_db_model.dart';
+import '../Workouts/models/Workout_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -25,41 +31,47 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   insideInIt() async {
-    final runStatsProvider =
-        Provider.of<RunDataProvider>(context, listen: false);
-    final workoutStatsProvider =
-        Provider.of<WorkoutDataProvider>(context, listen: false);
-    final cycleStatsProvider =
-        Provider.of<CycleDataProvider>(context, listen: false);
+    final data_provider = Provider.of<Data_Provider>(context, listen: false);
+    final workoutDataProvider =
+        Provider.of<Workouts_Provider>(context, listen: false);
 
     final prefs = await SharedPreferences.getInstance();
     print('got instance');
     String uid = prefs.getString('uid');
-    String token = prefs.getString('token');
-    print('gotten uid is' + uid);
-    print('gotten token is' + token);
-    // String token = prefs.getString('token');
-    runStatsProvider.setUid(uid);
-    runStatsProvider.setToken(token);
-    workoutStatsProvider.setUid(uid);
-    workoutStatsProvider.setToken(token);
-    cycleStatsProvider.setUid(uid);
-    cycleStatsProvider.setToken(token);
-
+    String email = prefs.getString('email');
+    String name = prefs.getString('name');
+    String userDisplay = prefs.getString('userDisplay');
+    data_provider.setUid(uid);
+    data_provider.setEmailId(email);
+    data_provider.setDisplay(userDisplay);
+    data_provider.setName(name);
+    print(Data_Provider().name);
     print("Uids and tokens are set");
-// #################################
-    // why are neeche ka not running ???
-    //////////////
-    // var a = await CalendarSchedule().reloadEvents();
-    // print("hhhh");
-// #######################################
+
+    /// initializing admin and exercise dbs
+    final exerciseDataProvider =
+        Provider.of<GetExerciseDataFromGoogleSheetProvider>(context,
+            listen: false);
+    final adminDataProvider = Provider.of<GetAdminDataFromGoogleSheetProvider>(
+        context,
+        listen: false);
+    await exerciseDataProvider.getListOfExercises();
+    print("b");
+    await adminDataProvider.getListOfAdmins();
+    //// END of initialization
+    await workoutDataProvider.showAllWorkouts();
+    print("all workouts Loaded");
+    print("Home Screen Inside init has succesfully run");
+    // TO IMPROVISE SECURITY TOKEN WILL BE SET LATER
   }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(Duration.zero, insideInIt);
+    Future.delayed(Duration.zero).then((e) async {
+      await insideInIt();
+    });
   }
 
   final List<IconData> rowOfItem = [
@@ -137,12 +149,20 @@ class _HomeScreenState extends State<HomeScreen> {
     //   'heroID': 6,
     // },
     {
-      'title': 'Calendar',
+      'title': 'Calendarrr',
       'url': 'assets/6569.png',
       'routeName': CalendarScreen.routeName,
       'description':
           'This section is under construction. Check back in later to view some exciting new stuff!',
       'heroID': 6,
+    },
+    {
+      'title': 'Workout2',
+      'url': 'assets/6569.png',
+      'routeName': Workouts_Home.routeName,
+      'description':
+          'This section is under construction. Check back in later to view some exciting new stuff!',
+      'heroID': 7,
     },
   ];
 

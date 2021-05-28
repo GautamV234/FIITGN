@@ -1,3 +1,4 @@
+import 'package:Fiitgn1/Providers/DataProvider.dart';
 import 'package:Fiitgn1/Providers/WorkoutDataModel.dart';
 import 'package:Fiitgn1/Providers/WorkoutLogModel.dart';
 import 'package:flutter/material.dart';
@@ -8,9 +9,9 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class WorkoutDataProvider with ChangeNotifier {
-  String _uid;
-  // String _uid = '6xjRKs7BI6TLvM6aekhyAUidPAc2';
-  String _token;
+  // String _uid;
+  // // String _uid = '6xjRKs7BI6TLvM6aekhyAUidPAc2';
+  // String _token;
   String currentPlanPrivate = "";
 
   static final List<ExerciseModel> _exercises = [
@@ -263,20 +264,20 @@ class WorkoutDataProvider with ChangeNotifier {
     return [..._exercises];
   }
 
-  void setToken(String token) {
-    _token = token;
-  }
+  // void setToken(String token) {
+  // _token = token;
+  // }
 
-  void setUid(String uid) {
-    _uid = uid;
-    // print('uid has been set');
-    notifyListeners();
-    // print("uid is $_uid");
-  }
+  // void setUid(String uid) {
+  //   // _uid = uid;
+  //   // print('uid has been set');
+  //   notifyListeners();
+  //   // print("uid is $_uid");
+  // }
 
-  String get getUid {
-    return _uid;
-  }
+  // String get getUid {
+  //   return _uid;
+  // }
 
   List<PlanModel> get customPlans {
     return [..._customPlans];
@@ -291,8 +292,9 @@ class WorkoutDataProvider with ChangeNotifier {
   }
 
   Future<void> getWorkoutStatsFromDB() async {
+    String _uid = Data_Provider().uid;
     final url =
-        'https://authentications-c0299.firebaseio.com/WorkoutData.json?auth=$_token&orderBy="uid"&equalTo="$_uid"';
+        'https://authentications-c0299.firebaseio.com/WorkoutData.json?orderBy="uid"&equalTo="$_uid"';
     try {
       final response = await http.get(url);
       final List<WorkoutDataModel> loadedData = [];
@@ -300,37 +302,12 @@ class WorkoutDataProvider with ChangeNotifier {
       print(extractedData);
       extractedData.forEach((statId, statVal) {
         final List<WorkoutLogModel> listOfSetsReps = [];
-
-        // final Map mapSetsReps = statVal['listOfSetsReps'];
-        // mapSetsReps.forEach((key, value) {
-        //   print("BoomBooom");
-        //   listOfSetsReps.add(new WorkoutLogModel(
-        //       exerciseName: value['exerciseName'],
-        //       numOfReps: value['numOfReps'],
-        //       setNumber: value['setNumber']));
-        // });
         final listMapSetsReps = statVal['listOfSetsReps'];
         print(listMapSetsReps);
         print(listMapSetsReps.runtimeType);
         // print("Tanananana");
         listMapSetsReps.forEach(
           (element) {
-            Map mapSetReps = element;
-            // print("mapSetReps type is " + mapSetReps.runtimeType.toString());
-            // print("heehaa");
-            // mapSetReps.forEach(
-            //   (key, value) {
-            //     print("Key type is" + key.runtimeType.toString());
-            //     print("value type is" + value.runtimeType.toString());
-            //     listOfSetsReps.add(
-            //       new WorkoutLogModel(
-            //         exerciseName: value['exerciseName'],
-            //         numOfReps: value['numOfReps'],
-            //         setNumber: value['setNumber'],
-            //       ),
-            //     );
-            //   },
-            // );
             listOfSetsReps.insert(
               0,
               new WorkoutLogModel(
@@ -360,13 +337,11 @@ class WorkoutDataProvider with ChangeNotifier {
       print("Loaded List for Workout Stats is ready");
     } catch (e) {
       print(e);
-      //
     }
   }
 
   Future<void> saveToYourWorkouts(WorkoutDataModel data) async {
-    final url =
-        'https://authentications-c0299.firebaseio.com/WorkoutData.json?auth=$_token';
+    final url = 'https://authentications-c0299.firebaseio.com/WorkoutData.json';
     final listOfSetsReps = [];
     data.listOfSetsReps.forEach((element) {
       listOfSetsReps.add(

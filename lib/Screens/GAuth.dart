@@ -19,8 +19,8 @@ class SignInGoogle extends StatefulWidget {
 
 logoutUser() async {
   final GoogleSignIn googleSignInObject = GoogleSignIn();
-  FirebaseUser fireBaseUser;
-  final FirebaseAuth fireBaseAuth = FirebaseAuth.instance;
+  // FirebaseUser fireBaseUser;
+  // final FirebaseAuth fireBaseAuth = FirebaseAuth.instance;
   print('Logging Out');
   await googleSignInObject.signOut();
   await FirebaseAuth.instance.signOut();
@@ -32,10 +32,11 @@ class SignInClass {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn =
-      GoogleSignIn(hostedDomain: 'iitgn.ac.in', scopes: <String>[
-    'email',
-    'https://www.googleapis.com/auth/calendar',
-  ]);
+      GoogleSignIn(); //hostedDomain: 'iitgn.ac.in',
+  //     scopes: <String>[
+  //   'email',
+  //   'https://www.googleapis.com/auth/calendar',
+  // ]);
   static var authHeaders;
 
   signIn() async {
@@ -43,29 +44,39 @@ class SignInClass {
     GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
     print("%%%%%%%%%%%%%%%%%%%%");
     authHeaders = await googleSignIn.currentUser.authHeaders;
+    // googleSignIn.currentUser.
     print("***************");
     print(authHeaders);
     print("***************");
-    // print("x");
+    print("x");
     GoogleSignInAuthentication googleSignInAuthentication =
         await googleSignInAccount.authentication;
     AuthCredential credential = GoogleAuthProvider.getCredential(
         idToken: googleSignInAuthentication.idToken,
         accessToken: googleSignInAuthentication.accessToken);
-
+    print("y");
     AuthResult result = await _auth.signInWithCredential(credential);
+    print("z");
     FirebaseUser user = await _auth.currentUser();
     print(user.uid);
     final idTOKEN = await user.getIdToken();
     String uid = user.uid;
-    String token = idTOKEN.token;
+    print("alpha");
+    // String token = idTOKEN.token;
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    print("range 1");
     prefs.setString('uid', uid);
-    prefs.setString('token', token);
-    SignInGoogle().isSignedIn = true;
+    prefs.setString('email', user.email);
+    prefs.setString('name', user.displayName);
+    prefs.setString('userDisplay', user.photoUrl);
+    print("range 2");
+    print("All user creds have been set");
+    // prefs.setString('token', token);
+    // SignInGoogle().isSignedIn = true;
     // isSignedInPrivate = true;
-    print(SignInGoogle().isSignedIn);
+    // print(SignInGoogle().isSignedIn);
     print("Sign In Successful");
+    print("/////////////////////////");
     Navigator.pushReplacementNamed(context, HomeScreen.routeName,
         result: true); // return true
   }
@@ -78,22 +89,9 @@ class SignInClass {
 }
 
 class _SignInGoogleState extends State<SignInGoogle> {
-  bool isSignedInPrivate = SignInGoogle().isSignedIn;
-  final GoogleSignIn googleSignInObject = GoogleSignIn();
-  FirebaseUser fireBaseUser;
-  final FirebaseAuth fireBaseAuth = FirebaseAuth.instance;
-
   @override
   Widget build(BuildContext context) {
     var key = new GlobalKey<ScaffoldState>();
-
-    void _showSnackBar() {
-      final snackBar =
-          SnackBar(content: Text("Invalid Email Id - Enter IITGN Email ID"));
-      key.currentState.showSnackBar(snackBar);
-    }
-
-    /// UI post here
 
     return Scaffold(
       key: key,
@@ -166,12 +164,11 @@ class _SignInGoogleState extends State<SignInGoogle> {
                           text: 'Login with IITGN ID',
                           icon: Icons.email,
                           onPressed: () async {
-                            bool outCome =
-                                await SignInClass(context: context).signIn();
+                            await SignInClass(context: context).signIn();
 
-                            if (outCome == false) {
-                              _showSnackBar();
-                            }
+                            // if (outCome == false) {
+                            //   // _showSnackBar();
+                            // }
                           },
                           backgroundColor: Color(0xFF3F7B70),
                         ),

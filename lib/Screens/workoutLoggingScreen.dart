@@ -1,3 +1,4 @@
+import 'package:Fiitgn1/Providers/DataProvider.dart';
 import 'package:Fiitgn1/Providers/ExerciseModel.dart';
 import 'package:Fiitgn1/Providers/PlanModel.dart';
 import 'package:flutter/material.dart';
@@ -76,7 +77,8 @@ class _WorkoutLoggingScreenState extends State<WorkoutLoggingScreen> {
     // currentPlanName = workoutDataProvider.currentPlan; //  this has been done only for development make changes again without fail
     print("currentPlanName is " + currentPlanName);
     print(currentPlanName == "");
-    String uid = workoutDataProvider.getUid;
+    String uid = Data_Provider().uid;
+    // String uid = workoutDataProvider.getUid;
 
     PlanModel currentPlan;
     if (currentPlanName == "") {
@@ -185,24 +187,6 @@ class _WorkoutLoggingScreenState extends State<WorkoutLoggingScreen> {
                         SingleChildScrollView(
                           child: Column(
                             children: [
-                              // Padding(
-                              //   padding: const EdgeInsets.all(10),
-                              //   child: Row(
-                              //     children: [
-                              //       Text(
-                              //         "You have chosen " + currentPlanName,
-                              //         style: TextStyle(
-                              //             fontWeight: FontWeight.bold,
-                              //             fontSize: 20),
-                              //       ),
-                              //     ],
-                              //   ),
-                              // ),
-                              // Text(
-                              //   "Choose Workouts",
-                              //   style: TextStyle(
-                              //       fontWeight: FontWeight.bold, fontSize: 20),
-                              // ),
                               ListView.builder(
                                 shrinkWrap: true,
                                 physics: ScrollPhysics(),
@@ -408,40 +392,6 @@ class _WorkoutLoggingScreenState extends State<WorkoutLoggingScreen> {
                                         ],
                                       ),
                                     ),
-
-                                    // setsAndReps.length == 0
-                                    //     ? Center(
-                                    //         child: Text("None"),
-                                    //       )
-                                    //     : Container(
-                                    //         height: MediaQuery.of(context).size.height / 10,
-                                    //         child: chintuMalvsSucks.length == 0
-                                    //             ? Center(
-                                    //                 child: Text("None"),
-                                    //               )
-                                    //             : ListView.builder(
-                                    //                 itemCount: chintuMalvsSucks.length,
-                                    //                 itemBuilder: (ctx, item) {
-                                    //                   print("i= " +
-                                    //                       index.toString() +
-                                    //                       " and  j = " +
-                                    //                       item.toString());
-                                    //                   return ListTile(
-                                    //                     title: Text(
-                                    //                       "Set " +
-                                    //                           setsAndReps[item].setNumber.toString(),
-                                    //                     ),
-                                    //                     subtitle: Text(
-                                    //                       "Reps- " +
-                                    //                           setsAndReps[item].numOfReps.toString(),
-                                    //                     ),
-                                    //                   );
-                                    //                 }),
-                                    //       ),
-                                    // add the list of sets and reps
-                                    // SizedBox(
-                                    //   height: 20,
-                                    // )
                                   ],
                                 ),
                               ),
