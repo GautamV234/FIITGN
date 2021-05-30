@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Data_Provider with ChangeNotifier {
-  static String _uid;
+  static String _uid = '6xjRKs7BI6TLvM6aekhyAUidPAc2';
   // String _auth_token;
-  static String _emailId;
-  static String _name;
+  static String _emailId = 'gsv.abhiram@iitgn.ac.in';
+  static String _name = 'Abhiram Geddam';
   static String _userDisplay;
 
 // getters

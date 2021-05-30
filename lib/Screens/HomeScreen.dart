@@ -35,18 +35,18 @@ class _HomeScreenState extends State<HomeScreen> {
     final workoutDataProvider =
         Provider.of<Workouts_Provider>(context, listen: false);
 
-    final prefs = await SharedPreferences.getInstance();
-    print('got instance');
-    String uid = prefs.getString('uid');
-    String email = prefs.getString('email');
-    String name = prefs.getString('name');
-    String userDisplay = prefs.getString('userDisplay');
-    data_provider.setUid(uid);
-    data_provider.setEmailId(email);
-    data_provider.setDisplay(userDisplay);
-    data_provider.setName(name);
-    print(Data_Provider().name);
-    print("Uids and tokens are set");
+    // final prefs = await SharedPreferences.getInstance();
+    // print('got instance');
+    // String uid = prefs.getString('uid');
+    // String email = prefs.getString('email');
+    // String name = prefs.getString('name');
+    // String userDisplay = prefs.getString('userDisplay');
+    // data_provider.setUid(uid);
+    // data_provider.setEmailId(email);
+    // data_provider.setDisplay(userDisplay);
+    // data_provider.setName(name);
+    // print(Data_Provider().name);
+    // print("Uids and tokens are set");
 
     /// initializing admin and exercise dbs
     final exerciseDataProvider =

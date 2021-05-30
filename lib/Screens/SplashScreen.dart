@@ -34,16 +34,16 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(Duration.zero).then((_) async {
-      final GoogleSignIn googleSignIn = GoogleSignIn();
-      bool isUserSignedIn = await googleSignIn.isSignedIn();
+    Future.delayed(Duration(seconds: 3)).then((_) async {
+      // final GoogleSignIn googleSignIn = GoogleSignIn();
+      // bool isUserSignedIn = await googleSignIn.isSignedIn();
       // final prefs = await SharedPreferences.getInstance();
       // final signedInStatus = prefs.getBool('signedInStatus');
-      if (isUserSignedIn == null || isUserSignedIn == false) {
-        Navigator.of(context).pushReplacementNamed(SignInGoogle.routeName);
-      } else if (isUserSignedIn == true) {
-        Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
-      }
+      // if (isUserSignedIn == null || isUserSignedIn == false) {
+      // Navigator.of(context).pushReplacementNamed(SignInGoogle.routeName);
+      // } else if (isUserSignedIn == true) {
+      Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+      // }
     });
     // Timer(Duration(seconds: 3), () async {
     //   final GoogleSignIn googleSignIn = GoogleSignIn();
