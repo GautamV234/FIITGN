@@ -71,8 +71,8 @@ class _Explore_WorkoutsState extends State<Explore_Workouts> {
                     workoutsList[i].workoutName,
                     style: TextStyle(fontSize: 21, fontWeight: FontWeight.w900),
                   ),
-                  // Text("Creator - " + workoutsList[i].creator_name),
-                  Text("Creator Id - " + workoutsList[i].creatorId),
+                  Text("Creator - " + workoutsList[i].creator_name),
+                  // Text("Creator Id - " + workoutsList[i].creatorId),
                   InkWell(
                     child: iconList[i],
                     onTap: () async {
