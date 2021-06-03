@@ -51,13 +51,13 @@ class SignInClass {
     print("x");
     GoogleSignInAuthentication googleSignInAuthentication =
         await googleSignInAccount.authentication;
-    AuthCredential credential = GoogleAuthProvider.getCredential(
+    AuthCredential credential = GoogleAuthProvider.credential(
         idToken: googleSignInAuthentication.idToken,
         accessToken: googleSignInAuthentication.accessToken);
     print("y");
-    AuthResult result = await _auth.signInWithCredential(credential);
+    UserCredential result = await _auth.signInWithCredential(credential);
     print("z");
-    FirebaseUser user = await _auth.currentUser();
+    User user = _auth.currentUser;
     print(user.uid);
     final idTOKEN = await user.getIdToken();
     String uid = user.uid;
@@ -68,7 +68,7 @@ class SignInClass {
     prefs.setString('uid', uid);
     prefs.setString('email', user.email);
     prefs.setString('name', user.displayName);
-    prefs.setString('userDisplay', user.photoUrl);
+    prefs.setString('userDisplay', user.photoURL);
     print("range 2");
     print("All user creds have been set");
     // prefs.setString('token', token);

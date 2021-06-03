@@ -37,11 +37,12 @@ class ExerciseDbModel {
 }
 
 class GetExerciseDataFromGoogleSheetProvider with ChangeNotifier {
+  // ignore: deprecated_member_use
   List<ExerciseDbModel> _listExercises = List<ExerciseDbModel>();
-  static const URL =
+  static const url =
       "https://script.google.com/macros/s/AKfycbx2H4v8xaSWlnTq3WKaVHw-Z_2eBh6M0yFufxGwm-diDYcKfJPzHZjI9zi23Z1G0YSF/exec";
   Future<List<ExerciseDbModel>> getListOfExercises() async {
-    await http.get(URL).then((response) {
+    await http.get(Uri.parse(url)).then((response) {
       var jsonFeedback = convert.jsonDecode(response.body) as List;
       _listExercises =
           jsonFeedback.map((json) => ExerciseDbModel.fromJson(json)).toList();

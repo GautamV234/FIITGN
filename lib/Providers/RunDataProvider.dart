@@ -62,7 +62,7 @@ class RunDataProvider with ChangeNotifier {
         'https://authentications-c0299.firebaseio.com/RunData.json?orderBy="uid"&equalTo="$_uid"';
     try {
       print("entered the try block");
-      final response = await http.get(url);
+      final response = await http.get(Uri.parse(url));
       print("t1");
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       print("t2");
@@ -128,7 +128,7 @@ class RunDataProvider with ChangeNotifier {
     final url = 'https://authentications-c0299.firebaseio.com/RunData.json';
     return http
         .post(
-      url,
+      Uri.parse(url),
       body: json.encode(
         {
           'uid': _uid,

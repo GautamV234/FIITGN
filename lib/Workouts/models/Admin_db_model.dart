@@ -29,12 +29,13 @@ class AdminDbModel {
 }
 
 class GetAdminDataFromGoogleSheetProvider with ChangeNotifier {
+  // ignore: deprecated_member_use
   List<AdminDbModel> _listAdmin = List<AdminDbModel>();
-  static const URL =
+  static const url =
       "https://script.google.com/macros/s/AKfycbx57muC0PlTGKmlkLTfrKP4Om9QJn1pjtVShNxc0Hxv7F5z9Sx5JB1xxhxGyiwchOw/exec";
   Future<List<AdminDbModel>> getListOfAdmins() async {
     print("t1");
-    await http.get(URL).then((response) {
+    await http.get(Uri.parse(url)).then((response) {
       print("t2");
       var jsonFeedback = convert.jsonDecode(response.body) as List;
       print("t3");

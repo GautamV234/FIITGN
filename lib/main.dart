@@ -106,7 +106,7 @@ class MyApp extends StatelessWidget {
           HomeScreen.routeName: (_) => HomeScreen(),
           PolyLineScreen.routeName: (_) => PolyLineScreen(),
           YourRunPolyLineScreen.routeName: (_) => YourRunPolyLineScreen(),
-          DetailsScreen.routeName: (_) => DetailsScreen(),
+          // DetailsScreen.routeName: (_) => DetailsScreen(),
           SignInGoogle.routeName: (_) => SignInGoogle(),
           WorkoutHomeScreen.routeName: (_) => WorkoutHomeScreen(),
           CustomPlansScreen.routeName: (_) => CustomPlansScreen(),

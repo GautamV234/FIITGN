@@ -296,7 +296,7 @@ class WorkoutDataProvider with ChangeNotifier {
     final url =
         'https://authentications-c0299.firebaseio.com/WorkoutData.json?orderBy="uid"&equalTo="$_uid"';
     try {
-      final response = await http.get(url);
+      final response = await http.get(Uri.parse(url));
       final List<WorkoutDataModel> loadedData = [];
       final extractedData = json.decode(response.body);
       print(extractedData);
@@ -354,7 +354,7 @@ class WorkoutDataProvider with ChangeNotifier {
     });
     return http
         .post(
-      url,
+      Uri.parse(url),
       body: json.encode(
         {
           'uid': data.uid,

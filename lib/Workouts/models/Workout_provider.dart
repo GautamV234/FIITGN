@@ -93,7 +93,7 @@ class Workouts_Provider with ChangeNotifier {
     const url = "https://authentications-c0299.firebaseio.com/Workouts.json";
     return http
         .post(
-      url,
+      Uri.parse(url),
       body: json.encode(
         {
           'creatorId': creatorId,
@@ -138,7 +138,7 @@ class Workouts_Provider with ChangeNotifier {
     String user_email = Data_Provider().email;
     const url = "https://authentications-c0299.firebaseio.com/Workouts.json";
     try {
-      final response = await http.get(url);
+      final response = await http.get(Uri.parse(url));
       final extractedData = json.decode(response.body) as Map;
       final List<WorkoutModel> loadedList = [];
 
@@ -198,7 +198,7 @@ class Workouts_Provider with ChangeNotifier {
     List followers = workout.listOfFollowersId;
     followers.add(user_uid);
     try {
-      await http.patch(url,
+      await http.patch(Uri.parse(url),
           body: json.encode({
             'access': workout.access,
             'creationDate': workout.creationDate,
@@ -238,7 +238,7 @@ class Workouts_Provider with ChangeNotifier {
     List followers = workout.listOfFollowersId;
     followers.remove(user_uid);
     try {
-      await http.patch(url,
+      await http.patch(Uri.parse(url),
           body: json.encode({
             'access': workout.access,
             'creationDate': workout.creationDate,
