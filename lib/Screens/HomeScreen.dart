@@ -1,3 +1,4 @@
+import 'package:Fiitgn1/Allocation/screens/sports.dart';
 import 'package:Fiitgn1/Providers/DataProvider.dart';
 import 'package:Fiitgn1/Screens/MapsScreen.dart';
 import 'package:flutter/material.dart';
@@ -163,6 +164,14 @@ class _HomeScreenState extends State<HomeScreen> {
       'description':
           'This section is under construction. Check back in later to view some exciting new stuff!',
       'heroID': 7,
+    },
+    {
+      'title': 'Allocation',
+      'url': 'assets/6569.png',
+      'routeName': Sports.routeName,
+      'description':
+          'This section is under construction. Check back in later to view some exciting new stuff!',
+      'heroID': 8,
     },
   ];
 

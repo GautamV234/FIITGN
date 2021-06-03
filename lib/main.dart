@@ -1,5 +1,6 @@
 // import 'package:Fiitgn1/Providers/DataProvider.dart';
 import 'package:Fiitgn1/Workouts/screens/wishlist.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'Calendar-Schedule/calendar_try_screen.dart';
 import 'Screens/SelectWorkoutPlanScreen.dart';
@@ -46,7 +47,12 @@ import 'Workouts/screens/explore_workouts.dart';
 import 'Workouts/screens/exercises_in_workout.dart';
 import 'Workouts/screens/created_by_user.dart';
 
-void main() {
+////////Allocation
+import 'Allocation/screens/sports.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized(); //Method needed to initialize firebase application.
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -130,7 +136,8 @@ class MyApp extends StatelessWidget {
           Explore_Workouts.routeName: (_) => Explore_Workouts(),
           Exercises_in_Workout.routeName: (_) => Exercises_in_Workout(),
           Created_by_user.routeName: (_) => Created_by_user(),
-          //
+          ///// Allocation Section
+          Sports.routeName: (_) => Sports(),
         },
       ),
     );
