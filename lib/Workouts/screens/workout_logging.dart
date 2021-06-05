@@ -7,7 +7,7 @@ import 'package:Fiitgn1/Providers/DataProvider.dart';
 import '../models/Workout_Data_Log_Model.dart';
 
 class Workout_Logging extends StatefulWidget {
-  static const routeName = '\StartWorkoutScreen';
+  static const routeName = '\Workout_Logging_Screen';
 
   @override
   _Workout_LoggingState createState() => _Workout_LoggingState();
