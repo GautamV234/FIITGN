@@ -189,6 +189,7 @@ class _MapScreenState extends State<MapScreen> {
   _showSnackBar() {
     // print("a");
     final snackBar = SnackBar(content: Text("Sorry! Back button is disabled"));
+    // ignore: deprecated_member_use
     key.currentState.showSnackBar(snackBar);
     // print('b');
   }
@@ -337,6 +338,7 @@ class _MapScreenState extends State<MapScreen> {
                                         context: context,
                                         builder: (ctx) {
                                           var actions2 = [
+                                            // ignore: deprecated_member_use
                                             FlatButton(
                                               onPressed: () {
                                                 storeFinalLat = finalLatitude;
@@ -380,6 +382,7 @@ class _MapScreenState extends State<MapScreen> {
                                               },
                                               child: Text('Yes'),
                                             ),
+                                            // ignore: deprecated_member_use
                                             FlatButton(
                                               onPressed: () {
                                                 Navigator.of(ctx).pop(true);

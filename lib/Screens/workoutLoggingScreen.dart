@@ -18,7 +18,9 @@ class WorkoutLoggingScreen extends StatefulWidget {
 }
 
 int setCount;
+// ignore: deprecated_member_use
 List<WorkoutLogModel> setsAndReps = List<WorkoutLogModel>();
+// ignore: deprecated_member_use
 List<WorkoutLogModel> workoutList = List<WorkoutLogModel>();
 
 class _WorkoutLoggingScreenState extends State<WorkoutLoggingScreen> {
@@ -44,8 +46,10 @@ class _WorkoutLoggingScreenState extends State<WorkoutLoggingScreen> {
             style: TextStyle(color: Colors.red),
           ),
           actions: [
+            // ignore: deprecated_member_use
             FlatButton(
               onPressed: () {
+                // ignore: deprecated_member_use
                 setsAndReps = List<WorkoutLogModel>();
                 Navigator.of(context)
                     .pushReplacementNamed(HomeScreen.routeName);
