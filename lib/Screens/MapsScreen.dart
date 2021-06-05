@@ -102,20 +102,23 @@ class _MapScreenState extends State<MapScreen> {
   }
 
   void getCurrentLocation() async {
+    print("%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+    print("RUNNING HAS STARTED");
     try {
       loc.LocationData location = await _locationTracker.getLocation();
-      // print("location gotten");
-      // await bLoc.BackgroundLocation.setAndroidNotification(
-      //   title: 'FIITGN is running in the background',
-      //   message: 'Please keep the device active',
-      //   icon: "@mipmap/ic_launcher",
-      // );
+      print("location gotten");
+      await bLoc.BackgroundLocation.setAndroidNotification(
+        title: 'FIITGN is running in the background',
+        message: 'Please keep the device active',
+        icon: "@mipmap/ic_launcher",
+      );
       // await bLoc.BackgroundLocation.setAndroidConfiguration(interval: 1000);
       await bLoc.BackgroundLocation.startLocationService();
-      // print('location services started');
+      print('location services started');
       updateMarkerAndCircle(location.latitude, location.longitude);
       isChanged = true;
       if (flag == 0) {
+        print("flag==0 condition");
         initialLatitude = location.latitude;
         initialLongitude = location.longitude;
 
@@ -137,7 +140,7 @@ class _MapScreenState extends State<MapScreen> {
       }
       // print("stream beginning");
       bLoc.BackgroundLocation.getLocationUpdates((location) {
-        // print("code entered the stream");
+        print("code entered the stream");
         if (_controller != null) {
           // print("stream going on");
           _controller.animateCamera(
@@ -172,7 +175,10 @@ class _MapScreenState extends State<MapScreen> {
             .add({'latitude': initialLatitude, 'longitude': initialLongitude});
       });
     } on PlatformException catch (e) {
+      print("error");
+      print(e.toString());
       if (e.code == 'PERMISSION DENIED') {
+        print("Permission Denied");
         debugPrint("Permission Denied");
       }
     }
@@ -188,9 +194,6 @@ class _MapScreenState extends State<MapScreen> {
   }
 
   Future<bool> _onBackPressed() {
-    // print("Checing connection");
-    // await _showSnackBar(key);
-    // print("After function");
     return Future<bool>.value(false);
   }
 
@@ -205,11 +208,6 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // var date2 = DateTime.now();
-    // String differenceSecs = '';
-    // if (startingTime != null)
-    // differenceSecs = date2.difference(startingTime).inSeconds.toString();
-
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Container(
@@ -217,11 +215,6 @@ class _MapScreenState extends State<MapScreen> {
       width: width,
       child: Scaffold(
         key: key,
-        // appBar: AppBar(
-        //   automaticallyImplyLeading: false,
-        //   actions: [],
-        //   title: Text('Track Your Run'),
-        // ),
         body: WillPopScope(
           onWillPop: () {
             _showSnackBar();
@@ -231,11 +224,7 @@ class _MapScreenState extends State<MapScreen> {
             height: MediaQuery.of(context).size.height,
             child: Column(
               children: [
-                // SizedBox(
-                //   height: MediaQuery.of(context).size.height / 20,
-                // ),
                 Container(
-                  //  margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
@@ -316,6 +305,8 @@ class _MapScreenState extends State<MapScreen> {
 
                             finishFlag == 0
                                 ? InkWell(
+                                    // print("%%%%%%%%%%%%%%%%%");
+                                    // print("starting the run");
                                     onTap: getCurrentLocation,
                                     child: Container(
                                       alignment: Alignment.center,
@@ -448,8 +439,6 @@ class _MapScreenState extends State<MapScreen> {
                                         MediaQuery.of(context).size.height /
                                             50),
                               ),
-                              //    color: Colors.white,
-                              //        width: MediaQuery.of(context).size.width / 3,
                             ),
                           ],
                         ),
@@ -536,7 +525,6 @@ class _MapScreenState extends State<MapScreen> {
                         ),
                       ],
                     ),
-                    //      color: Colors.green[300],
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(
@@ -544,87 +532,9 @@ class _MapScreenState extends State<MapScreen> {
                           topRight: Radius.circular(
                               MediaQuery.of(context).size.width / 10)),
                       color: Colors.grey[850],
-                      // gradient: LinearGradient(
-                      //   begin: Alignment.bottomCenter,
-                      //   end: Alignment.topCenter,
-                      //   colors: [Colors.red[200], Colors.white],
-                      // ),
                     ),
                   ),
                 ),
-
-                // Padding(
-                //   padding: const EdgeInsets.all(10.0),
-                //   child: InkWell(
-                //     onTap: () {
-                //       showDialog(
-                //         context: context,
-                //         builder: (ctx) {
-                //           var actions2 = [
-                //             FlatButton(
-                //               onPressed: () {
-                //                 storeFinalLat = finalLatitude;
-                //                 storeFinalLong = finalLongitude;
-                //                 endingTime = DateTime.now();
-                //                 passingToShowResults['initialLat'] =
-                //                     storeInitialLat;
-                //                 passingToShowResults['initialLong'] =
-                //                     storeInitialLong;
-                //                 passingToShowResults['finalLat'] =
-                //                     storeFinalLat;
-                //                 passingToShowResults['finalLong'] =
-                //                     storeFinalLong;
-                //                 passingToShowResults['initialTime'] =
-                //                     startingTime;
-                //                 passingToShowResults['finalTime'] = endingTime;
-                //                 passingToShowResults['distance'] = distance;
-                //                 passingToShowResults['listOfLatLng'] =
-                //                     listOfLatLngForPoly;
-
-                //                 // print("All parameters stored successfully");
-
-                //                 // _locationSubscription.cancel();
-                //                 bLoc.BackgroundLocation.stopLocationService();
-                //                 Navigator.of(context).pushReplacementNamed(
-                //                     ShowResultsScreen.routeName,
-                //                     arguments: passingToShowResults);
-                //                 // }
-                //               },
-                //               child: Text('Yes'),
-                //             ),
-                //             FlatButton(
-                //               onPressed: () {
-                //                 Navigator.of(ctx).pop(true);
-                //               },
-                //               child: Text('No'),
-                //             ),
-                //           ];
-                //           return AlertDialog(
-                //             title: Text('Are you sure you want to end Run?'),
-                //             actions: actions2,
-                //           );
-                //         },
-                //       );
-                //     },
-                //     child: finishFlag == 0
-                //         ? Container()
-                //         : Container(
-                //             alignment: Alignment.center,
-                //             width: MediaQuery.of(context).size.width,
-                //             height: MediaQuery.of(context).size.height / 25,
-                //             child: Text(
-                //               'Finish',
-                //               style: TextStyle(
-                //                   fontSize:
-                //                       MediaQuery.of(context).size.height / 30,
-                //                   fontWeight: FontWeight.w600),
-                //             ),
-                //             decoration: BoxDecoration(
-                //                 borderRadius: BorderRadius.circular(20),
-                //                 color: Colors.red[200]),
-                //           ),
-                //   ),
-                // ),
               ],
             ),
           ),
@@ -633,100 +543,3 @@ class _MapScreenState extends State<MapScreen> {
     );
   }
 }
-
-// finishFlag == 1
-//     ? Container()
-//     : Padding(
-//         padding: const EdgeInsets.all(10.0),
-//         child: InkWell(
-//           onTap: getCurrentLocation,
-//           child: Container(
-//             alignment: Alignment.center,
-//             width: MediaQuery.of(context).size.width,
-//             height: MediaQuery.of(context).size.height / 25,
-//             child: Text(
-//               'Start',
-//               style: TextStyle(
-//                   fontSize:
-//                       MediaQuery.of(context).size.height / 30,
-//                   fontWeight: FontWeight.w600),
-//             ),
-//             decoration: BoxDecoration(
-//                 borderRadius: BorderRadius.circular(20),
-//                 color: Colors.blue[100]),
-//           ),
-//         )),
-// FloatingActionButton(
-//   child: Icon(Icons.location_searching),
-//   onPressed: getCurrentLocation,
-// ),
-// Row(
-//   children: [
-//     Container(
-//       child: Container(
-//         child: Column(
-//           children: [
-//             Icon(
-//               Icons.directions_run,
-//               color: Colors.black,
-//             ),
-//             Text(
-//               '$dist',
-//               style: TextStyle(
-//                   fontSize:
-//                       MediaQuery.of(context).size.width / 7,
-//                   fontWeight: FontWeight.w700),
-//             ),
-//             Text('METRES')
-//           ],
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           crossAxisAlignment: CrossAxisAlignment.center,
-//         ),
-//         decoration: BoxDecoration(
-//           boxShadow: [
-//             BoxShadow(color: Colors.grey[200], blurRadius: 5)
-//           ],
-//           borderRadius: BorderRadius.circular(30),
-//           color: Colors.grey[200],
-//         ),
-//         margin: EdgeInsets.all(5),
-//       ),
-//       width: MediaQuery.of(context).size.width / 2,
-//       height: MediaQuery.of(context).size.height / 6,
-//       //  color: Colors.white,
-//     ),
-//     Container(
-//       child: Container(
-//         child: Column(
-//           children: [
-//             Icon(
-//               Icons.speed,
-//               color: Colors.black,
-//             ),
-//             Text(
-//               '$speedString',
-//               style: TextStyle(
-//                   fontSize:
-//                       MediaQuery.of(context).size.width / 7,
-//                   fontWeight: FontWeight.w700),
-//             ),
-//             Text('KMPH')
-//           ],
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           crossAxisAlignment: CrossAxisAlignment.center,
-//         ),
-//         decoration: BoxDecoration(
-//           boxShadow: [
-//             BoxShadow(color: Colors.grey[200], blurRadius: 5)
-//           ],
-//           borderRadius: BorderRadius.circular(30),
-//           color: Colors.grey[200],
-//         ),
-//         margin: EdgeInsets.all(5),
-//       ),
-//       height: MediaQuery.of(context).size.height / 6,
-//       width: MediaQuery.of(context).size.width / 2,
-//       //color: Colors.white,
-//     ),
-//   ],
-// ),
