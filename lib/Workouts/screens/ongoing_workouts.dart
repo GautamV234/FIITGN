@@ -18,7 +18,7 @@ class Ongoing_Workouts extends StatelessWidget {
               exercise_provier.exercisesBasesOnId(['1', '2', '3', '4']);
           map['exercises'] = exercises;
           Navigator.pushNamed(context, Workout_Logging.routeName,
-              arguments: exercises);
+              arguments: map);
         },
         child: Center(
           child: Text('OnGoing Workouts'),
