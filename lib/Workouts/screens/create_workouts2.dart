@@ -34,23 +34,23 @@ class _Create_Workout2State extends State<Create_Workout2> {
     final String description = routeArgs['desription'];
     allExerciseList.forEach(
       (element) {
-        colorList.add(Colors.red);
+        colorList.add(Colors.grey[200]);
       },
     );
     print(workoutName + " " + access);
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Choose Exercises'),
-        actions: [
-          InkWell(
-            child: Icon(Icons.save),
-            onTap: () {
-              List<String> listOfExercisesId = [];
-              exercisesSelectedForWorkout.forEach(
-                (element) {
-                  listOfExercisesId.add(element.exerciseId);
-                },
-              );
+      //    appBar: AppBar(
+      //      title: Text('Choose Exercises'),
+      //      actions: [
+      //        InkWell(
+      //          child: Icon(Icons.save),
+      //          onTap: () {
+      //            List<String> listOfExercisesId = [];
+      //            exercisesSelectedForWorkout.forEach(
+      //              (element) {
+      //                listOfExercisesId.add(element.exerciseId);
+      //
+      /*            );
               String creatorId = workoutDataProvider.userId;
               String creator_name = workoutDataProvider.user_name;
               List<String> listOfFollowersId = [creatorId];
@@ -65,56 +65,113 @@ class _Create_Workout2State extends State<Create_Workout2> {
               );
               Navigator.pushReplacementNamed(context, HomeScreen.routeName);
             },
-          ),
-        ],
-      ),
-      body: ListView.builder(
-        itemCount: allExerciseList.length,
-        itemBuilder: (ctx, i) {
-          return InkWell(
-            onTap: () {
-              if (!exercisesSelectedForWorkout.contains(allExerciseList[i])) {
-                Color color = Colors.green;
-                exercisesSelectedForWorkout.add(allExerciseList[i]);
-                print("exercise " + allExerciseList[i].exerciseName + " added");
-                setState(() {
-                  print('colorChange!');
-                  colorList[i] = color;
-                  print(colorList[i].toString());
-                });
-              } else {
-                Color color = Colors.red;
-                exercisesSelectedForWorkout.remove(allExerciseList[i]);
-                print(
-                    "exercise " + allExerciseList[i].exerciseName + " removed");
-                setState(() {
-                  colorList[i] = color;
-                });
-              }
-            },
-            child: Card(
-              color: colorList[i],
-              child: Column(
+ //         ),
+ //       ],
+//      ),
+*/
+      body: SingleChildScrollView(
+        physics: ScrollPhysics(),
+        child: Column(
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 60,
+            ),
+            Container(
+              height: MediaQuery.of(context).size.height / 6,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    allExerciseList[i].exerciseName,
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
+                  SizedBox(width: 30),
+                  Container(
+                    width: MediaQuery.of(context).size.width / 1.7,
+                    child: Text(
+                      'Create Workout',
+                      style: TextStyle(
+                        fontSize: 35,
+                        fontFamily: "Gilroy",
+                      ),
                     ),
                   ),
-                  Text(
-                    allExerciseList[i].description,
-                    style: TextStyle(
-                      fontSize: 10,
+                  Container(
+                    height: MediaQuery.of(context).size.height / 8,
+                    child: ClipRRect(
+                      child: Image.asset(
+                        'assets/23.png',
+                        fit: BoxFit.contain,
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
-          );
-        },
+            GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, childAspectRatio: 2),
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: allExerciseList.length,
+              itemBuilder: (ctx, i) {
+                return InkWell(
+                  onTap: () {
+                    if (!exercisesSelectedForWorkout
+                        .contains(allExerciseList[i])) {
+                      Color color = Colors.green;
+                      exercisesSelectedForWorkout.add(allExerciseList[i]);
+                      print("exercise " +
+                          allExerciseList[i].exerciseName +
+                          " added");
+                      setState(() {
+                        print('colorChange!');
+                        colorList[i] = color;
+                        print(colorList[i].toString());
+                      });
+                    } else {
+                      Color color = Colors.grey[200];
+                      exercisesSelectedForWorkout.remove(allExerciseList[i]);
+                      print("exercise " +
+                          allExerciseList[i].exerciseName +
+                          " removed");
+                      setState(() {
+                        colorList[i] = color;
+                      });
+                    }
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: colorList[i],
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height / 100,
+                          ),
+                          Text(
+                            allExerciseList[i].exerciseName,
+                            style:
+                                TextStyle(fontFamily: "Gilroy", fontSize: 23),
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height / 80,
+                          ),
+                          Text(
+                            allExerciseList[i].description,
+                            style:
+                                TextStyle(fontFamily: "Gilroy", fontSize: 17),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
 }
+
+//  color: colorList[i], allExerciseList[i].exerciseName, allExerciseList[i].description,

@@ -112,6 +112,12 @@ flutter:
     - assets/6569.png
     - assets/statLady.png
     - assets/cyclingStats.jpg
+    - assets/clok.png
+    - assets/hiss.png
+    - assets/idea.png
+    - assets/wiss.png
+    - assets/23.png
+    - assets/ico.png
 
     # - assets/Tile.jpg
     # - images/a_dot_ham.jpeg
@@ -134,6 +140,12 @@ flutter:
     - family: LemonMilk
       fonts:
         - asset: assets/fonts/LEMONMILK-Light.otf
+    - family: Gilroy
+      fonts: 
+        - asset: assets/fonts/Gilroy-Light.otf
+    - family: Gro
+      fonts: 
+        - asset: assets/fonts/NeutraText-Book.otf
   # fonts:
     # - family: Schyler
     #   fonts:
