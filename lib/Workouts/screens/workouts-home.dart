@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import './your-workouts.dart';
 import 'create_workout1.dart';
 import './explore_workouts.dart';
+import '../../Notifications/Notifications.dart';
 
 class Workouts_Home extends StatelessWidget {
   static const routeName = '\Workouts-Home';
@@ -45,6 +46,18 @@ class Workouts_Home extends StatelessWidget {
               },
               child: Text(
                 'Create Workouts',
+                style: TextStyle(fontSize: 22),
+              ),
+            ),
+          ),
+          Center(
+            heightFactor: 2,
+            child: RaisedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, Notifications.routeName);
+              },
+              child: Text(
+                'Notifications',
                 style: TextStyle(fontSize: 22),
               ),
             ),

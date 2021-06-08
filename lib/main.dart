@@ -46,7 +46,7 @@ import 'Workouts/models/Exercise_db_model.dart';
 import 'Workouts/screens/explore_workouts.dart';
 import 'Workouts/screens/exercises_in_workout.dart';
 import 'Workouts/screens/created_by_user.dart';
-
+import 'Notifications/Notifications.dart';
 ////////Allocation
 import 'Allocation/screens/sports.dart';
 
@@ -136,6 +136,8 @@ class MyApp extends StatelessWidget {
           Explore_Workouts.routeName: (_) => Explore_Workouts(),
           Exercises_in_Workout.routeName: (_) => Exercises_in_Workout(),
           Created_by_user.routeName: (_) => Created_by_user(),
+          Notifications.routeName: (_) => Notifications(),
+          
           ///// Allocation Section
           Sports.routeName: (_) => Sports(),
         },
