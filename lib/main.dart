@@ -51,6 +51,14 @@ import 'Workouts/screens/workout_logging.dart';
 ////////Allocation
 import 'Allocation/screens/sports.dart';
 
+
+///// Guided Sessions
+import 'Guided-Sessions/sessions.dart';
+
+//// Nutrition
+import 'Nutrition/nutritionScreen.dart';
+
+
 Future<void> main() async {
   WidgetsFlutterBinding
       .ensureInitialized(); //Method needed to initialize firebase application.
@@ -141,6 +149,14 @@ class MyApp extends StatelessWidget {
           Workout_Logging.routeName: (_) => Workout_Logging(),
           ///// Allocation Section
           Sports.routeName: (_) => Sports(),
+
+          //// Guided Sessions
+           Sessions.routeName: (_) => Sessions(),
+
+           ///// Nutrition 
+          NutritionScreen.routeName:(_)=>NutritionScreen(),
+           
+          
         },
       ),
     );

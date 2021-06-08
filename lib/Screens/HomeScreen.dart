@@ -1,4 +1,5 @@
 import 'package:Fiitgn1/Allocation/screens/sports.dart';
+
 import 'package:Fiitgn1/Providers/DataProvider.dart';
 import 'package:Fiitgn1/Screens/MapsScreen.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,12 @@ import '../Workouts/screens/workouts-home.dart';
 import '../Workouts/models/Admin_db_model.dart';
 import '../Workouts/models/Exercise_db_model.dart';
 import '../Workouts/models/Workout_provider.dart';
+
+///////////// GUIDED SESSIONS
+import 'package:Fiitgn1/Guided-Sessions/sessions.dart';
+
+///////// NUTRITION
+import 'package:Fiitgn1/Nutrition/nutritionScreen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -175,6 +182,23 @@ class _HomeScreenState extends State<HomeScreen> {
           'This section is under construction. Check back in later to view some exciting new stuff!',
       'heroID': 8,
     },
+    {
+      'title': 'Guided Sessions',
+      'url': 'assets/6569.png',
+      'routeName': Sessions.routeName,
+      'description':
+          'This section is under construction. Check back in later to view some exciting new stuff!',
+      'heroID': 9,
+    },
+    {
+      'title': 'Nutrition',
+      'url': 'assets/6569.png',
+      'routeName': NutritionScreen.routeName,
+      'description':
+          'This section is under construction. Check back in later to view some exciting new stuff!',
+      'heroID': 10,
+    },
+
   ];
 
   Widget build(BuildContext context) {
