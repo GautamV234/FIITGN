@@ -71,7 +71,7 @@ class _MapScreenState extends State<MapScreen> {
         //   anchor: Offset(0.5, 0.5),
         // );
         circle = Circle(
-          circleId: CircleId("car"),
+          circleId: CircleId("_"),
           radius: 2,
           zIndex: 1,
           strokeColor: Colors.blue,
@@ -170,6 +170,8 @@ class _MapScreenState extends State<MapScreen> {
         dist = distance.toStringAsFixed(2);
         initialLatitude = finalLatitude;
         initialLongitude = finalLongitude;
+        print("initial Latitude --> " + initialLatitude.toString());
+        print("initial Longitude -->" + initialLongitude.toString());
         // listOfLatLngForPoly.add(LatLng(initialLatitude, initialLongitude));
         listOfLatLngForPoly
             .add({'latitude': initialLatitude, 'longitude': initialLongitude});

@@ -110,14 +110,14 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   final List homeScreenList = [
-    // {
-    //   'title': 'Start Running',
-    //   'url': 'assets/10765.png',
-    //   'routeName': MapScreen.routeName,
-    //   'description':
-    //       'Running can be accessed from here. Get out there and get those legs working!',
-    //   'heroID': 1,
-    // },
+    {
+      'title': 'Start Running',
+      'url': 'assets/10765.png',
+      'routeName': MapScreen.routeName,
+      'description':
+          'Running can be accessed from here. Get out there and get those legs working!',
+      'heroID': 1,
+    },
     // {
     //   'title': 'Start Cycling',
     //   'url': 'assets/11241.png',
@@ -198,7 +198,6 @@ class _HomeScreenState extends State<HomeScreen> {
           'This section is under construction. Check back in later to view some exciting new stuff!',
       'heroID': 10,
     },
-
   ];
 
   Widget build(BuildContext context) {
@@ -293,25 +292,25 @@ class _HomeScreenState extends State<HomeScreen> {
       //           ],
       //         ),
 
-              // Expanded(
-              //   child: Container(
-              //     child: GridView.builder(
-              //       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              //           crossAxisCount: 2,
-              //           mainAxisSpacing:
-              //               MediaQuery.of(context).size.height / 80),
-              //       shrinkWrap: true,
-              //       physics: ScrollPhysics(),
-              //       itemCount: homeScreenList.length,
-              //       itemBuilder: (ctx, i) => HomeScreenItem(
-              //         routeName: homeScreenList[i]['routeName'],
-              //         title: homeScreenList[i]['title'],
-              //         url: homeScreenList[i]['url'],
-              //         description: homeScreenList[i]['description'],
-              //         heroID: homeScreenList[i]['heroID'],
-              //       ),
-              //     ),
-              //   ),
+      // Expanded(
+      //   child: Container(
+      //     child: GridView.builder(
+      //       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      //           crossAxisCount: 2,
+      //           mainAxisSpacing:
+      //               MediaQuery.of(context).size.height / 80),
+      //       shrinkWrap: true,
+      //       physics: ScrollPhysics(),
+      //       itemCount: homeScreenList.length,
+      //       itemBuilder: (ctx, i) => HomeScreenItem(
+      //         routeName: homeScreenList[i]['routeName'],
+      //         title: homeScreenList[i]['title'],
+      //         url: homeScreenList[i]['url'],
+      //         description: homeScreenList[i]['description'],
+      //         heroID: homeScreenList[i]['heroID'],
+      //       ),
+      //     ),
+      //   ),
       //         ),
       //       ],
       //     ),
@@ -380,27 +379,29 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: Colors.black),
                           ),
                         ),
-                         Expanded(
-                child: Container(
-                  child: GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing:
-                            MediaQuery.of(context).size.height / 80),
-                    shrinkWrap: true,
-                    physics: ScrollPhysics(),
-                    itemCount: homeScreenList.length,
-                    itemBuilder: (ctx, i) => HomeScreenItem(
-                      routeName: homeScreenList[i]['routeName'],
-                      title: homeScreenList[i]['title'],
-                      url: homeScreenList[i]['url'],
-                      description: homeScreenList[i]['description'],
-                      heroID: homeScreenList[i]['heroID'],
-                    ),
-                  ),
-                ),
-                         ),
- 
+                        Expanded(
+                          child: Container(
+                            child: GridView.builder(
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      mainAxisSpacing:
+                                          MediaQuery.of(context).size.height /
+                                              80),
+                              shrinkWrap: true,
+                              physics: ScrollPhysics(),
+                              itemCount: homeScreenList.length,
+                              itemBuilder: (ctx, i) => HomeScreenItem(
+                                routeName: homeScreenList[i]['routeName'],
+                                title: homeScreenList[i]['title'],
+                                url: homeScreenList[i]['url'],
+                                description: homeScreenList[i]['description'],
+                                heroID: homeScreenList[i]['heroID'],
+                              ),
+                            ),
+                          ),
+                        ),
+
                         // SignInButtonBuilder(
                         //   text: 'Login with IITGN ID',
                         //   icon: Icons.email,
