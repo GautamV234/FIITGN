@@ -9,10 +9,12 @@ Future<List<int>> checkavailability(starttime, endtime) async{
 
   //Adding microseconds to prevent isAfter from not working as intended
   var start = DateTime.parse(starttime);  
-  start = start.add(new Duration(microseconds: micros));
+  //start = start.add(new Duration(microseconds: micros));
   var end = DateTime.parse(endtime);
-  end = end.add(new Duration(microseconds: micros));
-  micros += 1;
+  //end = end.add(new Duration(microseconds: micros));
+  //micros += 1;
+  int startint = start.millisecondsSinceEpoch;
+  int endint = end.millisecondsSinceEpoch;
 
   print("Time Slots: " + starttime + " to " + endtime);
 
@@ -24,17 +26,10 @@ Future<List<int>> checkavailability(starttime, endtime) async{
     var currentquantity = doc['totalquantity'];
 
     for (int j = 0; j < n; j++) {
-      if ((DateTime.parse(bookedSlots[j.toString()]['time']['0'])
-                  .isAfter(start) &&
-              DateTime.parse(bookedSlots[j.toString()]['time']['0'])
-                  .isBefore(end)) ||
-          (DateTime.parse(bookedSlots[j.toString()]['time']['1'])
-                  .isAfter(start) &&
-              DateTime.parse(bookedSlots[j.toString()]['time']['1'])
-                  .isBefore(end))) {
-        
+      int tmpstart = DateTime.parse(bookedSlots[j.toString()]['time']['0']).millisecondsSinceEpoch;
+      int tmpend = DateTime.parse(bookedSlots[j.toString()]['time']['1']).millisecondsSinceEpoch;
+      if ((startint <= tmpstart &&  tmpstart < endint) || (startint < tmpend &&  tmpend <= endint)) {        
         if (currentquantity > bookedSlots[j.toString()]['availability']) {
-          
           currentquantity = bookedSlots[j.toString()]['availability'];
         }
       }
