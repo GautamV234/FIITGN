@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'nutrition.dart';
 
 class NutritionScreen extends StatefulWidget {
-  static const  routeName = '\Nutrition_Screen';
+  static const routeName = '\Nutrition_Screen';
   @override
   _NutritionScreenState createState() => _NutritionScreenState();
 }
@@ -31,7 +31,19 @@ class _NutritionScreenState extends State {
       appBar: AppBar(
         title: Text("Nutrition Data"),
       ),
-      body: getTextWidgets(items),
+      body: ListView(
+        children: [
+          Text("Now: "),
+          getTextWidgets(items),
+          SizedBox(height: 25),
+          Text("Today: "),
+          getDay(items, DateTime.now().weekday),
+          SizedBox(height: 25),
+          Text("Tomorrow: "),
+          getDay(items, DateTime.now().weekday + 1),
+          SizedBox(height: 25),
+        ],
+      ),
     );
   }
 }
@@ -184,5 +196,136 @@ Widget getTextWidgets(List<NutritionData> data) {
     }
   }
 
+  return new Column(children: list);
+}
+
+Widget getDay(List<NutritionData> data, int day) {
+  List<Widget> list = [];
+
+  if (day == 1) {
+    for (var i = breakfastIndex + 2; i < lunchIndex; i++) {
+      list.add(new Text("${data[i].monday} ${data[i].mondayCalories}"));
+    }
+
+    for (var i = lunchIndex + 2; i < snacksIndex; i++) {
+      list.add(new Text("${data[i].monday} ${data[i].mondayCalories}"));
+    }
+
+    for (var i = snacksIndex + 2; i < dinnerIndex; i++) {
+      list.add(new Text("${data[i].monday} ${data[i].mondayCalories}"));
+    }
+
+    for (var i = dinnerIndex + 2; i < data.length; i++) {
+      list.add(new Text("${data[i].monday} ${data[i].mondayCalories}"));
+    }
+  }
+
+  if (day == 2) {
+    for (var i = breakfastIndex + 2; i < lunchIndex; i++) {
+      list.add(new Text("${data[i].tuesday} ${data[i].tuesdayCalories}"));
+    }
+
+    for (var i = lunchIndex + 2; i < snacksIndex; i++) {
+      list.add(new Text("${data[i].tuesday} ${data[i].tuesdayCalories}"));
+    }
+
+    for (var i = snacksIndex + 2; i < dinnerIndex; i++) {
+      list.add(new Text("${data[i].tuesday} ${data[i].tuesdayCalories}"));
+    }
+
+    for (var i = dinnerIndex + 2; i < data.length; i++) {
+      list.add(new Text("${data[i].tuesday} ${data[i].tuesdayCalories}"));
+    }
+  }
+
+  if (day == 3) {
+    for (var i = breakfastIndex + 2; i < lunchIndex; i++) {
+      list.add(new Text("${data[i].wednesday} ${data[i].wednesdayCalories}"));
+    }
+
+    for (var i = lunchIndex + 2; i < snacksIndex; i++) {
+      list.add(new Text("${data[i].wednesday} ${data[i].wednesdayCalories}"));
+    }
+
+    for (var i = snacksIndex + 2; i < dinnerIndex; i++) {
+      list.add(new Text("${data[i].wednesday} ${data[i].wednesdayCalories}"));
+    }
+
+    for (var i = dinnerIndex + 2; i < data.length; i++) {
+      list.add(new Text("${data[i].wednesday} ${data[i].wednesdayCalories}"));
+    }
+  }
+
+  if (day == 4) {
+    for (var i = breakfastIndex + 2; i < lunchIndex; i++) {
+      list.add(new Text("${data[i].thursday} ${data[i].thursdayCalories}"));
+    }
+
+    for (var i = lunchIndex + 2; i < snacksIndex; i++) {
+      list.add(new Text("${data[i].thursday} ${data[i].thursdayCalories}"));
+    }
+
+    for (var i = snacksIndex + 2; i < dinnerIndex; i++) {
+      list.add(new Text("${data[i].thursday} ${data[i].thursdayCalories}"));
+    }
+
+    for (var i = dinnerIndex + 2; i < data.length; i++) {
+      list.add(new Text("${data[i].thursday} ${data[i].thursdayCalories}"));
+    }
+  }
+
+  if (day == 5) {
+    for (var i = breakfastIndex + 2; i < lunchIndex; i++) {
+      list.add(new Text("${data[i].friday} ${data[i].fridayCalories}"));
+    }
+
+    for (var i = lunchIndex + 2; i < snacksIndex; i++) {
+      list.add(new Text("${data[i].friday} ${data[i].fridayCalories}"));
+    }
+
+    for (var i = snacksIndex + 2; i < dinnerIndex; i++) {
+      list.add(new Text("${data[i].friday} ${data[i].fridayCalories}"));
+    }
+
+    for (var i = dinnerIndex + 2; i < data.length; i++) {
+      list.add(new Text("${data[i].friday} ${data[i].fridayCalories}"));
+    }
+  }
+
+  if (day == 6) {
+    for (var i = breakfastIndex + 2; i < lunchIndex; i++) {
+      list.add(new Text("${data[i].friday} ${data[i].fridayCalories}"));
+    }
+
+    for (var i = lunchIndex + 2; i < snacksIndex; i++) {
+      list.add(new Text("${data[i].friday} ${data[i].fridayCalories}"));
+    }
+
+    for (var i = snacksIndex + 2; i < dinnerIndex; i++) {
+      list.add(new Text("${data[i].friday} ${data[i].fridayCalories}"));
+    }
+
+    for (var i = dinnerIndex + 2; i < data.length; i++) {
+      list.add(new Text("${data[i].friday} ${data[i].fridayCalories}"));
+    }
+  }
+
+  if (day == 7) {
+    for (var i = breakfastIndex + 2; i < lunchIndex; i++) {
+      list.add(new Text("${data[i].saturday} ${data[i].saturdayCalories}"));
+    }
+
+    for (var i = lunchIndex + 2; i < snacksIndex; i++) {
+      list.add(new Text("${data[i].saturday} ${data[i].saturdayCalories}"));
+    }
+
+    for (var i = snacksIndex + 2; i < dinnerIndex; i++) {
+      list.add(new Text("${data[i].saturday} ${data[i].saturdayCalories}"));
+    }
+
+    for (var i = dinnerIndex + 2; i < data.length; i++) {
+      list.add(new Text("${data[i].saturday} ${data[i].saturdayCalories}"));
+    }
+  }
   return new Column(children: list);
 }
